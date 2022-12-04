@@ -6,4 +6,82 @@
 @import url(../blocks/page/__container/page__container.css);
 @import url(../blocks/header/header.css);
 
-@import url(../blocks/footer/footer.css);*/
+@import url(../blocks/footer/footer.css);
+
+font-family: "Inter", "Arial", "sans-serif";
+margin: 0;*/
+
+
+.root {
+  background-color: #000;
+
+}
+/** {
+  border: red solid 1px;
+  box-sizing: border-box;
+}*/
+.page {
+
+  max-width: 880px;
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: 45px 74px 40px 914px 66px 18px 60px;
+  grid-template-areas:
+  "."
+  "header"
+  "."
+  "content"
+  "."
+  "footer"
+  ".";
+
+  /*auto-fit*/
+
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-area: header;
+
+}
+
+.content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile {
+
+}
+
+.elements {
+
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.logo {
+
+}
+
+.logo:hover {
+
+}
+
+.header__logo {
+  max-width: 142px;
+  width: 39vw*(100vw-2*27px); /*это скорее всего перейдет в фиксированную ширину медиазапроса*/
+}
+.line {
+  max-width: 1280px;
+  height: 1px;
+  opacity: 0.7;
+  background-color: #545454;
+}
