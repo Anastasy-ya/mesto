@@ -12,23 +12,41 @@
 <body class="root">
   <div class="page">
     <header class="header">
-      <img class="logo header__logo" alt="Логотип" src="./images/Vector.svg">
-      <div class="line"></div>
+      <img class="header__logo" alt="Логотип" src="./images/Vector.svg">
+      <div class="header__line"></div>
 
     </header>
     <main class="content">
-      <section class="profile">
-
+       <section class="profile">
+       <div class="profile__person">
+         <img class="profile__avatar" alt="" src="./images/image.jpg">
+         <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__about">Исследователь океана</p>
+            <button class="profile__edit-button"></button>
+          </div>
+        </div>
+        <button class="add-button">
+        </button>
       </section>
       <ul class="elements">
         <li class="element">
           <img class="image" src="./images/item-kalmikia.jpg" alt="">
           <div class="signature"></div>
         </li>
+
+        <li class="element">
+          <img class="image" src="./images/item-kalmikia.jpg" alt="">
+          <div class="signature"></div>
+        </li><li class="element">
+          <img class="image" src="./images/item-kalmikia.jpg" alt="">
+          <div class="signature"></div>
+        </li>
+
       </ul>
     </main>
     <footer class="footer">
-
+      <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
   </div>
   <script async src="./scripts/index.js"></script>

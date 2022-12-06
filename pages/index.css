@@ -8,25 +8,29 @@
 
 @import url(../blocks/footer/footer.css);
 
-font-family: "Inter", "Arial", "sans-serif";
-margin: 0;*/
+  font-family: "Inter", "Arial", "sans-serif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;*/
 
 
 .root {
   background-color: #000;
 
 }
-/** {
+* {
   border: red solid 1px;
   box-sizing: border-box;
-}*/
+}
 .page {
 
   max-width: 880px;
   display: grid;
   margin: 0 auto;
   grid-template-columns: 1fr;
-  grid-template-rows: 45px 74px 40px 914px 66px 18px 60px;
+  grid-template-rows: 40px 74px 40px 914px 66px 18px 60px;
   grid-template-areas:
   "."
   "header"
@@ -35,8 +39,8 @@ margin: 0;*/
   "."
   "footer"
   ".";
-
-  /*auto-fit*/
+  /*;
+  auto-fit*/
 
 }
 
@@ -56,14 +60,96 @@ margin: 0;*/
 }
 
 .profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-button {
+  width: 150px;
+  height: 50px;
+  border: 1px solid #FFF;
+  background-color: black;
+  align-self: center;
+  background-image: url(/images/add-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.profile__person {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+
+
+.profile__edit-button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #FFF;
+  background-color: black;
+  align-self: flex-start;
+  background-image: url(/images/edit-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 10px;
+  right: -40px;
+}
+
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
 
 }
 
+.profile__info {
+
+
+
+
+  max-height: 73px;
+  position: relative;
+
+
+
+}
+
+
+
+.profile__name {
+  font-family: "Inter", "Arial", "sans-serif";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  margin: 0;
+  color: white;
+
+}
+
+.profile__about {
+  font-family: "Inter", "Arial", "sans-serif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  color: white;
+}
+
 .elements {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   list-style: none;
   margin: 0;
   padding: 0;
+  row-gap: 20px;
+  column-gap: 17px;
+  position: relative;
 }
 
 .element {
@@ -76,7 +162,7 @@ margin: 0;*/
 }
 
 .image {
-  height: 90%;
+  height: 78%;
   width: 100%;
   object-fit: cover;
 
@@ -84,31 +170,39 @@ margin: 0;*/
 
 .signature {
   height: 80px;
-  color: #fff;
+  color: white;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: -1;
+  z-index: 1;
 }
 
 .footer {
   grid-area: footer;
-}
 
-.logo {
 
 }
 
-.logo:hover {
-
+.footer__text {
+  color: #545454;
+  font-family: "Inter", "Arial", "sans-serif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;/*выяснить почему вышло за границы блока*/
 }
+
+
+
 
 .header__logo {
   max-width: 142px;
   width: 39vw*(100vw-2*27px); /*это скорее всего перейдет в фиксированную ширину медиазапроса*/
 }
-.line {
+.header__line {
   max-width: 1280px;
   height: 1px;
   opacity: 0.7;

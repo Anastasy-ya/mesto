@@ -1,0 +1,12 @@
+.block {
+width: 50px;
+height: 50px;
+color: red;
+display: inline-block;
+}
+.block2 {
+width: 50px;
+height: 50px;
+color: green;
+display: inline-block;
+}
