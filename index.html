@@ -13,7 +13,7 @@
   <div class="page">
     <header class="header">
       <img class="header__logo" alt="Логотип" src="./images/Vector.svg">
-      <div class="header__line"></div>
+      <!--<div class="header__line"></div>-->
 
     </header>
     <main class="content">
@@ -23,7 +23,7 @@
           <div class="profile__info">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <p class="profile__about">Исследователь океана</p>
-              <button class="profile__edit-button"></button>
+              <button class="profile__edit-button" type=""></button><!--задать тип всем кнопкам-->
           </div>
         </div>
         <button class="add-button">
@@ -86,7 +86,7 @@
             <div class="element__signature-die__box">
               <p class="element__signature-die_signature">Северная Осетия</p>
             </div>
-            <button class="button-like">
+            <button class="button-like button__like_active">
             </button>
           </div>
         </li>
@@ -95,10 +95,16 @@
 
       </ul>
 
-      <div class="popup">
-        <div class="popup__container">
+      <div class="popup popup_opened"><!--popup_opened-->
+        <form class="popup__container">
+          <button class="popup__close-icon">
+          </button>
+          <h2 class="popup__heading">Редактировать профиль</h2>
 
-        </div>
+
+          <button class="popup__button">Сохранить
+          </button>
+        </form>
       </div>
 
 
