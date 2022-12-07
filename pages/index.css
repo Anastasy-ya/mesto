@@ -126,7 +126,7 @@
   opacity: .6;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 620px) {
   .add-button {
     width: 282px;
     margin: 0 auto;
@@ -140,9 +140,9 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 618px) {
   .profile__person {
-    gap: 50px;
+   margin: 0 auto;
 
   }
 }
@@ -262,7 +262,7 @@
   height: 362px;
   overflow: hidden;
   position: relative;
-  z-index: -1;
+
 
 }
 
@@ -296,12 +296,12 @@
   background-position: center;
   border: none;
   background-color: #FFF;
-  transition: border 0.5s ease-in; /*и тут */
+  transition: opacity 0.5s ease-in; /*и тут */
   padding:0;
 }
 
 .button-like:hover {
-  border: 2px;/*сомнительно opacity: .5; */
+  opacity: .5;
 }
 
 .element__signature-die__box {
