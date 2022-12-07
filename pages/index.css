@@ -40,6 +40,7 @@
   "."
   "footer"
   ".";
+  box-sizing: border-box;
   /*;
   auto-fit*/
 
@@ -50,6 +51,7 @@
    min-width: 282px;
    padding: 0 19px;
    grid-template-rows: 28px 74px 28px /*914px*/auto 66px 18px 60px;
+   margin: 0;
   }
 }
 
@@ -61,6 +63,19 @@
 
 }
 
+@media screen and (max-width: 917px) {
+  .header {
+    width: 581px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .header {
+    width: 282px;
+    margin: 0 auto;
+  }
+}
 
 .header__logo {
   width: 142px;
@@ -88,6 +103,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 50px;
+  position: relative;
 }
 
 @media screen and (max-width: 410px) {
@@ -101,6 +117,20 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 70px;
+}
+
+@media screen and (max-width: 917px) {
+  .profile {
+    width: 581px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .profile {
+    width: 282px;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 410px) {
@@ -120,13 +150,14 @@
   background-position: center;
   padding: 0;
   transition: opacity 0.5s ease-in;
+  box-sizing: border-box;
 }
 
 .add-button:hover {
   opacity: .6;
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 917px) {
   .add-button {
     width: 282px;
     margin: 0 auto;
@@ -140,14 +171,14 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 618px) {
+@media screen and (max-width: 715px) {
   .profile__person {
    margin: 0 auto;
 
   }
 }
 
-.profile__edit-button {
+.profile__edit-button {/*вызывыает полосу прокрутки*/
   width: 24px;
   height: 24px;
   border: 1px solid #FFF;
@@ -161,6 +192,7 @@
   top: 15px;
   right: -45px;
   transition: opacity 0.5s ease-in;
+  box-sizing: border-box;
 }
 
 .profile__edit-button:hover {
@@ -184,7 +216,7 @@
 
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 615px) {
   .profile__avatar {
     margin: 0 auto;
 
@@ -196,7 +228,7 @@
   position: relative;
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 615px) {
   .profile__info {
     margin: 0 auto;
 
@@ -280,7 +312,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+
   display: flex;
   justify-content: space-between;
   padding: 25px 20px 30px;
@@ -327,6 +359,20 @@
 
 }
 
+@media screen and (max-width: 917px) {
+  .footer {
+    width: 581px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .footer {
+    width: 282px;
+    margin: 0 auto;
+  }
+}
+
 .footer__text {
   color: #545454;
   font-family: "Inter", "Arial", "sans-serif";
@@ -338,5 +384,28 @@
   padding: 0;/*выяснить почему вышло за границы блока*/
 }
 
+.popup {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.popup__container {
+  width: 430px;
+  height: 330px;
+  border-radius: 15px;
+  padding: ;
+  background-color: #FFF;
+  z-index: 1;
 
 
+  position: fixed;
+  top: ;
+
+
+}
