@@ -147,7 +147,7 @@ header::after {
   border: 1px solid #FFF;
   background-color: black;
   align-self: center;
-  background-image: url(/images/add-button.svg);
+  background-image: url(./images/add-button.svg);
   background-repeat: no-repeat;
   background-position: center;
   padding: 0;
@@ -188,7 +188,7 @@ header::after {
   padding:0;
   background-color: black;
   align-self: flex-start;
-  background-image: url(/images/edit-button.svg);
+  background-image: url(./images/edit-button.svg);
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
@@ -327,7 +327,7 @@ header::after {
 .button-like {
   width: 22px;
   height: 19px;
-  background-image: url(/images/like-button.svg);
+  background-image: url(./images/like-button.svg);
   background-repeat: no-repeat;
   background-position: center;
   border: none;
@@ -443,7 +443,7 @@ header::after {
   width: 32px;
   height: 32px;
   padding:0;
-  background-image: url(/images/Close_icon.svg);
+  background-image: url(./images/Close_icon.svg);
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
@@ -535,10 +535,10 @@ header::after {
 }
 
 .popup__name {
-  grid-area: popup__form-name__orientation_top;
+  grid-area: popup__dates_name;
 }
 
 .popup__about {
-  grid-area: popup__form-name__orientation_bottom;
+  grid-area: popup__dates_about;
 }
 
