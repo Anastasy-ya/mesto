@@ -2,7 +2,7 @@
 popup_opened доп класс
 popup__button отправить
 popup__close-icon
-popup
+
 */
 
 let editButton = document.querySelector('.profile__edit-button');
