@@ -153,6 +153,7 @@ header::after {
   padding: 0;
   transition: opacity 0.5s ease-in;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .add-button:hover {
@@ -195,6 +196,7 @@ header::after {
   right: -45px;
   transition: opacity 0.5s ease-in;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -332,6 +334,7 @@ header::after {
   background-color: #FFF;
   transition: opacity 0.5s ease-in; /*и тут */
   padding:0;
+  cursor: pointer;
 }
 
 .button-like:hover {
@@ -419,9 +422,9 @@ header::after {
   grid-template-areas:
   "popup__heading"
   "."
-  "m"
+  "popup__form-name__orientation_top"
   "."
-  "h"
+  "popup__form-name__orientation_bottom"
   "."
   "popup__button";
 
@@ -430,7 +433,8 @@ header::after {
 @media screen and (max-width: 615px) {
   .popup__container {
     width: 282px;
-
+    padding: 25px 22px;
+     grid-template-rows: 23px 75px 27px 30px 27px 45px 50px;
   }
 }
 
@@ -447,7 +451,16 @@ header::after {
   right: -40px;
   transition: opacity 0.5s ease-in;
   background-color: rgba(0, 0, 0, 0.0);
+  cursor: pointer;
+}
 
+@media screen and (max-width: 615px) {
+  .popup__close-icon {
+    top: -30px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .profile__edit-button:hover {
@@ -463,6 +476,15 @@ header::after {
   margin: 0;
   grid-area: popup__heading;
 }
+
+@media screen and (max-width: 615px) {
+  .popup__heading {
+    font-size: 18px;
+    line-height: 22px;
+
+  }
+}
+
 .popup__button {
   grid-area: popup__button;
   height: 50px;
@@ -471,10 +493,52 @@ header::after {
   border: none;
   padding: 0;
   margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  font-family: "Inter", "Arial", "sans-serif";
+  cursor: pointer;
+  color: #FFF;
+  transition: opacity 0.5s ease-in;
+
 }
 
 
 
+.popup__button:hover {
+  opacity: .8;
+}
+
+.popup__form {
+  border: none;
+}
 
 
+.popup__dates {
+
+  border: none;
+  border-bottom: 1px black solid;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  font-family: "Inter", "Arial", "sans-serif";
+  margin: 0;
+  padding: 0 0 7px;
+/*возможно обойдемся одним классом*/
+}
+
+
+.popup__dates:focus {
+  outline: none;
+  border: 1px solid black;
+}
+
+.popup__name {
+  grid-area: popup__form-name__orientation_top;
+}
+
+.popup__about {
+  grid-area: popup__form-name__orientation_bottom;
+}
 
