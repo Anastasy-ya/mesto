@@ -147,7 +147,7 @@ header::after {
   border: 1px solid #FFF;
   background-color: black;
   align-self: center;
-  background-image: url(./images/add-button.svg);
+  background-image: url(../images/add-button.svg);
   background-repeat: no-repeat;
   background-position: center;
   padding: 0;
@@ -188,7 +188,7 @@ header::after {
   padding:0;
   background-color: black;
   align-self: flex-start;
-  background-image: url(./images/edit-button.svg);
+  background-image: url(../images/edit-button.svg);
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
@@ -327,7 +327,7 @@ header::after {
 .button-like {
   width: 22px;
   height: 19px;
-  background-image: url(./images/like-button.svg);
+  background-image: url(../images/like-button.svg);
   background-repeat: no-repeat;
   background-position: center;
   border: none;
@@ -422,9 +422,9 @@ header::after {
   grid-template-areas:
   "popup__heading"
   "."
-  "popup__form-name__orientation_top"
+  "popup__dates_name"
   "."
-  "popup__form-name__orientation_bottom"
+  "popup__dates_about"
   "."
   "popup__button";
 
@@ -534,11 +534,11 @@ header::after {
   border: 1px solid black;
 }
 
-.popup__name {
+.popup__dates_name {
   grid-area: popup__dates_name;
 }
 
-.popup__about {
+.popup__dates_about {
   grid-area: popup__dates_about;
 }
 
