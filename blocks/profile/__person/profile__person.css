@@ -1,0 +1,12 @@
+.profile__person {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 715px) {
+    .profile__person {
+        margin: 0 auto;
+    }
+}
