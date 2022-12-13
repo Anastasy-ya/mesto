@@ -20,5 +20,5 @@
 *  Примитивы
 *  Dom
 
-https://anastasy-ya.github.io/mesto/
+https://anastasy-ya.github.io/mesto/?profile-name=&profile-about=
 
