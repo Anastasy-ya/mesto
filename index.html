@@ -1,127 +1,102 @@
 <!DOCTYPE html>
 <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<link rel="icon" href="#" type="image">-->
+        <title lang="en">Mesto-Russia</title>
+        <link rel="stylesheet" href="./pages/index.css">
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--<link rel="icon" href="#" type="image">-->
-  <title lang="en">Mesto-Russia</title>
-  <link rel="stylesheet" href="./pages/index.css">
-</head>
+    <body class="root">
+        <div class="page">
+            <header class="header">
+                <img class="header__logo" alt="Логотип" src="./images/Vector.svg">
+            </header>
+            <main class="content">
+                <section class="profile">
+                    <div class="profile__person">
+                        <img class="profile__avatar" alt="Аватар профиля" src="./images/image.jpg">
+                        <div class="profile__info">
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
+                            <p class="profile__about">Исследователь океана</p>
+                            <button class="profile__edit-button" type="button"></button>
+                        </div>
+                    </div>
+                    <button class="add-button"></button>
+                </section>
+                <ul class="elements">
+                    <li class="elements__item">
+                        <img class="elements__image" src="./images/item-kalmikia.jpg" alt="Калмыкские степи">
+                        <div class="elements__die">
+                            <div class="elements__die-box">
+                                <p class="elements__signature">Калмыкия</p>
+                            </div>
+                            <button class="button-like"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img class="elements__image" src="./images/item-kamchatka.jpg" alt="Камчатские горы">
+                        <div class="elements__die">
+                            <div class="elements__die-box">
+                                <p class="elements__signature">Камчатка</p>
+                            </div>
+                            <button class="button-like"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img class="elements__image" src="./images/item-lenskie-stolbi.jpg" alt="Памятник природы. Ленские столбы">
+                        <div class="elements__die">
+                            <div class="elements__die-box">
+                                <p class="elements__signature">Ленские столбы</p>
+                            </div>
+                            <button class="button-like"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img class="elements__image" src="./images/item-ostrov-olhon.jpg" alt="Остров Ольхон">
+                        <div class="elements__die">
+                            <div class="elements__die-box">
+                                <p class="elements__signature">Ольхон</p>
+                            </div>
+                            <button class="button-like"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img class="elements__image" src="./images/item-ostrov-vrangelia.jpg" alt="Неприступные скалы">
+                        <div class="elements__die">
+                            <div class="elements__die-box">
+                                <p class="elements__signature">Остров Врангеля</p>
+                            </div>
+                            <button class="button-like"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img class="elements__image" src="./images/item-sev-osetia.jpg" alt="Аутентичные захоронения Северной Осетии">
+                        <div class="elements__die">
+                            <div class="elements__die-box">
+                                <p class="elements__signature">Северная Осетия</p>
+                            </div>
+                            <button class="button-like button__like_active"></button>
+                        </div>
+                    </li>
+                </ul>
 
-<body class="root">
-  <div class="page">
-    <header class="header">
-      <img class="header__logo" alt="Логотип" src="./images/Vector.svg">
-      <!--<div class="header__line"></div>-->
-
-    </header>
-    <main class="content">
-      <section class="profile">
-        <div class="profile__person">
-          <img class="profile__avatar" alt="" src="./images/image.jpg">
-          <div class="profile__info">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <p class="profile__about">Исследователь океана</p>
-              <button class="profile__edit-button" type="button"></button><!--задать тип всем кнопкам-->
-          </div>
+                <div class="popup"><!--popup_opened-->
+                    <form class="popup__container">
+                        <button class="popup__close-icon" type="button"></button>
+                        <h2 class="popup__heading">Редактировать профиль</h2>
+                        <input type="text" class="popup__dates popup__dates-name" value="Жак-Ив Кустo">
+                        <input type="text" class="popup__dates popup__dates-about" value="Исследователь океана">
+                        <button class="popup__button">Cохранить</button>
+                    </form>
+                </div>
+            </main>
+            <footer class="footer">
+                <p class="footer__text">© 2020 Mesto Russia</p>
+            </footer>
         </div>
-        <button class="add-button">
-        </button>
-      </section>
-      <ul class="elements">
-        <li class="element">
-          <img class="element__image" src="./images/item-kalmikia.jpg" alt="">
-          <div class="element__signature-die">
-            <div class="element__signature-die__box">
-              <p class="element__signature-die_signature">Калмыкия</p>
-            </div>
-            <button class="button-like">
-            </button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/item-kamchatka.jpg" alt="">
-          <div class="element__signature-die">
-            <div class="element__signature-die__box">
-              <p class="element__signature-die_signature">Камчатка</p>
-            </div>
-            <button class="button-like">
-            </button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/item-lenskie-stolbi.jpg" alt="">
-          <div class="element__signature-die">
-            <div class="element__signature-die__box">
-              <p class="element__signature-die_signature">Ленские столбы</p>
-            </div>
-            <button class="button-like">
-            </button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/item-ostrov-olhon.jpg" alt="">
-          <div class="element__signature-die">
-            <div class="element__signature-die__box">
-              <p class="element__signature-die_signature">Ольхон</p>
-            </div>
-            <button class="button-like">
-            </button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/item-ostrov-vrangelia.jpg" alt="">
-          <div class="element__signature-die">
-            <div class="element__signature-die__box">
-              <p class="element__signature-die_signature">Остров Врангеля</p>
-            </div>
-            <button class="button-like">
-            </button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="./images/item-sev-osetia.jpg" alt="">
-          <div class="element__signature-die">
-            <div class="element__signature-die__box">
-              <p class="element__signature-die_signature">Северная Осетия</p>
-            </div>
-            <button class="button-like button__like_active">
-            </button>
-          </div>
-        </li>
-
-
-
-      </ul>
-
-      <div class="popup"><!--popup_opened-->
-        <form class="popup__container">
-          <button class="popup__close-icon" type="button">
-          </button>
-          <h2 class="popup__heading">Редактировать профиль</h2>
-
-
-
-            <input type="text" class="popup__dates popup__dates_name" value="Жак-Ив Кустo">
-            <input type="text" class="popup__dates popup__dates_about" value="Исследователь океана">
-            <button class="popup__button">Cохранить</button>
-
-
-
-
-
-        </form>
-      </div>
-
-
-
-    </main>
-    <footer class="footer">
-      <p class="footer__text">© 2020 Mesto Russia</p>
-    </footer>
-  </div>
-  <script async src="./scripts/index.js"></script>
-</body>
-
+        <script async src="./scripts/index.js"></script>
+    </body>
 </html>
+
