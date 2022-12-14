@@ -1,0 +1,14 @@
+.content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 50px;
+    position: relative;
+}
+
+@media screen and (max-width: 410px) {
+    .content {
+        gap: 40px;
+    }
+}
