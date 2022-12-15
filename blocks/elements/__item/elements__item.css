@@ -3,5 +3,7 @@
     width: 282px;
     height: 362px;
     overflow: hidden;
-    position: relative;
+    display: grid;
+    grid-template-rows: 1fr 80px;
+
 }

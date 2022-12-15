@@ -3,10 +3,12 @@
     align-items: center;
     gap: 25px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 @media screen and (max-width: 715px) {
     .profile__person {
         margin: 0 auto;
+        column-gap: 10px;
     }
 }
