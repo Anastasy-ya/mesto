@@ -5,10 +5,13 @@
     justify-content: space-between;
     gap: 50px;
     position: relative;
+    margin: 0 auto;
+    padding: 0;
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 650px) {
     .content {
-        gap: 40px;
+        gap: 38px;
+        max-width: 282px;
     }
 }

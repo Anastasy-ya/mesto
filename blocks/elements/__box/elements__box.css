@@ -1,0 +1,29 @@
+.elements__box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    row-gap: 20px;
+    column-gap: 17px;
+    position: relative;
+    flex-direction: row-reverse;
+    max-width: 880px;
+}
+
+@media screen and (max-width: 920px) {
+    .elements__box {
+        margin: 0 auto;
+        padding: 0 19px;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .elements__box {
+        margin: 0;
+        padding: 0;
+        row-gap: 19px;
+    }
+}

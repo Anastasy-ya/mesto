@@ -5,22 +5,25 @@
     gap: 70px;
 }
 
-@media screen and (max-width: 917px) {
+@media screen and (max-width: 920px) {
     .profile {
-        width: 581px;
+        max-width: 581px;
         margin: 0 auto;
+        padding: 0 19px;
+        box-sizing: border-box;
     }
 }
 
-@media screen and (max-width: 615px) {
+@media screen and (max-width: 650px) {
     .profile {
         width: 282px;
-        margin: 0 auto;
+        padding: 0;
+        margin: 0;
     }
 }
 
 @media screen and (max-width: 410px) {
     .profile {
-        gap: 36px;
+        gap: 30px;
     }
 }

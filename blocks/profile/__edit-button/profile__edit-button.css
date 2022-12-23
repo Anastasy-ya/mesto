@@ -3,21 +3,15 @@
     height: 24px;
     border: 1px solid #fff;
     padding: 0;
-    background-color: black;
-    align-self: flex-start;
+    margin: 14px 0 0;
+    background-color: rgba(0, 0, 0, 0);
     background-image: url(../../../images/edit-button.svg);
     background-repeat: no-repeat;
     background-position: center;
-    position: absolute;
-    top: 15px;
-    right: -45px;
     transition: opacity 0.5s ease-in;
     box-sizing: border-box;
     cursor: pointer;
-}
-
-.profile__edit-button:hover {
-    opacity: 0.6;
+    display: block;
 }
 
 .profile__edit-button:hover {
@@ -28,7 +22,7 @@
     .profile__edit-button {
         width: 18px;
         height: 18px;
-        top: 5px;
-        right: -30px;
+        align-self: center;
+        margin: 0;
     }
 }

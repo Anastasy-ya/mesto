@@ -1,7 +1,10 @@
 .elements__item {
     border-radius: 15px;
-    width: 282px;
-    height: 362px;
+    max-width: 282px;
+    min-height: 362px;
     overflow: hidden;
-    position: relative;
+    display: grid;
+    grid-template-rows: 1fr 80px;
+    width: 100%;
+    height: 100%;
 }

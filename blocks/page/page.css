@@ -17,9 +17,7 @@
 
 @media screen and (max-width: 920px) {
     .page {
-        min-width: 282px;
-        padding: 0 19px;
-        grid-template-rows: 28px 74px 28px auto 66px 18px 60px;
+        grid-template-rows: 28px 53px 45px auto 48px 19px 36px;
         margin: 0;
     }
 }
@@ -27,4 +25,4 @@
 /** {
   border: red solid 1px;
   box-sizing: border-box;
-}*/
+}
