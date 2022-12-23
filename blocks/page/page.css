@@ -1,0 +1,28 @@
+.page {
+    max-width: 880px;
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: 45px 74px 40px auto 66px 18px 60px;
+    grid-template-areas:
+        "."
+        "header"
+        "."
+        "content"
+        "."
+        "footer"
+        ".";
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 920px) {
+    .page {
+        grid-template-rows: 28px 53px 45px auto 48px 19px 36px;
+        margin: 0;
+    }
+}
+
+/** {
+  border: red solid 1px;
+  box-sizing: border-box;
+}

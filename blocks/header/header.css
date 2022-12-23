@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    grid-area: header;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 650px) {
+    .header {
+        max-width: 100%;
+    }
+}
