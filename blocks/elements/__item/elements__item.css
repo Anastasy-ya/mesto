@@ -1,7 +1,6 @@
 .elements__item {
     border-radius: 15px;
     max-width: 282px;
-    min-height: 362px;
     overflow: hidden;
     display: grid;
     grid-template-rows: 1fr 80px;

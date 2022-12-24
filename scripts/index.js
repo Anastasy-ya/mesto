@@ -8,7 +8,7 @@ let nameInput = document.querySelector('[name="Name"]');
 let jobInput = document.querySelector('[name="About"]');
 
 
-let formElement = document.querySelector(".form");
+let formElement = document.querySelector(".popup__form");
 let profileName = document.querySelector(".profile__name");
 let profileJob = document.querySelector(".profile__about");
 
