@@ -1,4 +1,4 @@
-//задали переменные
+//задали переменные для редактирования имени и профессии
 let editButton = document.querySelector(".profile__edit-button");
 let popup = document.querySelector(".popup");
 let popupClose = document.querySelector(".popup__close-icon");
@@ -49,6 +49,14 @@ formElement.addEventListener("submit", handleFormSubmit);
 
 //
 //
+
+
+//задали переменные для редактирования добавления карточек
+
+let addButton = document.querySelector(".add-button");
+
+
+
 //добавим карточки по умолчанию
 const initialCards = [
   {
