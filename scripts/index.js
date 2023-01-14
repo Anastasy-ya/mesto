@@ -14,14 +14,30 @@ let profileJob = document.querySelector(".profile__about");
 
 
 
-//функция открытия попапа
-function openPopup() {
+
+
+
+let editPopup = document.querySelector(".popup_edit");
+
+
+
+
+
+
+
+
+//функция открытия попапов
+function openPopup(popup) {
     popup.classList.add("popup_opened");
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
+
 }
 
-
+//функция внесения данных из инпутов в имя и работу при отрытии
+function addNameAndJob() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(editPopup);
+}
 
 //функция закрытия попапа
 function closePopup() {
@@ -37,24 +53,53 @@ function handleFormSubmit(evt) {
 
 }
 
-//cоздали слушатели событий по кнопке открытия и закрытия
-editButton.addEventListener("click", openPopup);
+//cоздали слушатели событий по кнопке открытия и закрытия для редактирования профиля
+editButton.addEventListener("click", addNameAndJob);
 popupClose.addEventListener("click", closePopup);
 //навесим слушатель событий на submit формы
 formElement.addEventListener("submit", handleFormSubmit);
 
 
-
-
-
+//
 //
 //
 
 
-//задали переменные для редактирования добавления карточек
 
+
+//popup_image
+//
+
+
+//задали переменные для редактирования добавления карточек  кажется надо переименовать перем и задавать через конст
 let addButton = document.querySelector(".add-button");
+let addPopup = document.querySelector(".popup_add");
 
+//задали переменные для увеличения картинки
+const bigImage = document.querySelector(".popup_image");
+const imageToOpen = document.querySelector(".elements__image");
+
+//cоздали слушатели событий по кнопке добавления карточек
+//и открытия попапа для редактирования профиля
+addButton.addEventListener("click", () => {
+openPopup(addPopup);
+});
+
+
+//ф-я открытия попапа для увеличения картинки
+imageToOpen.addEventListener("click", () => {
+openPopup(bigImage);
+});
+
+
+
+
+
+//это удалить
+ //btnPopupAdd.addEventListener("click", () => {
+ // resetValidation(popupAddForm, validationConfig);
+ // openPopup(popupAdd);
+//});
 
 
 //добавим карточки по умолчанию

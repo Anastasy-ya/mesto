@@ -15,3 +15,46 @@
         padding: 25px 22px;
     }
 }
+
+
+
+/*контейнер для картинки*/
+.popup__image-container {
+  z-index: 1;
+  opacity: 1;
+  position: relative;
+  max-height: 540px;
+
+}
+
+@media screen and (max-width: 615px) {
+    .popup__image-container {
+
+    }
+}
+
+
+
+
+
+/*картинка*/
+.popup__image {
+  max-height: 540px;
+
+}
+
+
+/*второй класс черного фона*/
+.popup_image {
+  background: rgba(0, 0, 0, .9);
+}
+
+
+.popup__signature {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 25px;
+  color: #FFF;
+  font-family: "Inter", "Arial", "sans-serif";
+  font-style: normal;
+}
