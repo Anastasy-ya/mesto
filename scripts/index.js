@@ -115,6 +115,20 @@ openPopup(bigImage);
 });
 
 
+//задали переменные для увеличения картинки
+const like = document.querySelectorAll(".button-like");
+
+
+
+//ф-я изменения цвета лайка
+like.forEach(button => {
+  button.addEventListener('click', function (event) {
+    const eventTarget = event.target;
+    eventTarget.classList.toggle("button-like_active");
+
+    });
+});
+
 
 
 
