@@ -100,7 +100,7 @@ let addPopup = document.querySelector(".popup_add");
 
 //задали переменные для увеличения картинки
 const bigImage = document.querySelector(".popup_image");
-const imageToOpen = document.querySelector(".elements__image");
+const imageToOpen = document.querySelectorAll(".elements__image");
 
 //cоздали слушатели событий по кнопке добавления карточек
 //и открытия попапа для редактирования профиля
@@ -110,12 +110,14 @@ openPopup(addPopup);
 
 
 //ф-я открытия попапа для увеличения картинки
-imageToOpen.addEventListener("click", () => {
+imageToOpen.forEach(button => {
+button.addEventListener("click", () => {
 openPopup(bigImage);
-});
+}
+)});
 
 
-//задали переменные для увеличения картинки
+//задали переменные для лайков
 const like = document.querySelectorAll(".button-like");
 
 
@@ -125,7 +127,6 @@ like.forEach(button => {
   button.addEventListener('click', function (event) {
     const eventTarget = event.target;
     eventTarget.classList.toggle("button-like_active");
-
     });
 });
 
@@ -163,4 +164,21 @@ const initialCards = [
   }
 ];
 
+//объявим переменные
+const elementsBox = document.querySelector('.elements__box');//общая коробка для вставки карточек
+const template = document.querySelector('#template').content;//темплейт откуда копируем
+//const elementsItem = template.querySelector('.elements__item');//карточка
+//const elementsImage = template.querySelector('.elements__image');//картинка
+//const elementsSignature = template.querySelector('.elements__signature');//подпись
 
+
+
+// // клонируем содержимое тега template
+// const userElement = userTemplate.querySelector('.user').cloneNode(true);
+
+// // наполняем содержимым
+// userElement.querySelector('.user__avatar').src = 'tinyurl.com/v4pfzwy';
+// userElement.querySelector('.user__name').textContent = 'Дюк Корморант';
+
+// // отображаем на странице
+// usersOnline.append(userElement);
