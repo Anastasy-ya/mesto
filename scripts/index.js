@@ -164,21 +164,87 @@ const initialCards = [
   }
 ];
 
+
+// let itemName = //initialCards.сюда сложить массив из name
+// let itemImage =
+
+
+
+
+//ф-я в которую попадает название задачи
+const createItem = (itemName, itemImage) => {
 //объявим переменные
-const elementsBox = document.querySelector('.elements__box');//общая коробка для вставки карточек
-const template = document.querySelector('#template').content;//темплейт откуда копируем
+const template = document.querySelector('#template');//темплейт откуда копируем
+console.log(template);
+// клонируем содержимое тега template
+const templateElement = template.content.querySelector('.elements__item').cloneNode(true);
+
+//тут не определился либо темплейт либо его содержимое ПАЧАМУ????
+
+
+
 //const elementsItem = template.querySelector('.elements__item');//карточка
 //const elementsImage = template.querySelector('.elements__image');//картинка
 //const elementsSignature = template.querySelector('.elements__signature');//подпись
 
 
 
-// // клонируем содержимое тега template
-// const userElement = userTemplate.querySelector('.user').cloneNode(true);
 
-// // наполняем содержимым
-// userElement.querySelector('.user__avatar').src = 'tinyurl.com/v4pfzwy';
+
+// наполняем содержимым заменить функцией которая переберет массивы
+templateElement.querySelector('.elements__signature').textContent = itemName;//меняем подпись   itemName
+
+//templateElement.querySelector('.elements__image').src = itemImage;//ой не факт что это сработает
+return templateElement;
+};
+
+
+
+
+
+
+
+
+//ф-я вставки темплейта в elements__box
+const elementsBox = document.querySelector('.elements__box');//общая коробка для вставки карточек
+
+const addItem = (itemName, itemImage) => {
+elementsBox.prepend(templateElement);
+}
+//вызов ф-и
+addItem('Архыз', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
+
+// // наполняем содержимым код из теории
+// userElement.querySelector('.elements__signature').src = 'tinyurl.com/v4pfzwy';
 // userElement.querySelector('.user__name').textContent = 'Дюк Корморант';
 
 // // отображаем на странице
 // usersOnline.append(userElement);
+
+
+
+
+// мой кривой код с онлайн кодинга
+// //ф-я добаувления итема
+// const createItem = (ItemName, itemImage) => {
+
+// //ф-я клонирования и определения содержимого
+// const Item = template.querySelector('.elements__item').cloneNode(true);//клонируем карточки
+// Item.querySelector('.elements__signature').textContent = itemName;//меняем подпись
+
+// //Item.querySelector('.elements__image')    =itemImage    меняем картинку ;
+// //Item.querySelector('.elements__image')    = itemName;   меняем alt для картинки ;
+// return createItem;
+
+// };
+
+// //добавим в dom наш итем
+// const makeItem = (itemName, itemImage) => {
+//   elementsBox.apend(createItem(ItemName,  itemImage));
+
+
+// };
+// makeItem('Байкал', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg');
+// console.log(makeItem);
+
+// //console.log(elementsBox, elementsItem, elementsImage, elementsSignature);  itemName
