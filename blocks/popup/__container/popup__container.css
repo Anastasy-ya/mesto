@@ -23,7 +23,7 @@
   z-index: 1;
   opacity: 1;
   position: relative;
-  max-height: 540px;
+
 
 }
 
@@ -40,13 +40,19 @@
 /*картинка*/
 .popup__image {
   max-height: 540px;
+  width: 75%;
 
 }
+@media screen and (max-width: 615px) {
+    .popup__image {
 
+    }
+}
 
 /*второй класс черного фона*/
 .popup_image {
   background: rgba(0, 0, 0, .9);
+
 }
 
 

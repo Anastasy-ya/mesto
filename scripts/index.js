@@ -1,7 +1,9 @@
 //задали переменные для редактирования имени и профессии
 let editButton = document.querySelector(".profile__edit-button");
 let popup = document.querySelector(".popup");
-let popupClose = document.querySelector(".popup__close-icon");
+let popupClose = document.querySelectorAll(".popup__close-icon");
+
+// console.log(popupClose)
 
 
 let nameInput = document.querySelector('[name="Name"]');
@@ -40,7 +42,7 @@ function addNameAndJob() {
 }
 
 //функция закрытия попапа
-function closePopup() {
+function closePopup(popup) {
     popup.classList.remove("popup_opened");
 }
 
@@ -49,13 +51,13 @@ function handleFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    closePopup();
+    closePopup(popup);
 
 }
 
 //cоздали слушатели событий по кнопке открытия и закрытия для редактирования профиля
 editButton.addEventListener("click", addNameAndJob);
-popupClose.addEventListener("click", closePopup);
+// popupClose.addEventListener("click", closePopup);
 //навесим слушатель событий на submit формы
 formElement.addEventListener("submit", handleFormSubmit);
 
@@ -63,12 +65,33 @@ formElement.addEventListener("submit", handleFormSubmit);
 //
 //
 //
+//
+
+
+
+
+popupClose.forEach(button => {
+  button.addEventListener('click', function (event) {
+      // console.log(event.currentTarget.closest(".popup"));
+      closePopup(event.currentTarget.closest(".popup"));
+
+    });
+});
+
+
+
+
+
+
+
+
+
 
 
 
 
 //popup_image
-//
+//не забыть привести порядок центрирование изображения
 
 
 //задали переменные для редактирования добавления карточек  кажется надо переименовать перем и задавать через конст
@@ -95,11 +118,7 @@ openPopup(bigImage);
 
 
 
-//это удалить
- //btnPopupAdd.addEventListener("click", () => {
- // resetValidation(popupAddForm, validationConfig);
- // openPopup(popupAdd);
-//});
+
 
 
 //добавим карточки по умолчанию
