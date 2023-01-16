@@ -136,6 +136,8 @@ like.forEach(button => {
 
 
 
+
+
 //добавим карточки по умолчанию
 const initialCards = [
   {
@@ -165,29 +167,29 @@ const initialCards = [
 ];
 
 
-//ф-я передающая данные из массива в ф-ю создания карточки
+//ф-я передающая данные из массива в ф-ю создания карточки тут поломка 1 очередь
 createStartItems = array => {
-  array.forEach(({itemName, itemImage}) => {
-  createItem(itemName, itemImage);
-
+  array.forEach(({name, link}) => {
+    return createItem(name, link);
   })
 };
 
-createStartItems(initialCards);
-//console.log(createStartItems);
-
 //ф-я создания карточки
-function createItem (itemName, itemImage) {
+function createItem (name, link) {
 const template = document.querySelector('#template').content;//содержимое темплейта
 const templateElement = template.querySelector('.elements__item').cloneNode(true);//li копируем
 //меняем содержимое полей
-templateElement.querySelector('.elements__signature').textContent = itemName;
-templateElement.querySelector('.elements__image').src = itemImage;
-templateElement.querySelector('.elements__image').alt = itemName;//может быть понадобится `${}`
+templateElement.querySelector('.elements__signature').textContent = name;
+templateElement.querySelector('.elements__image').src = link;
+templateElement.querySelector('.elements__image').alt = name;// `${}`
 console.log(templateElement);
 return templateElement;
 
 };
+
+
+
+
 
 // ф-я вставки темплейта в elements__box
 addItems = element => {
@@ -195,7 +197,42 @@ const elementsBox = document.querySelector('.elements__box');//общая кор
 elementsBox.prepend(element);
 };
 
-addItems(createStartItems(initialCards));
+addItems(createItem(initialCards));
+//конец ф-и передающей данные из массива в ф-ю создания карточки
+
+
+
+
+//ф-я добавляющая введенный код в новую карточку не понятно работает или нет 2 очередь
+function saveInput(evt) {
+
+const subtittleInput = document.querySelector('[name="subtitle"]');
+const linkInput = document.querySelector('[name="link"]');
+  evt.preventDefault();
+  const name = subtittleInput.value;
+  const link = linkInput.value;
+  console.log(name, link)
+  createItem (name, link);
+  closePopup(popup);
+}
+
+
+//удалим карточку
+function deleteItem(evt) {
+  const deleteIcon = document.querySelector('.elements__delete');
+  deleteIcon.addEventListener('click', function (evt) {
+  const eventTarget = evt.target;
+  eventTarget.//тут меня не хватило
+})
+};
+
+// button.addEventListener('click', function (evt) {
+//   // в переменной eventTarget окажется элемент
+//   // button, на который мы кликнули
+
+//     const eventTarget = evt.target;
+//     eventTarget.setAttribute('disabled', true);
+// });
 
 
 // renderCard(createItem(itemName, itemImage), elementsBox)
