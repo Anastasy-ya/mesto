@@ -33,6 +33,8 @@ const addButton = document.querySelector('.add-button');
 //задали переменные для увеличения картинки
 const bigImage = document.querySelector('.popup_image');
 const imageToOpen = document.querySelectorAll('.elements__image');
+// console.log(bigImage);
+
 
 
 
@@ -88,18 +90,6 @@ popupClose.forEach(button => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-//popup_image
 //не забыть привести порядок центрирование изображения
 
 
@@ -111,7 +101,7 @@ addButton.addEventListener('click', () => {
 openPopup(popupAdd);
 });
 
-
+//поломка1
 //ф-я открытия попапа для увеличения картинки
 imageToOpen.forEach(button => {
 button.addEventListener('click', () => {
@@ -124,7 +114,7 @@ openPopup(bigImage);
 const like = document.querySelectorAll('.button-like');
 
 
-
+//поломка2
 //ф-я изменения цвета лайка
 like.forEach(button => {
   button.addEventListener('click', function (event) {
