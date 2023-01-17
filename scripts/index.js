@@ -167,10 +167,30 @@ const initialCards = [
 ];
 
 
-//ф-я передающая данные из массива в ф-ю создания карточки тут поломка 1 очередь
+
+// // переменные для темплейта
+// const template = document.querySelector('#template').content;//содержимое темплейта
+
+
+// // ф-я передающая данные из массива в ф-ю создания карточки тут поломка 1 очередь
+
+// const createStartItems = [initialCards];
+// for (let i = 0; i < initialCards.length; i++) {
+
+//   const templateElement = template.querySelector('.elements__item').cloneNode(true);//li копируем
+//   templateElement.querySelector('.elements__signature').textContent = initialCards[i].name;
+//   templateElement.querySelector('.elements__image').src = initialCards[i].link;
+//   templateElement.querySelector('.elements__image').alt = initialCards[i].name;
+//   //const element = templateElement;
+//  console.log(templateElement);
+// }
+
+
+
 createStartItems = array => {
   array.forEach(({name, link}) => {
-    return createItem(name, link);
+
+    addItems(createItem(name, link));
   })
 };
 
@@ -181,14 +201,11 @@ const templateElement = template.querySelector('.elements__item').cloneNode(true
 //меняем содержимое полей
 templateElement.querySelector('.elements__signature').textContent = name;
 templateElement.querySelector('.elements__image').src = link;
-templateElement.querySelector('.elements__image').alt = name;// `${}`
+templateElement.querySelector('.elements__image').alt = name;
 console.log(templateElement);
 return templateElement;
 
 };
-
-
-
 
 
 // ф-я вставки темплейта в elements__box
@@ -197,7 +214,9 @@ const elementsBox = document.querySelector('.elements__box');//общая кор
 elementsBox.prepend(element);
 };
 
-addItems(createItem(initialCards));
+createStartItems(initialCards);
+
+
 //конец ф-и передающей данные из массива в ф-ю создания карточки
 
 
@@ -222,7 +241,7 @@ function deleteItem(evt) {
   const deleteIcon = document.querySelector('.elements__delete');
   deleteIcon.addEventListener('click', function (evt) {
   const eventTarget = evt.target;
-  eventTarget.//тут меня не хватило
+  //eventTarget.//тут меня не хватило
 })
 };
 
