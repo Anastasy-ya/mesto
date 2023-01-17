@@ -3,27 +3,36 @@ const editButton = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const popupClose = document.querySelectorAll('.popup__close-icon');
 
-// console.log(popupClose)
+
 
 
 const nameInput = document.querySelector('[name="Name"]');
 const jobInput = document.querySelector('[name="About"]');
 
 
-const formElement = document.querySelector('.popup__form');
+
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__about');
 
 
-
+//выбор форм для ввода
 
 
 
 const editPopup = document.querySelector('.popup_edit');
+const formEditElement = editPopup.querySelector('.popup__form');
+const popupAdd = document.querySelector('.popup_add');
+const formEAddlement = popupAdd.querySelector('.popup__form');
+//console.log(formEditElement, formEAddlement);
 
 
+//задали переменные для редактирования добавления карточек  кажется надо переименовать перем и задавать через конст
+const addButton = document.querySelector('.add-button');
+//let addPopup = document.querySelector('.popup_add');
 
-
+//задали переменные для увеличения картинки
+const bigImage = document.querySelector('.popup_image');
+const imageToOpen = document.querySelectorAll('.elements__image');
 
 
 
@@ -59,7 +68,7 @@ function handleFormSubmit(evt) {
 editButton.addEventListener('click', addNameAndJob);
 // popupClose.addEventListener('click', closePopup);
 //навесим слушатель событий на submit формы
-formElement.addEventListener('submit', handleFormSubmit);
+formEditElement.addEventListener('submit', handleFormSubmit);
 
 
 //
@@ -69,7 +78,7 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 
 
-
+//закрытие всех попапов по крестику
 popupClose.forEach(button => {
   button.addEventListener('click', function (event) {
       // console.log(event.currentTarget.closest(".popup"));
@@ -94,18 +103,12 @@ popupClose.forEach(button => {
 //не забыть привести порядок центрирование изображения
 
 
-//задали переменные для редактирования добавления карточек  кажется надо переименовать перем и задавать через конст
-let addButton = document.querySelector('.add-button');
-let addPopup = document.querySelector('.popup_add');
 
-//задали переменные для увеличения картинки
-const bigImage = document.querySelector('.popup_image');
-const imageToOpen = document.querySelectorAll('.elements__image');
 
 //cоздали слушатели событий по кнопке добавления карточек
 //и открытия попапа для редактирования профиля
 addButton.addEventListener('click', () => {
-openPopup(addPopup);
+openPopup(popupAdd);
 });
 
 
@@ -129,6 +132,62 @@ like.forEach(button => {
     eventTarget.classList.toggle('button-like_active');
     });
 });
+
+
+
+//ф-я добавляющая введенный код в новую карточку
+function saveInput(evt) {
+
+  const subtittleInput = document.querySelector('[name="subtitle"]');
+  const linkInput = document.querySelector('[name="link"]');
+  evt.preventDefault();
+  let name = subtittleInput.value;
+  let link = linkInput.value;
+
+  addItems (createItem (name, link));
+  subtittleInput.value = 'Название';
+  linkInput.value = 'Ссылка на картинку';
+
+  closePopup(popupAdd);
+
+  //сделать подсказки бледными
+};
+
+
+formEAddlement.addEventListener('submit', saveInput);
+
+
+
+
+
+// //функция внесения данных из инпутов в имя и работу при отрытии
+// function addNameAndJob() {
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileJob.textContent;
+//   openPopup(editPopup);
+// }
+
+// //функция закрытия попапа
+// function closePopup(popup) {
+//     popup.classList.remove('popup_opened');
+// }
+
+// //функция сохранения
+// function handleFormSubmit(evt) {
+//     evt.preventDefault();
+//     profileName.textContent = nameInput.value;
+//     profileJob.textContent = jobInput.value;
+//     closePopup(popup);
+
+// }
+
+// //cоздали слушатели событий по кнопке открытия и закрытия для редактирования профиля
+// editButton.addEventListener('click', addNameAndJob);
+// // popupClose.addEventListener('click', closePopup);
+// //навесим слушатель событий на submit формы
+// formEditElement.addEventListener('submit', handleFormSubmit);
+
+
 
 
 
@@ -186,7 +245,7 @@ const initialCards = [
 // }
 
 
-
+//вытащим данные из массива, которые попадут в ф-ю создания карточки, которая попадет в ф-ю вставки в dom
 createStartItems = array => {
   array.forEach(({name, link}) => {
 
@@ -202,7 +261,7 @@ const templateElement = template.querySelector('.elements__item').cloneNode(true
 templateElement.querySelector('.elements__signature').textContent = name;
 templateElement.querySelector('.elements__image').src = link;
 templateElement.querySelector('.elements__image').alt = name;
-console.log(templateElement);
+//console.log(templateElement);
 return templateElement;
 
 };
@@ -222,25 +281,16 @@ createStartItems(initialCards);
 
 
 
-//ф-я добавляющая введенный код в новую карточку не понятно работает или нет 2 очередь
-function saveInput(evt) {
-
-const subtittleInput = document.querySelector('[name="subtitle"]');
-const linkInput = document.querySelector('[name="link"]');
-  evt.preventDefault();
-  const name = subtittleInput.value;
-  const link = linkInput.value;
-  console.log(name, link)
-  createItem (name, link);
-  closePopup(popup);
-}
 
 
-//удалим карточку
+console.log();
+//удалим карточку  тут пока ничего не работает
 function deleteItem(evt) {
-  const deleteIcon = document.querySelector('.elements__delete');
+  const deleteIcon = document.querySelector('.elements__delete');//выбрать конкретный клик
   deleteIcon.addEventListener('click', function (evt) {
-  const eventTarget = evt.target;
+    createItem.remove;
+
+  //const eventTarget = evt.target;
   //eventTarget.//тут меня не хватило
 })
 };
