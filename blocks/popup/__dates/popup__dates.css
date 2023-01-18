@@ -19,6 +19,5 @@
 
 .popup__dates:focus {
     outline: none;
-    border: 1px solid black;
     max-width: 288px;
 }

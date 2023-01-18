@@ -11,3 +11,14 @@
     margin: 0;
     padding: 0;
 }
+
+.popup_add .popup__dates {
+  border-bottom: 1px rgba(0, 0, 0, .2) solid;
+  background: rgba(0, 0, 0, 0);
+  color: rgba(196, 196, 196, 1);
+}
+
+.popup_add .popup__dates:focus {
+  background: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 1);
+}
