@@ -1,74 +1,173 @@
-//задали переменные для редактирования имени и профессии
+//переменные для редактирования имени и профессии
 const editButton = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const popupClose = document.querySelectorAll('.popup__close-icon');
-
-
-
-
 const nameInput = document.querySelector('[name="Name"]');
 const jobInput = document.querySelector('[name="About"]');
-
-
-
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__about');
 
-
-//выбор форм для ввода
-
-
+//переменные форм для ввода
 
 const editPopup = document.querySelector('.popup_edit');
 const formEditElement = editPopup.querySelector('.popup__form');
 const popupAdd = document.querySelector('.popup_add');
 const formEAddlement = popupAdd.querySelector('.popup__form');
-//console.log(formEditElement, formEAddlement);
 
-
-//задали переменные для редактирования добавления карточек  кажется надо переименовать перем и задавать через конст
+//переменные для редактирования добавления карточек
 const addButton = document.querySelector('.add-button');
-//let addPopup = document.querySelector('.popup_add');
 
-//задали переменные для увеличения картинки
+//переменные для увеличения картинки
 const bigImage = document.querySelector('.popup_image');
 const imageToOpen = document.querySelectorAll('.elements__image');
-// console.log(bigImage);
+
+//поломка1
+// //ф-я открытия попапа для увеличения картинки
+// const makeImageBig = (image) => {
+// image.forEach(button => {
+// button.addEventListener('click', () => {
+// openPopup(bigImage);
+// }
+// )})};
+// console.log();
+
+
+//добавим карточки по умолчанию
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 
 
+// // переменные для темплейта
+// const template = document.querySelector('#template').content;//содержимое темплейта
 
+
+// // ф-я передающая данные из массива в ф-ю создания карточки тут поломка 1 очередь
+
+// const createStartItems = [initialCards];
+// for (let i = 0; i < initialCards.length; i++) {
+
+//   const templateElement = template.querySelector('.elements__item').cloneNode(true);//li копируем
+//   templateElement.querySelector('.elements__signature').textContent = initialCards[i].name;
+//   templateElement.querySelector('.elements__image').src = initialCards[i].link;
+//   templateElement.querySelector('.elements__image').alt = initialCards[i].name;
+//   //const element = templateElement;
+//  console.log(templateElement);
+// }
+
+
+//вытащим данные из массива, которые попадут в ф-ю создания карточки, которая попадет в ф-ю вставки в dom
+createStartItems = array => {
+  array.forEach(({name, link}) => {
+
+    addItems(createItem(name, link));
+  })
+};
+
+//ф-я открывает только ранее созданные из html карточки
+imageToOpen.forEach(button => {
+button.addEventListener('click', () => {
+openPopup(bigImage);
+}
+)});
+
+//ф-я открытия большого изображения не работает
+  // function makeImageBig() {
+  //   imageToOpen.forEach(button => {
+  //   button.addEventListener('click', () => {
+  //   openPopup(bigImage);
+  //   }
+  //   )})
+  // };
+  //переменные для большого попапа
+const bigImageLink = document.querySelector('.popup__image');
+const bigImageName = document.querySelector('.popup__signature');
+
+//  ф-я увеличения картинки первая часть, затем навесить слушатель внутри ф-и создания карточки
+  function makeImageBig(name, link) {
+    openPopup(bigImage);
+    bigImageLink.src = link;
+    bigImageLink.alt = name;
+    bigImageName.textContent = name;
+  };
+
+//ф-я создания карточки
+function createItem (name, link) {
+  const template = document.querySelector('#template').content;//содержимое темплейта
+  const templateElement = template.querySelector('.elements__item').cloneNode(true);//li копируем
+  //меняем содержимое полей
+  templateElement.querySelector('.elements__signature').textContent = name;
+  templateElement.querySelector('.elements__image').src = link;
+  templateElement.querySelector('.elements__image').alt = name;
+
+  // makeImageBig()
+// //пытаюсь добавить функционал открытия картинки в большом размере
+  console.log(imageToOpen);
+  return templateElement;
+
+};
+
+
+// ф-я вставки темплейта в elements__box
+addItems = element => {
+const elementsBox = document.querySelector('.elements__box');//общая коробка для вставки карточек
+elementsBox.prepend(element);
+};
+
+createStartItems(initialCards);
 
 //функция открытия попапов
 function openPopup(popup) {
-    popup.classList.add('popup_opened');
-
-}
+  popup.classList.add('popup_opened');
+};
 
 //функция внесения данных из инпутов в имя и работу при отрытии
 function addNameAndJob() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(editPopup);
-}
+};
 
-//функция закрытия попапа
+//функция закрытия попапов
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-}
+};
 
-//функция сохранения
+//функция сохранения имени и информации о работе
 function handleFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closePopup(popup);
+};
 
-}
-
-//cоздали слушатели событий по кнопке открытия и закрытия для редактирования профиля
+//слушатели событий по кнопке открытия и закрытия для редактирования профиля
 editButton.addEventListener('click', addNameAndJob);
-// popupClose.addEventListener('click', closePopup);
+//popupClose.addEventListener('click', closePopup);
 //навесим слушатель событий на submit формы
 formEditElement.addEventListener('submit', handleFormSubmit);
 
@@ -77,37 +176,21 @@ formEditElement.addEventListener('submit', handleFormSubmit);
 //
 //
 //
-
-
+//не забыть привести порядок центрирование изображения
 
 //закрытие всех попапов по крестику
 popupClose.forEach(button => {
   button.addEventListener('click', function (event) {
       // console.log(event.currentTarget.closest(".popup"));
       closePopup(event.currentTarget.closest('.popup'));
-
     });
 });
 
-
-//не забыть привести порядок центрирование изображения
-
-
-
-
-//cоздали слушатели событий по кнопке добавления карточек
-//и открытия попапа для редактирования профиля
+//открытие попапа для добавления карточек
 addButton.addEventListener('click', () => {
 openPopup(popupAdd);
 });
 
-//поломка1
-//ф-я открытия попапа для увеличения картинки
-imageToOpen.forEach(button => {
-button.addEventListener('click', () => {
-openPopup(bigImage);
-}
-)});
 
 
 //задали переменные для лайков
@@ -187,83 +270,7 @@ formEAddlement.addEventListener('submit', saveInput);
 
 
 
-//добавим карточки по умолчанию
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
-
-
-// // переменные для темплейта
-// const template = document.querySelector('#template').content;//содержимое темплейта
-
-
-// // ф-я передающая данные из массива в ф-ю создания карточки тут поломка 1 очередь
-
-// const createStartItems = [initialCards];
-// for (let i = 0; i < initialCards.length; i++) {
-
-//   const templateElement = template.querySelector('.elements__item').cloneNode(true);//li копируем
-//   templateElement.querySelector('.elements__signature').textContent = initialCards[i].name;
-//   templateElement.querySelector('.elements__image').src = initialCards[i].link;
-//   templateElement.querySelector('.elements__image').alt = initialCards[i].name;
-//   //const element = templateElement;
-//  console.log(templateElement);
-// }
-
-
-//вытащим данные из массива, которые попадут в ф-ю создания карточки, которая попадет в ф-ю вставки в dom
-createStartItems = array => {
-  array.forEach(({name, link}) => {
-
-    addItems(createItem(name, link));
-  })
-};
-
-//ф-я создания карточки
-function createItem (name, link) {
-const template = document.querySelector('#template').content;//содержимое темплейта
-const templateElement = template.querySelector('.elements__item').cloneNode(true);//li копируем
-//меняем содержимое полей
-templateElement.querySelector('.elements__signature').textContent = name;
-templateElement.querySelector('.elements__image').src = link;
-templateElement.querySelector('.elements__image').alt = name;
-//console.log(templateElement);
-return templateElement;
-
-};
-
-
-// ф-я вставки темплейта в elements__box
-addItems = element => {
-const elementsBox = document.querySelector('.elements__box');//общая коробка для вставки карточек
-elementsBox.prepend(element);
-};
-
-createStartItems(initialCards);
 
 
 //конец ф-и передающей данные из массива в ф-ю создания карточки
