@@ -7,6 +7,10 @@ const jobInput = document.querySelector('[name="About"]');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__about');
 
+//переменные для темплейта
+const template = document.querySelector('#template').content;//содержимое темплейта
+
+
 //переменные форм для ввода
 
 const editPopup = document.querySelector('.popup_edit');
@@ -19,7 +23,14 @@ const addButton = document.querySelector('.add-button');
 
 //переменные для увеличения картинки
 const bigImage = document.querySelector('.popup_image');
-const imageToOpen = document.querySelectorAll('.elements__image');
+
+
+
+
+
+
+
+
 
 //поломка1
 // //ф-я открытия попапа для увеличения картинки
@@ -88,12 +99,12 @@ createStartItems = array => {
   })
 };
 
-//ф-я открывает только ранее созданные из html карточки
-imageToOpen.forEach(button => {
-button.addEventListener('click', () => {
-openPopup(bigImage);
-}
-)});
+// //ф-я открывает только ранее созданные из html карточки
+// imageToOpen.forEach(button => {
+// button.addEventListener('click', () => {
+// openPopup(bigImage);
+// }
+// )});
 
 //ф-я открытия большого изображения не работает
   // function makeImageBig() {
@@ -107,29 +118,50 @@ openPopup(bigImage);
 const bigImageLink = document.querySelector('.popup__image');
 const bigImageName = document.querySelector('.popup__signature');
 
-//  ф-я увеличения картинки первая часть, затем навесить слушатель внутри ф-и создания карточки
-  function makeImageBig(name, link) {
+//  ф-я увеличения картинки первая часть, затем навесить слушатель внутри ф-и создания карточки и вызвать
+  function makeImageBig(imgName, imgLink) {
     openPopup(bigImage);
-    bigImageLink.src = link;
-    bigImageLink.alt = name;
-    bigImageName.textContent = name;
+    bigImageLink.src = imgLink;
+    bigImageLink.alt = imgName;
+    bigImageName.textContent = imgName;
   };
 
 //ф-я создания карточки
 function createItem (name, link) {
-  const template = document.querySelector('#template').content;//содержимое темплейта
   const templateElement = template.querySelector('.elements__item').cloneNode(true);//li копируем
+  const imageToOpen = templateElement.querySelector('.elements__image');
+  //переменные для лайков
+  const like = templateElement.querySelector('.button-like');
+  //урна
+  const deleteIcon = templateElement.querySelector('.elements__delete');
   //меняем содержимое полей
   templateElement.querySelector('.elements__signature').textContent = name;
   templateElement.querySelector('.elements__image').src = link;
   templateElement.querySelector('.elements__image').alt = name;
+  // добавим в карточку открытие картинки в большом размере
+  imageToOpen.addEventListener('click', makeImageBig(name, link));
+  // imageToOpen.addEventListener('click', function (evt) {
+  //   const eventTarget = evt.target;
+  //   eventTarget.addEventListener('click', makeImageBig(name, link));
+  // });
+  // добавим в карточку удаление по иконке
+  deleteIcon.addEventListener('click', templateElement.remove);//
+  // добавим в карточку лайки
+  like.addEventListener('click', () => {
+  like.classList.toggle('button-like_active')
+  });
 
-  // makeImageBig()
-// //пытаюсь добавить функционал открытия картинки в большом размере
-  console.log(imageToOpen);
   return templateElement;
 
 };
+//кусок из теории для выбора одного элемента из ряда подобных
+// button.addEventListener('click', function (evt) {
+//   // в переменной eventTarget окажется элемент
+//   // button, на который мы кликнули
+
+//     const eventTarget = evt.target;
+//     eventTarget.setAttribute('disabled', true);
+// });
 
 
 // ф-я вставки темплейта в elements__box
@@ -193,18 +225,17 @@ openPopup(popupAdd);
 
 
 
-//задали переменные для лайков
-const like = document.querySelectorAll('.button-like');
 
 
-//поломка2
-//ф-я изменения цвета лайка
-like.forEach(button => {
-  button.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.classList.toggle('button-like_active');
-    });
-});
+
+// //поломка2
+// //ф-я изменения цвета лайка работает только для старых карточек
+// like.forEach(button => {
+//   button.addEventListener('click', function (event) {
+//     const eventTarget = event.target;
+//     eventTarget.classList.toggle('button-like_active');
+//     });
+// });
 
 
 
@@ -276,21 +307,16 @@ formEAddlement.addEventListener('submit', saveInput);
 //конец ф-и передающей данные из массива в ф-ю создания карточки
 
 
+// //удалим карточку  тут пока ничего не работает
+// function deleteItem(evt) {
+//   const deleteIcon = document.querySelector('.elements__delete');//выбрать конкретный клик
+//   deleteIcon.addEventListener('click', function (evt) {
+//     createItem.remove;
 
-
-
-
-console.log();
-//удалим карточку  тут пока ничего не работает
-function deleteItem(evt) {
-  const deleteIcon = document.querySelector('.elements__delete');//выбрать конкретный клик
-  deleteIcon.addEventListener('click', function (evt) {
-    createItem.remove;
-
-  //const eventTarget = evt.target;
-  //eventTarget.//тут меня не хватило
-})
-};
+//   //const eventTarget = evt.target;
+//   //eventTarget.//тут меня не хватило
+// })
+// };
 
 // button.addEventListener('click', function (evt) {
 //   // в переменной eventTarget окажется элемент
@@ -304,22 +330,6 @@ function deleteItem(evt) {
 // renderCard(createItem(itemName, itemImage), elementsBox)
 
 // const elementsBox = document.querySelector('.elements__box');
-
-// function renderCard(element, containerElement) {
-// containerElement.prepend(element);
-// }
-
-
-
-// function sendFormAddCard(evt) {
-
-//   evt.preventDefault();
-//   const name = nameInputCard.value;
-//   const link = linkInputCard.value;
-//   createCard(name, link);
-//   closePopup(cardsPopup)
-// }
-
 
 
 
