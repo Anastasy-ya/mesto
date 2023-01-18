@@ -119,11 +119,11 @@ const bigImageLink = document.querySelector('.popup__image');
 const bigImageName = document.querySelector('.popup__signature');
 
 //  ф-я увеличения картинки первая часть, затем навесить слушатель внутри ф-и создания карточки и вызвать
-  function makeImageBig(imgName, imgLink) {
+  function makeImageBig(name, link) {
     openPopup(bigImage);
-    bigImageLink.src = imgLink;
-    bigImageLink.alt = imgName;
-    bigImageName.textContent = imgName;
+    bigImageLink.src = link;
+    bigImageLink.alt = name;
+    bigImageName.textContent = name;
   };
 
 //ф-я создания карточки
@@ -139,13 +139,16 @@ function createItem (name, link) {
   templateElement.querySelector('.elements__image').src = link;
   templateElement.querySelector('.elements__image').alt = name;
   // добавим в карточку открытие картинки в большом размере
-  imageToOpen.addEventListener('click', makeImageBig(name, link));
+  imageToOpen.addEventListener('click', () => makeImageBig(name, link));
+
+
+
   // imageToOpen.addEventListener('click', function (evt) {
   //   const eventTarget = evt.target;
   //   eventTarget.addEventListener('click', makeImageBig(name, link));
   // });
   // добавим в карточку удаление по иконке
-  deleteIcon.addEventListener('click', templateElement.remove);//
+  deleteIcon.addEventListener('click', removeItem);//e.target.closest('.elements__element').remove();
   // добавим в карточку лайки
   like.addEventListener('click', () => {
   like.classList.toggle('button-like_active')
@@ -153,6 +156,10 @@ function createItem (name, link) {
 
   return templateElement;
 
+};
+
+function removeItem(event) {
+event.target.closest('.elements__item').remove();
 };
 //кусок из теории для выбора одного элемента из ряда подобных
 // button.addEventListener('click', function (evt) {
