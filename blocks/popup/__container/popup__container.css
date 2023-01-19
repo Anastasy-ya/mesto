@@ -20,37 +20,7 @@
 
 
 
-/*картинка*/
-.popup__image {
-  max-height: 75vh;
-  max-width: 75vw;
-  z-index: 1;
-  opacity: 1;
-  position: relative;
-  display: block;
-
-}
-@media screen and (max-width: 615px) {
-    .popup__image {
-
-    }
-}
-
-/*второй класс черного фона*/
-.popup_image {
-  background: rgba(0, 0, 0, .9);
-  /* display: flex;
-  opacity: 0; */
-
-}
 
 
-.popup__signature {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 25px;
-  color: #FFF;
-  font-family: "Inter", "Arial", "sans-serif";
-  font-style: normal;
-  display: block;
-}
+
+

@@ -21,7 +21,7 @@ const formEAddlement = popupAdd.querySelector('.popup__form');
 const addButton = document.querySelector('.add-button');
 
 //переменные для увеличения картинки
-const bigImage = document.querySelector('.popup_image');
+const bigImage = document.querySelector('.popup-image');
 
 //добавим карточки по умолчанию
 const initialCards = [
@@ -61,6 +61,7 @@ createStartItems = array => {
 //переменные для большого попапа
 const bigImageLink = document.querySelector('.popup__image');
 const bigImageName = document.querySelector('.popup__signature');
+const bigImageClose = document.querySelector('.popup-image__close-icon');
 
 //  ф-я увеличения картинки
 function makeImageBig(name, link) {
@@ -68,6 +69,9 @@ function makeImageBig(name, link) {
   bigImageLink.src = link;
   bigImageLink.alt = name;
   bigImageName.textContent = name;
+  bigImageClose.addEventListener('click', () => {
+  bigImage.classList.remove('popup_opened')
+});
 };
 
 //ф-я создания карточки
@@ -85,7 +89,7 @@ function createItem (name, link) {
   // добавим в карточку открытие картинки в большом размере
   imageToOpen.addEventListener('click', () => makeImageBig(name, link));
   // добавим в карточку удаление по иконке
-  deleteIcon.addEventListener('click', removeItem);//e.target.closest('.elements__element').remove();
+  deleteIcon.addEventListener('click', removeItem);
   // добавим в карточку лайки
   like.addEventListener('click', () => {
   like.classList.toggle('button-like_active')

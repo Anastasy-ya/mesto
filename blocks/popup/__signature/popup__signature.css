@@ -1,0 +1,10 @@
+.popup__signature {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 25px;
+  color: #FFF;
+  font-family: "Inter", "Arial", "sans-serif";
+  font-style: normal;
+  display: block;
+  max-width: 75vw;
+}

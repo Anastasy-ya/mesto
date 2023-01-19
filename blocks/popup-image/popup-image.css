@@ -1,0 +1,5 @@
+/*второй класс черного фона*/
+.popup-image {
+  background: rgba(0, 0, 0, .9);
+  flex-direction: column;
+}
