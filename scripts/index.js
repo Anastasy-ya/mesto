@@ -42,15 +42,20 @@ createStartItems = array => {
   })
 };
 
+//ф-я закрытия попапа с большой картинкой по крестику
+bigImageClose.addEventListener('click', () => {
+    closePopup(bigImage)
+});
+
 //ф-я увеличения картинки и закрытия по крестику
 function makeImageBig(name, link) {
   openPopup(bigImage);
   bigImageLink.src = link;
   bigImageLink.alt = name;
   bigImageName.textContent = name;
-  bigImageClose.addEventListener('click', () => {
-    closePopup(bigImage)
-});
+//   bigImageClose.addEventListener('click', () => {
+//     closePopup(bigImage)
+// });
 };
 
 //ф-я создания карточки
