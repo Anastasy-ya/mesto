@@ -19,5 +19,8 @@
 
 .popup__dates:focus {
     outline: none;
-    max-width: 288px;
+}
+
+.popup__dates::placeholder {
+  color:  #C4C4C4;
 }
