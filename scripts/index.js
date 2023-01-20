@@ -1,7 +1,7 @@
 //переменные для редактирования имени и профессии
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupClose = document.querySelectorAll('.popup__close-icon');
-// const popupList = Array.from(document.querySelectorAll('.popup')); // найдем все попапы на странице
+const popupList = Array.from(document.querySelectorAll('.popup')); // найдем все попапы на странице
 const nameInput = document.querySelector('[name="Name"]');
 const jobInput = document.querySelector('[name="About"]');
 const profileName = document.querySelector('.profile__name');
@@ -124,20 +124,19 @@ buttonEdit.addEventListener('click', addNameAndJob);
 formEditElement.addEventListener('submit', handleFormSubmit);
 
 //закрытие всех попапов по крестику
-popupClose.forEach(button => {
-  button.addEventListener('click', function (event) {
-    closePopup(event.currentTarget.closest('.popup'));
-  });
-});
-//неработающая ф-я закрытия попапов по крестику
-// popupList.forEach((popup) => { // итерируем массив. объявляя каждый попап в переменную popup
-//   popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
-//     const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
-//     if (targetClassList.contains('popup__close')) { // проверяем наличие класса кнопки закрытия
-//       closePopup(popup); // если класс присутствует, то закрываем попап
-//     }
-//   })
+// popupClose.forEach(button => {
+//   button.addEventListener('click', function (event) {
+//     closePopup(event.currentTarget.closest('.popup'));
+//   });
 // });
+popupList.forEach((popup) => { // итерируем массив. объявляя каждый попап в переменную popup
+  popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
+    const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
+    if (targetClassList.contains('popup__close-icon')) { // проверяем наличие класса кнопки закрытия
+      closePopup(popup); // если класс присутствует, то закрываем попап
+    }
+  })
+});
 
 //открытие попапа для добавления карточек
 buttonAdd.addEventListener('click', () => {
