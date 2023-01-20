@@ -1,6 +1,6 @@
 //переменные для редактирования имени и профессии
 const buttonEdit = document.querySelector('.profile__edit-button');
-const popupClose = document.querySelectorAll('.popup__close-icon');
+const popupClose = document.querySelectorAll('.popup-close-icon');
 const popupList = Array.from(document.querySelectorAll('.popup')); // найдем все попапы на странице
 const nameInput = document.querySelector('[name="Name"]');
 const jobInput = document.querySelector('[name="About"]');
@@ -26,7 +26,7 @@ const bigImage = document.querySelector('.popup_type_image');
 //переменные для большого попапа
 const bigImageLink = document.querySelector('.popup__image');
 const bigImageName = document.querySelector('.popup__signature');
-const bigImageClose = document.querySelector('.popup__close-icon_type_image');
+const bigImageClose = document.querySelector('.popup-close-icon_type_image');
 
 //переменные инпутов
 const subtittleInput = document.querySelector('[name="subtitle"]');
@@ -132,7 +132,7 @@ formEditElement.addEventListener('submit', handleFormSubmit);
 popupList.forEach((popup) => { // итерируем массив. объявляя каждый попап в переменную popup
   popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
     const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
-    if (targetClassList.contains('popup__close-icon')) { // проверяем наличие класса кнопки закрытия
+    if (targetClassList.contains('popup-close-icon')) { // проверяем наличие класса кнопки закрытия
       closePopup(popup); // если класс присутствует, то закрываем попап
     }
   })
