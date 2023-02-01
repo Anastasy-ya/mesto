@@ -121,7 +121,7 @@
               aria-label="Close"
             ></button>
             <h2 class="popup__heading">Редактировать профиль</h2>
-            <form class="popup__form" name="Form">
+            <form class="popup__form" name="Form" novalidate><!-- novalidate-->
               <input
                 type="text"
                 name="Name"
@@ -130,6 +130,7 @@
                 required
                 minlength="2"
                 maxlength="40"
+                id="name-input"
               /><!---->
               <input
                 type="text"
@@ -139,8 +140,9 @@
                 required
                 minlength="2"
                 maxlength="200"
+                id="about-input"
               />
-              <button class="popup__button" type="submit" aria-label="Save">
+              <button class="popup__button " type="submit" aria-label="Save"><!--popup__button_inactive-->
                 Cохранить
               </button>
             </form>
@@ -157,7 +159,7 @@
               aria-label="Close"
             ></button>
             <h2 class="popup__heading">Новое место</h2>
-            <form class="popup__form" name="Form">
+            <form class="popup__form" name="Form"><!-- novalidate-->
               <input
                 type="text"
                 name="subtitle"
@@ -166,15 +168,17 @@
                 required
                 minlength="2"
                 maxlength="30"
+                id="title-input"
               />
               <input
-                type="text"
+                type="url"
                 name="link"
                 class="popup__dates"
                 placeholder="Ссылка на картинку"
                 required
+                id="url-input"
               />
-              <button class="popup__button" type="submit" aria-label="Save">
+              <button class="popup__button" type="submit" aria-label="Save"><!--popup__button_inactive-->
                 Cоздать
               </button>
             </form>

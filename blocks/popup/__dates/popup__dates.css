@@ -24,3 +24,8 @@
 .popup__dates::placeholder {
   color:  #C4C4C4;
 }
+
+.popup__dates:invalid {
+  color:  #C4C4C4;
+}
+

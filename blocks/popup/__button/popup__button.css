@@ -20,6 +20,12 @@
 .popup__button:hover {
     opacity: 0.8;
 }
+/*тут должен включиться стиль кнопки */
+.popup__button:invalid {
+  background-color: rgba(0, 0, 0, 0);
+  border: rgba(0, 0, 0, 1) 1px solid;
+  color: rgba(0, 0, 0, 1);
+}
 
 @media screen and (max-width: 920px) {
     .popup__button {
@@ -28,4 +34,10 @@
       margin: 22px 0 0;
       height: 46px;
     }
+}
+
+.popup__button_inactive {/**/
+  background-color: rgba(0, 0, 0, 0);
+  border: rgba(0, 0, 0, 1) 1px solid;
+  color: rgba(0, 0, 0, 1);
 }
