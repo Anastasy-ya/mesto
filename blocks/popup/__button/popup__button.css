@@ -46,3 +46,38 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+
+/*_____________________________________________*/
+
+.popup__label {
+  position: relative;
+}
+
+
+
+
+.popup__input-error {
+  font-family: "Inter", "Arial", "sans-serif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  max-width: 358px;
+  color: #FF0000;
+  opacity: 0;
+  position: absolute;
+  top: 32px;
+  left: 0;
+}
+
+.form__input-error_active {
+  opacity: 1;
+}
+
+
+
+.form__input_type_error {
+border-bottom-color: red;
+box-sizing: border-box;
+}
