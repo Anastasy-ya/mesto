@@ -45,9 +45,9 @@ const showInputError = (formSelector, inputSelector, errorMessage) => {
   // console.log(formSelector);
   const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
   // console.log(inputErrorClass);
-  inputSelector.classList.add("form__input_type_error");//красное подчеркивание не работает
-  inputErrorClass.textContent = errorMessage;
-  inputErrorClass.classList.add("form__input-error_active");
+  inputSelector.classList.add("form__input_type_error");//красное подчеркивание не работает и ошибка скорее всего в стилях
+  inputErrorClass.textContent = errorMessage;//работает
+  inputErrorClass.classList.add("form__input-error_active");//это скорее всего не понадобится
 };
 
 // скрыть сообщение об ошибке тут разобраться с классами
@@ -55,8 +55,8 @@ const hideInputError = (formSelector, inputSelector) => {
   console.log(formSelector, inputSelector);
   const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
 
-  inputSelector.classList.remove("form__input_type_error");
-  inputErrorClass.textContent = errorMessage;//красное подчеркивание не работает
+  inputSelector.classList.remove("form__input_type_error");//красное подчеркивание не работает
+  inputErrorClass.textContent = '';
   // console.log(formSelector, errorMessage);
   inputErrorClass.classList.remove("form__input-error_active");// тоже не работает
 };

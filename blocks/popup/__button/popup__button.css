@@ -4,7 +4,7 @@
     background-color: #000;
     border: none;
     padding: 0;
-    margin: 25px 0 0;
+    margin: 6px 0 0;
     font-weight: 400;
     font-style: normal;
     font-size: 18px;
@@ -23,23 +23,23 @@
 /*тут должен включиться стиль кнопки */
 .popup__button:invalid {
   background-color: rgba(0, 0, 0, 0);
-  border: rgba(0, 0, 0, 1) 1px solid;
-  color: rgba(0, 0, 0, 1);
+  border: rgba(0, 0, 0, .2) 1px solid;
+  color: rgba(0, 0, 0, .2);
 }
 
 @media screen and (max-width: 920px) {
     .popup__button {
       font-size: 14px;
       line-height: 17px;
-      margin: 22px 0 0;
+      margin: 26px 0 0;
       height: 46px;
     }
 }
 
 .popup__button_inactive {/**/
   background-color: rgba(0, 0, 0, 0);
-  border: rgba(0, 0, 0, 1) 1px solid;
-  color: rgba(0, 0, 0, 1);
+  border: rgba(0, 0, 0, .2) 1px solid;
+  color: rgba(0, 0, 0, .2);
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -50,34 +50,6 @@
 
 /*_____________________________________________*/
 
-.popup__label {
-  position: relative;
-}
 
 
 
-
-.popup__input-error {
-  font-family: "Inter", "Arial", "sans-serif";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  max-width: 358px;
-  color: #FF0000;
-  opacity: 0;
-  position: absolute;
-  top: 32px;
-  left: 0;
-}
-
-.form__input-error_active {
-  opacity: 1;
-}
-
-
-
-.form__input_type_error {
-border-bottom-color: red;
-box-sizing: border-box;
-}
