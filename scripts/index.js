@@ -35,6 +35,14 @@ const linkInput = document.querySelector('[name="link"]');
 //общая коробка для вставки карточек
 const elementsBox = document.querySelector('.elements__box');
 
+
+
+
+//очистить поля инпутов
+
+
+
+
 //вытащим данные из массива
 createStartItems = array => {
   array.forEach(({name, link}) => {
@@ -53,6 +61,7 @@ function makeImageBig(name, link) {
   bigImageLink.src = link;
   bigImageLink.alt = name;
   bigImageName.textContent = name;
+
 //   bigImageClose.addEventListener('click', () => {
 //     closePopup(bigImage)
 // });
@@ -95,8 +104,24 @@ createStartItems(initialCards);
 
 //функция открытия попапов
 function openPopup(popup) {
+  const inputs = popupAdd.querySelectorAll('.popup__dates');  //начало необязательного фрагмента
+    inputs.forEach((input) => {
+    input.value = "";//обнулить инпуты при открытии (только для добавления карточки)
+    }
+  )//конец необязательного фрагмента
   popup.classList.add('popup_opened');
+  window.addEventListener('keyup', closeEsc);
 };
+
+
+//закрытие попапа по esc
+function closeEsc(event, popup) {//закрыть инпут по esc
+  //console.log(event.key);
+  if (event.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));//
+  }
+}
+
 
 //функция внесения данных из инпутов в имя и работу при отрытии
 function addNameAndJob() {
@@ -107,8 +132,12 @@ function addNameAndJob() {
 
 //функция закрытия попапов
 function closePopup(popup) {
+  // popup.removeEventListener('keyup', closeEsc(event));
+  // console.log(popup);
   popup.classList.remove('popup_opened');
+  window.removeEventListener('keyup', closeEsc);
 };
+
 
 //функция сохранения имени и информации о работе
 function handleFormSubmit(evt) {
