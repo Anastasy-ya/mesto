@@ -122,9 +122,7 @@
             ></button>
             <h2 class="popup__heading">Редактировать профиль</h2>
             <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
-
               <label class="form__label">
-
                 <input
                   type="text"
                   name="Name"
@@ -133,16 +131,11 @@
                   required
                   minlength="2"
                   maxlength="40"
-                  id="popup__name-input"
+                  id="form__name-input"
                 /><!--popup__input-error - основное оформление текста-->
-
-                <span class="popup__input-error popup__name-input-error"></span>
-
+                <span class="form__input-error form__name-input-error"></span>
               </label>
-
-
               <label class="form__label">
-
                 <input
                   type="text"
                   name="About"
@@ -151,14 +144,10 @@
                   required
                   minlength="2"
                   maxlength="200"
-                  id="popup__about-input"
+                  id="form__about-input"
                 />
-
-                <span class="popup__input-error popup__about-input-error"></span>
-
+                <span class="form__input-error form__about-input-error"></span>
               </label>
-
-
               <button class="popup__button " type="submit" aria-label="Save"><!--popup__button_inactive-->
                 Cохранить
               </button>
@@ -177,9 +166,7 @@
             ></button>
             <h2 class="popup__heading">Новое место</h2>
             <form class="popup__form" name="Form" novalidate><!-- novalidate-->
-
               <label class="form__label">
-
                 <input
                   type="text"
                   name="subtitle"
@@ -188,28 +175,21 @@
                   required
                   minlength="2"
                   maxlength="30"
-                  id="popup__title-input"
+                  id="form__title-input"
                 />
-
-                <span class="popup__input-error popup__title-input-error"></span>
-
+                <span class="form__input-error form__title-input-error"></span>
               </label>
-
               <label class="form__label">
-
                 <input
                   type="url"
                   name="link"
                   class="form__input"
                   placeholder="Ссылка на картинку"
                   required
-                  id="popup__url-input"
+                  id="form__url-input"
                 />
-
-                <span class="popup__input-error popup__url-input-error"></span>
-
+                <span class="form__input-error form__url-input-error"></span>
               </label>
-
               <button class="popup__button" type="submit" aria-label="Save"><!--popup__button_inactive-->
                 Cоздать
               </button>
