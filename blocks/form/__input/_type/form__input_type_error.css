@@ -1,0 +1,4 @@
+.form__input_type_error {
+  border-bottom: 1px red solid;
+  box-sizing: border-box;
+}

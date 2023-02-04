@@ -35,14 +35,6 @@ const linkInput = document.querySelector('[name="link"]');
 //общая коробка для вставки карточек
 const elementsBox = document.querySelector('.elements__box');
 
-
-
-
-//очистить поля инпутов
-
-
-
-
 //вытащим данные из массива
 createStartItems = array => {
   array.forEach(({name, link}) => {
@@ -104,9 +96,9 @@ createStartItems(initialCards);
 
 //функция открытия попапов
 function openPopup(popup) {
-  const inputs = popupAdd.querySelectorAll('.popup__dates');  //начало необязательного фрагмента
+  const inputs = popupAdd.querySelectorAll('.form__input');  //начало необязательного фрагмента
     inputs.forEach((input) => {
-    input.value = "";//обнулить инпуты при открытии (только для добавления карточки)
+    input.value = '';//обнулить инпуты при открытии (только для добавления карточки)
     }
   )//конец необязательного фрагмента
   popup.classList.add('popup_opened');

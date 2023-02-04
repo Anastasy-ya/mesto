@@ -1,0 +1,10 @@
+.popup__button_inactive {
+  background-color: rgba(0, 0, 0, 0);
+  border: rgba(0, 0, 0, .2) 1px solid;
+  color: rgba(0, 0, 0, .2);
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
