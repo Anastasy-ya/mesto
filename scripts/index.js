@@ -53,10 +53,6 @@ function makeImageBig(name, link) {
   bigImageLink.src = link;
   bigImageLink.alt = name;
   bigImageName.textContent = name;
-
-//   bigImageClose.addEventListener('click', () => {
-//     closePopup(bigImage)
-// });
 };
 
 //ф-я создания карточки
@@ -69,8 +65,9 @@ function createItem (name, link) {
   const iconDelete = templateElement.querySelector('.elements__delete');
   //меняем содержимое полей
   templateElement.querySelector('.elements__signature').textContent = name;
-  templateElement.querySelector('.elements__image').src = link;
-  templateElement.querySelector('.elements__image').alt = name;
+  const elementsImage = templateElement.querySelector('.elements__image');
+  elementsImage.src = link;
+  elementsImage.alt = name;
   // добавим в карточку открытие картинки в большом размере
   imageToOpen.addEventListener('click', () => makeImageBig(name, link));
   // добавим в карточку удаление по иконке
@@ -96,27 +93,36 @@ createStartItems(initialCards);
 
 //функция открытия попапов
 function openPopup(popup) {
-  const inputs = popupAdd.querySelectorAll('.form__input');  //начало необязательного фрагмента
-    inputs.forEach((input) => {
-    input.value = '';//обнулить инпуты при открытии (только для добавления карточки)
-    }
-  )//конец необязательного фрагмента
   popup.classList.add('popup_opened');
   window.addEventListener('keyup', closeEsc);
 };
 
+//ф-я обнуления кнопки сабмит
+function resetButton(popup) {
+  const submitButtonSelector = popup.querySelector('.popup__button');
+  submitButtonSelector.disabled = true;
+  submitButtonSelector.classList.add('popup__button_inactive'); //кнопка некликабельна
+};
+
+//ф-я обнуления текста ошибок и красного подчеркивания при ошибке
+function resetError(popup) {
+  const inputsList = popup.querySelectorAll('.form__input');
+  inputsList.forEach((inputSelector) => {
+    const inputErrorClass = popup.querySelector(`.${inputSelector.id}-error`);
+    inputErrorClass.textContent = '';//удалить сообщение об ошибке при открытии
+    inputSelector.classList.remove('form__input_type_error');//удалить красное подчеркивание при открытии
+  });
+};
 
 //закрытие попапа по esc
 function closeEsc(event, popup) {//закрыть инпут по esc
-  //console.log(event.key);
   if (event.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));//
   }
 }
 
-
 //функция внесения данных из инпутов в имя и работу при отрытии
-function addNameAndJob() {
+function openEditProfileForm() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
@@ -124,32 +130,25 @@ function addNameAndJob() {
 
 //функция закрытия попапов
 function closePopup(popup) {
-  // popup.removeEventListener('keyup', closeEsc(event));
-  // console.log(popup);
   popup.classList.remove('popup_opened');
   window.removeEventListener('keyup', closeEsc);
 };
 
-
 //функция сохранения имени и информации о работе
-function handleFormSubmit(evt) {
+function submitEditProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
+  resetError(popupEdit);//тут не работает
 };
 
 //слушатель событий по кнопке редактирования профиля
-buttonEdit.addEventListener('click', addNameAndJob);
+buttonEdit.addEventListener('click', openEditProfileForm);
 //навесим слушатель событий на submit формы
-formEditElement.addEventListener('submit', handleFormSubmit);
+formEditElement.addEventListener('submit', submitEditProfileForm);
 
 //закрытие всех попапов по крестику
-// popupClose.forEach(button => {
-//   button.addEventListener('click', function (event) {
-//     closePopup(event.currentTarget.closest('.popup'));
-//   });
-// });
 popupList.forEach((popup) => { // итерируем массив. объявляя каждый попап в переменную popup
   popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
     const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
@@ -161,20 +160,32 @@ popupList.forEach((popup) => { // итерируем массив. объявл�
 
 //открытие попапа для добавления карточек
 buttonAdd.addEventListener('click', () => {
+  // debugger;
+  resetButton(popupAdd);//обнулить кнопку пишу функцию
+  resetError(popupAdd);//очистить ошибки и удалить красную черту пишу функцию
+  formAddlement.reset();//удалить содержание инпутов формы popupAdd
   openPopup(popupAdd);
 });
 
 //ф-я добавляющая введенный код в новую карточку
-function saveInput(evt) {
+function submitAddCardForm(evt) {
   evt.preventDefault();
-  let name = subtittleInput.value;
-  let link = linkInput.value;
-  addItems (createItem (name, link));
-  subtittleInput.value = '';
-  linkInput.value = '';
+  const name = subtittleInput.value;
+  const link = linkInput.value;
+  addItems (createItem (name, link));//вставка темплейта в dom элемент
   closePopup(popupAdd);
+
 };
 
-formAddlement.addEventListener('submit', saveInput);
+formAddlement.addEventListener('submit', submitAddCardForm);
+
+//закрыть попап кликом по оверлей
+popupList.forEach(function (popup) {
+  popup.addEventListener('click', function (event) {
+    if (event.target === event.currentTarget) {
+      closePopup(popup);
+    }
+  })
+});
 
 

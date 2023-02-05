@@ -1,31 +1,15 @@
-//закрыть попап кликом по оверлей
-popupList.forEach(function (popup) {
-  popup.addEventListener('click', function (event) {
-    if (event.target === event.currentTarget) {
-      closePopup(popup);
-    }
-  })
-});
-
 // показать сообщение об ошибке
 const showInputError = (formSelector, inputSelector, errorMessage) => {
-  // debugger;
-  // const inputSelectorId = inputSelector.id;
-  // console.log(inputSelectorId);
-  const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
-  inputSelector.classList.add('form__input_type_error');//красное подчеркивание
-  inputErrorClass.textContent = errorMessage;
-  // inputErrorClass.classList.add("form__input-error_active");
+const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
+inputSelector.classList.add('form__input_type_error');//красное подчеркивание
+inputErrorClass.textContent = errorMessage;
 };
 
 // скрыть сообщение об ошибке
 const hideInputError = (formSelector, inputSelector) => {
-  // debugger;
-  const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
-  // console.log(inputSelector.id);
-  inputSelector.classList.remove('form__input_type_error');
-  inputErrorClass.textContent = '';//не работает, попробовать получить другим способом
-  // inputErrorClass.classList.remove("form__input-error_active");
+const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
+inputSelector.classList.remove('form__input_type_error');
+inputErrorClass.textContent = '';//очистить текст ошибки при валидации
 };
 
 //показать/скрыть сообщение об ошибке
@@ -49,8 +33,10 @@ const toggleButtonState = (inputList, submitButtonSelector) => {
   //в ф-ю попадет массив инпутов для проверки их состояния и кнопка сабмит
   if (hasInvalidInput(inputList)) {//если поля невалидны
     submitButtonSelector.classList.add('popup__button_inactive'); //кнопка некликабельна
+    submitButtonSelector.disabled = true;
   } else {//если валидны
     submitButtonSelector.classList.remove('popup__button_inactive'); //кнопка кликабельна
+    submitButtonSelector.disabled = false;
   }
 };
 
@@ -58,8 +44,7 @@ const toggleButtonState = (inputList, submitButtonSelector) => {
 const setEventListeners = (formSelector) => {
   //возьмем фОРМУ
   const inputList = Array.from(formSelector.querySelectorAll('.form__input')); //найдем массив инпутов
-  const submitButtonSelector = formSelector.querySelector('.popup__button'); //найдем кнопку сабмит, это по ходу тоже массив?????
-  //console.log(submitButtonSelector);
+  const submitButtonSelector = formSelector.querySelector('.popup__button'); //найдем кнопку сабмит
   toggleButtonState(inputList, submitButtonSelector); //получим данные о валидности и переключим состояние кнопки сабмит
   inputList.forEach((inputSelector) => {
     //для каждого элемента inputElement из массива инпутов inputSelector

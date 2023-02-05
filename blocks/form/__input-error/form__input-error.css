@@ -10,3 +10,9 @@
   padding: 0;
   margin: 5px 0 0;
 }
+
+@media screen and (max-width: 615px) {
+  .form__input-error {
+    max-width: 238px;
+  }
+}
