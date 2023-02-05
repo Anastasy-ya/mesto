@@ -97,22 +97,7 @@ function openPopup(popup) {
   window.addEventListener('keyup', closeEsc);
 };
 
-//ф-я обнуления кнопки сабмит
-function resetButton(popup) {
-  const submitButtonSelector = popup.querySelector('.popup__button');
-  submitButtonSelector.disabled = true;
-  submitButtonSelector.classList.add('popup__button_inactive'); //кнопка некликабельна
-};
 
-//ф-я обнуления текста ошибок и красного подчеркивания при ошибке
-function resetError(popup) {
-  const inputsList = popup.querySelectorAll('.form__input');
-  inputsList.forEach((inputSelector) => {
-    const inputErrorClass = popup.querySelector(`.${inputSelector.id}-error`);
-    inputErrorClass.textContent = '';//удалить сообщение об ошибке при открытии
-    inputSelector.classList.remove('form__input_type_error');//удалить красное подчеркивание при открытии
-  });
-};
 
 //закрытие попапа по esc
 function closeEsc(event, popup) {//закрыть инпут по esc
@@ -123,7 +108,7 @@ function closeEsc(event, popup) {//закрыть инпут по esc
 
 //функция внесения данных из инпутов в имя и работу при отрытии
 function openEditProfileForm() {
-  resetError(popupEdit);//тут не работает удалить текст ошибок
+  // resetError(popupEdit);//тут не работает удалить текст ошибок   последние изменения
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
@@ -162,8 +147,8 @@ popupList.forEach((popup) => { // итерируем массив. объявл�
 //открытие попапа для добавления карточек
 buttonAdd.addEventListener('click', () => {
 
-  resetButton(popupAdd);//обнулить кнопку пишу функцию
-  resetError(popupAdd);//очистить ошибки и удалить красную черту пишу функцию
+  // resetButton(submitButtonSelector, obj);//обнулить кнопку пишу функцию    последнее изменение       функции нужны переменные, но их неоткуда брать, разве что вынести в глоб обл
+  // resetError(popupAdd);//очистить ошибки и удалить красную черту пишу функцию    последнее изменение
 
   formAddlement.reset();//удалить содержание инпутов формы popupAdd
   openPopup(popupAdd);

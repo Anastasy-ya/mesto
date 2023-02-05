@@ -1,28 +1,57 @@
-const config = {
+const obj = {
   formSelector: '.popup__form',
   inputSelector: '.form__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'form__input_type_error',
   // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
+
 };
+
+//ф-я обнуления кнопки сабмит
+function resetButton(submitButtonSelector, obj) {
+  // debugger;
+  // const submitButtonSelector = popup.querySelector('.popup__button');
+  submitButtonSelector.disabled = true;
+  submitButtonSelector.classList.add(obj.inactiveButtonClass); //кнопка некликабельна
+};
+
+// //ф-я обнуления текста ошибок и красного подчеркивания при ошибке
+// function resetError(popup) {
+//   const inputsList = popup.querySelectorAll('.form__input');
+//   inputsList.forEach((inputSelector) => {
+//     const inputErrorClass = popup.querySelector(`.${inputSelector.id}-error`);
+//     inputErrorClass.textContent = '';//удалить сообщение об ошибке при открытии
+//     inputSelector.classList.remove(obj.inputErrorClass);//удалить красное подчеркивание при открытии
+//   });
+// };
 
 // показать сообщение об ошибке
 const showInputError = (formSelector, inputSelector, errorMessage) => {
 const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
-inputSelector.classList.add('form__input_type_error');//красное подчеркивание
+inputSelector.classList.add(obj.inputErrorClass);//красное подчеркивание
 inputErrorClass.textContent = errorMessage;
 };
 
+
+
+
 // скрыть сообщение об ошибке
 const hideInputError = (formSelector, inputSelector) => {
+  // debugger;
 const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
-inputSelector.classList.remove('form__input_type_error');
+inputSelector.classList.remove(obj.inputErrorClass);
 inputErrorClass.textContent = '';//очистить текст ошибки при валидации
+
+// const inputErrorClass = popup.querySelector(`.${inputSelector.id}-error`);
+//     inputErrorClass.textContent = '';//удалить сообщение об ошибке при открытии
+
+
 };
 
 //показать/скрыть сообщение об ошибке
 const checkInputValidity = (formSelector, inputSelector) => {
+  // debugger;
   if (!inputSelector.validity.valid) {//если форма невалидна
     showInputError(formSelector, inputSelector, inputSelector.validationMessage); //показать сообщение об ошибке
   } else {
@@ -38,40 +67,50 @@ const hasInvalidInput = (inputList) => {
 };
 
 //проверить валидны ли поля и переключить вид кнопки и состояние  submitButtonSelector попадает из внешнего окружения
-const toggleButtonState = (inputList, submitButtonSelector) => {
+const toggleButtonState = (inputList, submitButtonSelector, obj) => {
   //в ф-ю попадет массив инпутов для проверки их состояния и кнопка сабмит
   if (hasInvalidInput(inputList)) {//если поля невалидны
-    submitButtonSelector.classList.add('popup__button_inactive'); //кнопка некликабельна
+    submitButtonSelector.classList.add(obj.inactiveButtonClass); //кнопка некликабельна
     submitButtonSelector.disabled = true;
   } else {//если валидны
-    submitButtonSelector.classList.remove('popup__button_inactive'); //кнопка кликабельна
+    submitButtonSelector.classList.remove(obj.inactiveButtonClass); //кнопка кликабельна
     submitButtonSelector.disabled = false;
   }
 };
 
 //ф-я, которая навесит слушатели событий полям ввода и кнопке
-const setEventListeners = (formSelector) => {
+const setEventListeners = (formSelector, obj, submitButtonSelector) => {
+  // debugger
   //возьмем фОРМУ
-  const inputList = Array.from(formSelector.querySelectorAll('.form__input')); //найдем массив инпутов
-  const submitButtonSelector = formSelector.querySelector('.popup__button'); //найдем кнопку сабмит
-  toggleButtonState(inputList, submitButtonSelector); //получим данные о валидности и переключим состояние кнопки сабмит
+  const inputList = Array.from(formSelector.querySelectorAll(obj.inputSelector)); //найдем массив инпутов
+  // const submitButtonSelector = formSelector.querySelector('.popup__button'); //найдем кнопку сабмит
+  toggleButtonState(inputList, submitButtonSelector, obj); //получим данные о валидности и переключим состояние кнопки сабмит
   inputList.forEach((inputSelector) => {
     //для каждого элемента inputElement из массива инпутов inputSelector
     inputSelector.addEventListener('input', function () {
       checkInputValidity(formSelector, inputSelector);
-      toggleButtonState(inputList, submitButtonSelector); //в случае надобности изменим состояние кнопки сабмит
+      toggleButtonState(inputList, submitButtonSelector, obj); //в случае надобности изменим состояние кнопки сабмит
     });
   });
 };
 
 //навесить слушатели всем полям и отменить дефолтное действие
 const enableValidation = (obj) => {
-  const formList = Array.from(document.querySelectorAll('.popup__form')); //получить массив из форм
+  const formList = Array.from(document.querySelectorAll(obj.formSelector)); //получить массив из форм
+
   formList.forEach((formSelector) => {//для каждого элемента formSelector массива formList
-    setEventListeners(formSelector); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
+    const submitButtonSelector = formSelector.querySelector(obj.submitButtonSelector);
+
+    // далее по сабмиту удалить ошибки и выключить кнопку
+    formSelector.addEventListener("submit", () => {//по событию сабмит
+      resetButton(submitButtonSelector, obj)//деактивировать кнопку
+      // resetError()
+      // hideInputError(formSelector, inputSelector)
+    });
+    setEventListeners(formSelector, obj, submitButtonSelector); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
   });
 };
 
-enableValidation(config); //вызовем, навесив обработчики событий
+enableValidation(obj); //вызовем, навесив обработчики событий
 
 
