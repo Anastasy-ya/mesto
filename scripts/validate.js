@@ -1,3 +1,12 @@
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'form__input_type_error',
+  // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
+};
+
 // показать сообщение об ошибке
 const showInputError = (formSelector, inputSelector, errorMessage) => {
 const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
@@ -56,13 +65,13 @@ const setEventListeners = (formSelector) => {
 };
 
 //навесить слушатели всем полям и отменить дефолтное действие
-const enableValidation = () => {
+const enableValidation = (obj) => {
   const formList = Array.from(document.querySelectorAll('.popup__form')); //получить массив из форм
   formList.forEach((formSelector) => {//для каждого элемента formSelector массива formList
     setEventListeners(formSelector); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
   });
 };
 
-enableValidation(); //вызовем, навесив обработчики событий
+enableValidation(config); //вызовем, навесив обработчики событий
 
 

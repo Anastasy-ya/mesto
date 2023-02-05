@@ -123,6 +123,7 @@ function closeEsc(event, popup) {//закрыть инпут по esc
 
 //функция внесения данных из инпутов в имя и работу при отрытии
 function openEditProfileForm() {
+  resetError(popupEdit);//тут не работает удалить текст ошибок
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
@@ -140,7 +141,7 @@ function submitEditProfileForm(evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
-  resetError(popupEdit);//тут не работает
+
 };
 
 //слушатель событий по кнопке редактирования профиля
@@ -160,9 +161,10 @@ popupList.forEach((popup) => { // итерируем массив. объявл�
 
 //открытие попапа для добавления карточек
 buttonAdd.addEventListener('click', () => {
-  // debugger;
+
   resetButton(popupAdd);//обнулить кнопку пишу функцию
   resetError(popupAdd);//очистить ошибки и удалить красную черту пишу функцию
+
   formAddlement.reset();//удалить содержание инпутов формы popupAdd
   openPopup(popupAdd);
 });
