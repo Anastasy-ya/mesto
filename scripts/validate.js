@@ -10,21 +10,9 @@ const obj = {
 
 //ф-я обнуления кнопки сабмит
 function resetButton(submitButtonSelector, obj) {
-  // debugger;
-  // const submitButtonSelector = popup.querySelector('.popup__button');
   submitButtonSelector.disabled = true;
   submitButtonSelector.classList.add(obj.inactiveButtonClass); //кнопка некликабельна
 };
-
-// //ф-я обнуления текста ошибок и красного подчеркивания при ошибке
-// function resetError(popup) {
-//   const inputsList = popup.querySelectorAll('.form__input');
-//   inputsList.forEach((inputSelector) => {
-//     const inputErrorClass = popup.querySelector(`.${inputSelector.id}-error`);
-//     inputErrorClass.textContent = '';//удалить сообщение об ошибке при открытии
-//     inputSelector.classList.remove(obj.inputErrorClass);//удалить красное подчеркивание при открытии
-//   });
-// };
 
 // показать сообщение об ошибке
 const showInputError = (formSelector, inputSelector, errorMessage) => {
@@ -33,25 +21,15 @@ inputSelector.classList.add(obj.inputErrorClass);//красное подчерк
 inputErrorClass.textContent = errorMessage;
 };
 
-
-
-
 // скрыть сообщение об ошибке
 const hideInputError = (formSelector, inputSelector) => {
-  // debugger;
 const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
 inputSelector.classList.remove(obj.inputErrorClass);
 inputErrorClass.textContent = '';//очистить текст ошибки при валидации
-
-// const inputErrorClass = popup.querySelector(`.${inputSelector.id}-error`);
-//     inputErrorClass.textContent = '';//удалить сообщение об ошибке при открытии
-
-
 };
 
 //показать/скрыть сообщение об ошибке
 const checkInputValidity = (formSelector, inputSelector) => {
-  // debugger;
   if (!inputSelector.validity.valid) {//если форма невалидна
     showInputError(formSelector, inputSelector, inputSelector.validationMessage); //показать сообщение об ошибке
   } else {
@@ -80,7 +58,6 @@ const toggleButtonState = (inputList, submitButtonSelector, obj) => {
 
 //ф-я, которая навесит слушатели событий полям ввода и кнопке
 const setEventListeners = (formSelector, obj, submitButtonSelector) => {
-  // debugger
   //возьмем фОРМУ
   const inputList = Array.from(formSelector.querySelectorAll(obj.inputSelector)); //найдем массив инпутов
   // const submitButtonSelector = formSelector.querySelector('.popup__button'); //найдем кнопку сабмит
@@ -100,12 +77,9 @@ const enableValidation = (obj) => {
 
   formList.forEach((formSelector) => {//для каждого элемента formSelector массива formList
     const submitButtonSelector = formSelector.querySelector(obj.submitButtonSelector);
-
     // далее по сабмиту удалить ошибки и выключить кнопку
     formSelector.addEventListener("submit", () => {//по событию сабмит
       resetButton(submitButtonSelector, obj)//деактивировать кнопку
-      // resetError()
-      // hideInputError(formSelector, inputSelector)
     });
     setEventListeners(formSelector, obj, submitButtonSelector); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
   });

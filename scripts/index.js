@@ -11,7 +11,6 @@ const profileJob = document.querySelector('.profile__about');
 const template = document.querySelector('#template').content;//содержимое темплейта
 
 //переменные форм для ввода
-
 const popupEdit = document.querySelector('.popup_type_profile-edit');
 const formEditElement = popupEdit.querySelector('.popup__form');
 const popupAdd = document.querySelector('.popup_type_add');
@@ -44,7 +43,7 @@ createStartItems = array => {
 
 //ф-я закрытия попапа с большой картинкой по крестику
 bigImageClose.addEventListener('click', () => {
-    closePopup(bigImage)
+  closePopup(bigImage);
 });
 
 //ф-я увеличения картинки и закрытия по крестику
@@ -65,16 +64,15 @@ function createItem (name, link) {
   const iconDelete = templateElement.querySelector('.elements__delete');
   //меняем содержимое полей
   templateElement.querySelector('.elements__signature').textContent = name;
-  const elementsImage = templateElement.querySelector('.elements__image');
-  elementsImage.src = link;
-  elementsImage.alt = name;
+  imageToOpen.src = link;
+  imageToOpen.alt = name;
   // добавим в карточку открытие картинки в большом размере
   imageToOpen.addEventListener('click', () => makeImageBig(name, link));
   // добавим в карточку удаление по иконке
   iconDelete.addEventListener('click', removeItem);
   // добавим в карточку лайки
   like.addEventListener('click', () => {
-  like.classList.toggle('button-like_active')
+    like.classList.toggle('button-like_active')
   });
   return templateElement;
 };
@@ -89,7 +87,7 @@ addItems = element => {
   elementsBox.prepend(element);
 };
 
-createStartItems(initialCards);
+createStartItems(initialCards);//cоздадим карточки по дефолту
 
 //функция открытия попапов
 function openPopup(popup) {
@@ -97,18 +95,15 @@ function openPopup(popup) {
   window.addEventListener('keyup', closeEsc);
 };
 
-
-
 //закрытие попапа по esc
-function closeEsc(event, popup) {//закрыть инпут по esc
+function closeEsc(event) {
   if (event.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));//
   }
-}
+};
 
 //функция внесения данных из инпутов в имя и работу при отрытии
 function openEditProfileForm() {
-  // resetError(popupEdit);//тут не работает удалить текст ошибок   последние изменения
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
@@ -126,7 +121,6 @@ function submitEditProfileForm(evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
-
 };
 
 //слушатель событий по кнопке редактирования профиля
@@ -146,10 +140,6 @@ popupList.forEach((popup) => { // итерируем массив. объявл�
 
 //открытие попапа для добавления карточек
 buttonAdd.addEventListener('click', () => {
-
-  // resetButton(submitButtonSelector, obj);//обнулить кнопку пишу функцию    последнее изменение       функции нужны переменные, но их неоткуда брать, разве что вынести в глоб обл
-  // resetError(popupAdd);//очистить ошибки и удалить красную черту пишу функцию    последнее изменение
-
   formAddlement.reset();//удалить содержание инпутов формы popupAdd
   openPopup(popupAdd);
 });
@@ -161,7 +151,6 @@ function submitAddCardForm(evt) {
   const link = linkInput.value;
   addItems (createItem (name, link));//вставка темплейта в dom элемент
   closePopup(popupAdd);
-
 };
 
 formAddlement.addEventListener('submit', submitAddCardForm);
