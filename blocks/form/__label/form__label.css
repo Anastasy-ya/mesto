@@ -1,5 +1,5 @@
 .form__label {
-  height: 62px;
+  min-height: 62px;
   width: 358px;
   display: flex;
   flex-direction: column;
