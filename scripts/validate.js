@@ -5,7 +5,6 @@ const obj = {
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'form__input_type_error',
   // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
-
 };
 
 //ф-я обнуления кнопки сабмит
