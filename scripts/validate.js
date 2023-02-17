@@ -1,4 +1,4 @@
-const obj = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.form__input',
   submitButtonSelector: '.popup__button',
@@ -8,22 +8,22 @@ const obj = {
 };
 
 //ф-я обнуления кнопки сабмит
-function resetButton(submitButtonSelector, obj) {
+function resetButton(submitButtonSelector, validationConfig) {
   submitButtonSelector.disabled = true;
-  submitButtonSelector.classList.add(obj.inactiveButtonClass); //кнопка некликабельна
+  submitButtonSelector.classList.add(validationConfig.inactiveButtonClass); //кнопка некликабельна
 };
 
 // показать сообщение об ошибке
 const showInputError = (formSelector, inputSelector, errorMessage) => {
 const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
-inputSelector.classList.add(obj.inputErrorClass);//красное подчеркивание
+inputSelector.classList.add(validationConfig.inputErrorClass);//красное подчеркивание
 inputErrorClass.textContent = errorMessage;
 };
 
 // скрыть сообщение об ошибке
 const hideInputError = (formSelector, inputSelector) => {
 const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);
-inputSelector.classList.remove(obj.inputErrorClass);
+inputSelector.classList.remove(validationConfig.inputErrorClass);
 inputErrorClass.textContent = '';//очистить текст ошибки при валидации
 };
 
@@ -44,46 +44,46 @@ const hasInvalidInput = (inputList) => {
 };
 
 //проверить валидны ли поля и переключить вид кнопки и состояние  submitButtonSelector попадает из внешнего окружения
-const toggleButtonState = (inputList, submitButtonSelector, obj) => {
+const toggleButtonState = (inputList, submitButtonSelector, validationConfig) => {
   //в ф-ю попадет массив инпутов для проверки их состояния и кнопка сабмит
   if (hasInvalidInput(inputList)) {//если поля невалидны
-    submitButtonSelector.classList.add(obj.inactiveButtonClass); //кнопка некликабельна
+    submitButtonSelector.classList.add(validationConfig.inactiveButtonClass); //кнопка некликабельна
     submitButtonSelector.disabled = true;
   } else {//если валидны
-    submitButtonSelector.classList.remove(obj.inactiveButtonClass); //кнопка кликабельна
+    submitButtonSelector.classList.remove(validationConfig.inactiveButtonClass); //кнопка кликабельна
     submitButtonSelector.disabled = false;
   }
 };
 
 //ф-я, которая навесит слушатели событий полям ввода и кнопке
-const setEventListeners = (formSelector, obj, submitButtonSelector) => {
+const setEventListeners = (formSelector, validationConfig, submitButtonSelector) => {
   //возьмем фОРМУ
-  const inputList = Array.from(formSelector.querySelectorAll(obj.inputSelector)); //найдем массив инпутов
+  const inputList = Array.from(formSelector.querySelectorAll(validationConfig.inputSelector)); //найдем массив инпутов
   // const submitButtonSelector = formSelector.querySelector('.popup__button'); //найдем кнопку сабмит
-  toggleButtonState(inputList, submitButtonSelector, obj); //получим данные о валидности и переключим состояние кнопки сабмит
+  toggleButtonState(inputList, submitButtonSelector, validationConfig); //получим данные о валидности и переключим состояние кнопки сабмит
   inputList.forEach((inputSelector) => {
     //для каждого элемента inputElement из массива инпутов inputSelector
     inputSelector.addEventListener('input', function () {
       checkInputValidity(formSelector, inputSelector);
-      toggleButtonState(inputList, submitButtonSelector, obj); //в случае надобности изменим состояние кнопки сабмит
+      toggleButtonState(inputList, submitButtonSelector, validationConfig); //в случае надобности изменим состояние кнопки сабмит
     });
   });
 };
 
 //навесить слушатели всем полям и отменить дефолтное действие
-const enableValidation = (obj) => {
-  const formList = Array.from(document.querySelectorAll(obj.formSelector)); //получить массив из форм
+const enableValidation = (validationConfig) => {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector)); //получить массив из форм
 
   formList.forEach((formSelector) => {//для каждого элемента formSelector массива formList
-    const submitButtonSelector = formSelector.querySelector(obj.submitButtonSelector);
+    const submitButtonSelector = formSelector.querySelector(validationConfig.submitButtonSelector);
     // далее по сабмиту удалить ошибки и выключить кнопку
     formSelector.addEventListener("submit", () => {//по событию сабмит
-      resetButton(submitButtonSelector, obj)//деактивировать кнопку
+      resetButton(submitButtonSelector, validationConfig)//деактивировать кнопку
     });
-    setEventListeners(formSelector, obj, submitButtonSelector); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
+    setEventListeners(formSelector, validationConfig, submitButtonSelector); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
   });
 };
 
-enableValidation(obj); //вызовем, навесив обработчики событий
+enableValidation(validationConfig); //вызовем, навесив обработчики событий
 
 
