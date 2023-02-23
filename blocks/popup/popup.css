@@ -5,14 +5,15 @@
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, .5);
-    visibility: hidden;
+
     justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
     display: flex;
-    transition: visibility 0s, opacity 0.5s linear;
+    transition: visibility 0.5s, opacity 0.5s linear;
     opacity: 0;
+    visibility: hidden;
 }
 /*
 .popup_add .popup__dates {
