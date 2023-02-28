@@ -189,7 +189,7 @@ class Card {
     //тут надо не через стрел ф-ю а через  bind
 
     // добавим в карточку открытие картинки в большом размере
-    this._imageToOpen.addEventListener('click', this._makeImageBig(this._name, this._link));
+    this._imageToOpen.addEventListener('click', () => this._makeImageBig(this._name, this._link));
 
     //вместо использования стрелочной функции для сохранения контекста контекст привязан в свойствах класса
     // добавим в карточку удаление по иконке
