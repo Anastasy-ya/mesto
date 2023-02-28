@@ -74,7 +74,7 @@ const initialCards = [
 
 
   //переменные для класса карты   тут разобраться что нужно что нет
-  consts = {
+tags = {
 
   // popupClose: document.querySelectorAll('.popup-close-icon'),
 
@@ -87,28 +87,32 @@ const initialCards = [
   elementsDelete: '.elements__delete',
 
 
-  }
+}
 
-  // const imageToOpen = this._element.querySelector(consts.itemImage);
-  // //переменные для лайков
-  // const like = this._element.querySelector(consts.buttonLike);
-  // //урна
-  // const iconDelete = this._element.querySelector(consts.elementsDelete);
+
+// consts = {
+//   const imageToOpen = this._element.querySelector(tads.itemImage);
+//   //переменные для лайков
+//   const like = this._element.querySelector(tads.buttonLike);
+//   //урна
+//   const iconDelete = this._element.querySelector(tads.elementsDelete);
+// }
 
 
 
 
 class Card {
 
-  constructor(cardData, templateSelector) {//в templateSelector попадет селектор темплейта при создании экземпляра карточки
+  constructor(cardData, templateSelector, makeImageBig) {//в templateSelector попадет селектор темплейта при создании экземпляра карточки
     this._name = cardData.name;
     this._link = cardData.link;
     this._templateSelector = templateSelector;//селектор темплейта стал свойством объекта класса Card
 
-    //подумать куда запихнуть селекторы
-    this._imageToOpen = this._element.querySelector(consts.itemImage);
-    this._like = this._element.querySelector(consts.buttonLike);
-    this._iconDelete = this._element.querySelector(consts.elementsDelete);
+    this._makeImageBig = makeImageBig;//передали внешнюю функцию как параметр
+    this._removeItem = this._removeItem.bind(this);//привязываем контекст this к нужному объекту
+    this._addLike = this._addLike.bind(this);//привязываем контекст this к нужному объекту
+
+
   }
 
 
@@ -116,7 +120,7 @@ class Card {
   _getTemplate() {
     //здесь получим template-элемент и склонируем его
     const templateElement = document.querySelector(this._templateSelector)
-    .content.querySelector(consts.template)
+    .content.querySelector(tags.template)
     .cloneNode(true);//копируем li
 
     //селектор темплейта использован при поиске элемента нужного нам темплейта
@@ -128,17 +132,17 @@ class Card {
 
   //ф-я удаления карточки
   _removeItem(event) {
-    event.target.closest(consts.template).remove();
+    event.target.closest(tags.template).remove();
   };
 
 
-  // ф-я увеличения картинки и закрытия по крестику
-  _makeImageBig() {
-    openPopup(bigImage);
-    bigImageLink.src = this._link;
-    bigImageLink.alt = this._name;
-    bigImageName.textContent = this._name;
-  };
+  // // ф-я увеличения картинки и закрытия по крестику        функция в index глобальная, передается классу card, слушатель остается внутри card
+  // _makeImageBig() {
+  //   openPopup(bigImage);
+  //   bigImageLink.src = this._link;
+  //   bigImageLink.alt = this._name;
+  //   bigImageName.textContent = this._name;
+  // };это пошло в индекс на фиг
 
 
   // //ф-я добавляющая введенный код в новую карточку
@@ -150,18 +154,48 @@ class Card {
   //   closePopup(popupAdd);
   // };
 
+  _addLike() {
+    this._like.classList.toggle(tags.buttonLikeActive);
+  }
+
+
+  generateCard() {//затем копия темплейта изменяется пережд вставкой
+    //тут навесим нужные слушатели. вызвав их и заменим содержимое полей. Это последняя функция
+    //слушатели отправить в соответствующую функцию
+    this._element = this._getTemplate();
+
+    this._imageToOpen = this._element.querySelector(tags.itemImage);//внутренние константы может определить через const,
+    //константы для использования в нескольких методах через this
+    //переменные для лайков
+    this._like = this._element.querySelector(tags.buttonLike);
+    //урна
+    this._iconDelete = this._element.querySelector(tags.elementsDelete);
+
+    this._setEventListeners();
+
+    //меняем содержимое полей
+    this._element.querySelector(tags.signature).textContent = this._name;
+    this._imageToOpen.src = this._link;
+    this._imageToOpen.alt = this._name;
+
+
+    //templateElement заменен на this._element
+
+    return this._element;//получаем готовый элемент для вставки в dom
+  }
+
   _setEventListeners() {//создадим нужные слушатели
     //закрытие попапа просмотр изображения по клику на крестик
-
+    //тут надо не через стрел ф-ю а через  bind
 
     // добавим в карточку открытие картинки в большом размере
-    this._imageToOpen.addEventListener('click', () => this._makeImageBig());
+    this._imageToOpen.addEventListener('click', this._makeImageBig(this._name, this._link));
+
+    //вместо использования стрелочной функции для сохранения контекста контекст привязан в свойствах класса
     // добавим в карточку удаление по иконке
-    iconDelete.addEventListener('click', this._removeItem);
+    this._iconDelete.addEventListener('click', this._removeItem);
     // добавим в карточку лайки
-    like.addEventListener('click', () => {
-      like.classList.toggle(consts.buttonLikeActive)
-    });
+    this._like.addEventListener('click', this._addLike);//this._makeImageBig()  this._removeItem  this._addLike
 
 
     bigImageClose.addEventListener('click', () => {
@@ -178,26 +212,6 @@ class Card {
 
   }//конец функции, навешивающей слушатели
 
-
-  generateCard() {//затем копия темплейта изменяется пережд вставкой
-    //тут навесим нужные слушатели. вызвав их и заменим содержимое полей. Это последняя функция
-    //слушатели отправить в соответствующую функцию
-    this._element = this._getTemplate();
-    this._setEventListeners();
-
-
-
-      //меняем содержимое полей
-      this._element.querySelector(consts.signature).textContent = this._name;
-      imageToOpen.src = this._link;
-      imageToOpen.alt = this._name;
-
-
-    //templateElement заменен на this._element
-
-    return this._element;//получаем готовый элемент для вставки в dom
-  }
-
 }//конец класса
 
 //передать cardData в класс валидации и навесить внутри слушателей и функций, проверяющих поля
@@ -205,17 +219,25 @@ class Card {
 //создать cardData из данных из коробки(6 карточек)
 
 
+// ф-я увеличения картинки и закрытия по крестику        функция в index глобальная, передается классу card, слушатель остается внутри card
+  function makeImageBig(name, link) {
+    openPopup(bigImage);
+    bigImageLink.src = link;
+    bigImageLink.alt = name;
+    bigImageName.textContent = name;
+  };//проверить переменные в глобальной области видимости
 
 
+//далее 2 функции пойдут в главный файл, куда будет импортирован класс card
 // ф-я вставки темплейта в elements__box
 addItems = element => {
   //общая коробка для вставки карточек
-  const elementsBox = document.querySelector(consts.elementsBox);
+  const elementsBox = document.querySelector(tags.elementsBox);
   elementsBox.prepend(element);
 };
 
 for (const item of initialCards) {
-  const defaultCard = new Card(item, '#template');
+  const defaultCard = new Card(item, '#template', makeImageBig);//темплейт заменить переменной
   const element = defaultCard.generateCard();
   this.addItems(element);
 }//перебрали массив карточек по дефолту и создали из него карточки
@@ -357,21 +379,21 @@ function submitEditProfileForm(evt) {
   closePopup(popupEdit);
 };
 
-// //слушатель событий по кнопке редактирования профиля
-// buttonEdit.addEventListener('click', openEditProfileForm);
-// //навесим слушатель событий на submit формы
-// formEditElement.addEventListener('submit', submitEditProfileForm);
-//   ИСПОЛЬЗОВАНА
+//слушатель событий по кнопке редактирования профиля
+buttonEdit.addEventListener('click', openEditProfileForm);
+//навесим слушатель событий на submit формы
+formEditElement.addEventListener('submit', submitEditProfileForm);
 
-// //закрытие всех попапов по крестику
-// popupList.forEach((popup) => { // итерируем массив. объявляя каждый попап в переменную popup
-//   popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
-//     const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
-//     if (targetClassList.contains('popup-close-icon')) { // проверяем наличие класса кнопки закрытия
-//       closePopup(popup); // если класс присутствует, то закрываем попап
-//     }
-//   })
-// });
+
+//закрытие всех попапов по крестику
+popupList.forEach((popup) => { // итерируем массив. объявляя каждый попап в переменную popup
+  popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
+    const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
+    if (targetClassList.contains('popup-close-icon')) { // проверяем наличие класса кнопки закрытия
+      closePopup(popup); // если класс присутствует, то закрываем попап
+    }
+  })
+});
 
 //открытие попапа для добавления карточек
 buttonAdd.addEventListener('click', () => {
@@ -379,17 +401,16 @@ buttonAdd.addEventListener('click', () => {
   openPopup(popupAdd);
 });
 
-// //ф-я добавляющая введенный код в новую карточку
-// function submitAddCardForm(evt) {
-//   evt.preventDefault();
-//   const name = subtittleInput.value;
-//   const link = linkInput.value;
-//   addItems (createItem (name, link));//вставка темплейта в dom элемент
-//   closePopup(popupAdd);
-// };   ИСПОЛЬЗОВАНА
+//ф-я добавляющая введенный код в новую карточку
+function submitAddCardForm(evt) {
+  evt.preventDefault();
+  const name = subtittleInput.value;
+  const link = linkInput.value;
+  addItems (createItem (name, link));//вставка темплейта в dom элемент
+  closePopup(popupAdd);
+};
+formAddlement.addEventListener('submit', submitAddCardForm);
 
-// formAddlement.addEventListener('submit', submitAddCardForm);
-//   ИСПОЛЬЗОВАНА
 
 //закрыть попап кликом по оверлей
 popupList.forEach(function (popup) {
