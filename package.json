@@ -1,0 +1,14 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "**JavaScript. Начало**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lazareva Anastasia",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.3"
+  }
+}

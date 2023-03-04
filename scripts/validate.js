@@ -1,11 +1,11 @@
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: 'form__input_type_error',
-  // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
-};
+// const validationConfig = {
+//   formSelector: '.popup__form',
+//   inputSelector: '.form__input',
+//   submitButtonSelector: '.popup__button',
+//   inactiveButtonClass: 'popup__button_inactive',
+//   inputErrorClass: 'form__input_type_error',
+//   // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
+// };
 
 
 
