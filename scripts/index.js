@@ -199,8 +199,9 @@ createItem = (cardData, templateSelector, makeImageBig) => {
 
   const defaultCard = new Card(cardData, templateSelector, makeImageBig);//темплейт заменить переменной
   const element = defaultCard.generateCard();
-  this.addItems(element);
+  addItems(element);
 }//перебрали массив карточек по дефолту и создали из него карточки
+
 for (const item of initialCards) {
 createItem(item, '#template', makeImageBig);
 }
@@ -473,7 +474,7 @@ function submitAddCardForm(evt) {
   evt.preventDefault();
   const name = subtittleInput.value;
   const link = linkInput.value;
-  addItems (createItem({name, link}, '#template', makeImageBig));//вставка темплейта в dom элемент заменить на создание из карточки
+  createItem({name, link}, '#template', makeImageBig);//вставка темплейта в dom элемент заменить на создание из карточки
   closePopup(popupAdd);
 };
 formAddlement.addEventListener('submit', submitAddCardForm);
