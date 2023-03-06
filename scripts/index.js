@@ -15,7 +15,7 @@ const profileJob = document.querySelector('.profile__about');
 const template = document.querySelector('#template').content;//содержимое темплейта
 
 //переменные форм для ввода
-const popupEdit = document.querySelector('.popup_type_profile-edit');
+const popupEdit = document.querySelector('.popup_type_profile-edit');//используется
 const formEditElement = popupEdit.querySelector('.popup__form');
 const popupAdd = document.querySelector('.popup_type_add');
 const formAddlement = popupAdd.querySelector('.popup__form');
@@ -229,14 +229,14 @@ class FormValidator{
 
     _showInputError(inputSelector) {
       const inputErrorClass = this._formSelector.querySelector(`.${inputSelector.id}-error`);//validationConfig. ??
-      // console.log(inputErrorClass, 1);
+
       inputSelector.classList.add(validationConfig.inputErrorClass);//красное подчеркивание
-      inputErrorClass.textContent = 'errorMessage';//errorMessage
+      inputErrorClass.textContent = inputSelector.validationMessage;//errorMessage
     }
 
     _hideInputError(inputSelector) {
       const inputErrorClass = this._formSelector.querySelector(`.${inputSelector.id}-error`);//в конструкции validationConfig.inputSelector я не уверена
-      // console.log(inputErrorClass, 2);
+
       inputSelector.classList.remove(validationConfig.inputErrorClass);//тут путаница между внутренним inputErrorClass и validationConfig.inputErrorClass разобраться
       inputErrorClass.textContent = '';//очистить текст ошибки при валидации   тут не работает, или работает?
     }
@@ -246,7 +246,7 @@ class FormValidator{
   _checkInputValidity(inputSelector) {//inputSelector раньше шел из hasInvalidInput(), не путать с validationConfig
     //
     if (!inputSelector.validity.valid) {//если форма невалидна
-      console.log(inputSelector);
+
       this._showInputError(inputSelector); //показать сообщение об ошибке (formSelector, inputSelector, inputSelector.validationMessage)
     } else {
       this._hideInputError(inputSelector); //если невалидна скрыть  (formSelector, inputSelector)
@@ -294,9 +294,8 @@ class FormValidator{
       this._inputList.forEach((inputSelector) => {//дублирует hasInvalidInput, разобраться
         //для каждого элемента inputElement из массива инпутов inputSelector
 
-        inputSelector.addEventListener('input', function () {
+        inputSelector.addEventListener('input', () => {
           this._checkInputValidity(inputSelector);
-          //тут не работает блин _checkInputValidity или дочерние
           this._toggleButtonState(); //в случае надобности изменим состояние кнопки сабмит
         });
       });
@@ -305,17 +304,23 @@ class FormValidator{
   }
 
 
-  enableValidation() {//вызовем функцию создав обработчики событий публичный класс, вызывающий внутренние
+  enableValidation() {//публичный класс, вызывающий внутренние
     this._setEventListeners();
   }
 }
-const popupSelector = document.querySelector('.popup_type_profile-edit');//тут на самом деле селектор формы нужен, идет в след строку
-const validation = new FormValidator(validationConfig, popupSelector);
-// console.log(popupSelector, validation);
 
-validation.enableValidation();
+// const validationPopupEdit = new FormValidator(validationConfig, popupEdit);
+// const validationPopupAdd = new FormValidator(validationConfig, popupAdd);
+// // console.log(popupSelector, validation);
 
-
+// validationPopupEdit.enableValidation();//вызовем функцию создав обработчики событий
+// validationPopupAdd.enableValidation();
+//навесим обработчики событий на формы
+const formList = Array.from(document.querySelectorAll(validationConfig.formSelector)); //получить массив из форм    раскомментировать
+  formList.forEach((formSelector) => {//для каждого элемента formSelector массива formList
+    const validationForm = new FormValidator(validationConfig, formSelector);
+    validationForm.enableValidation(); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
+  });
 
 /////////////////////////////////////////////////////////////////////конец валидации
 
@@ -424,6 +429,7 @@ validation.enableValidation();
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   window.addEventListener('keyup', closeEsc);
+
 };
 
 //закрытие попапа по esc
