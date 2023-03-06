@@ -221,38 +221,42 @@ class FormValidator{
     this._data = data;
     this._formSelector = formSelector;
 
-    this._inputList = Array.from(this._formSelector.querySelectorAll(".form__input")); //найдем массив инпутов это взято из _setEventListeners   this._data.inputSelector
+    this._inputList = Array.from(this._formSelector.querySelectorAll('.form__input')); //найдем массив инпутов это взято из _setEventListeners   this._data.inputSelector
     this._submitButtonSelector = this._formSelector.querySelector('.popup__button'); //найдем кнопку сабмит это взято из _setEventListeners здесь будет свойство validationConfig
 
 
   }
 
     _showInputError(inputSelector) {
-      const inputErrorClass = formSelector.querySelector(`.${inputSelector.id}-error`);//validationConfig. ??
-      console.log(inputErrorClass);
+      const inputErrorClass = this._formSelector.querySelector(`.${inputSelector.id}-error`);//validationConfig. ??
+      // console.log(inputErrorClass, 1);
       inputSelector.classList.add(validationConfig.inputErrorClass);//красное подчеркивание
-      inputErrorClass.textContent = errorMessage;
+      inputErrorClass.textContent = 'errorMessage';//errorMessage
     }
 
     _hideInputError(inputSelector) {
       const inputErrorClass = this._formSelector.querySelector(`.${inputSelector.id}-error`);//в конструкции validationConfig.inputSelector я не уверена
+      // console.log(inputErrorClass, 2);
       inputSelector.classList.remove(validationConfig.inputErrorClass);//тут путаница между внутренним inputErrorClass и validationConfig.inputErrorClass разобраться
       inputErrorClass.textContent = '';//очистить текст ошибки при валидации   тут не работает, или работает?
     }
 
 
     //показать/скрыть сообщение об ошибке
-  _checkInputValidity = (inputSelector) => {//inputSelector раньше шел из hasInvalidInput(), не путать с validationConfig
+  _checkInputValidity(inputSelector) {//inputSelector раньше шел из hasInvalidInput(), не путать с validationConfig
+    //
     if (!inputSelector.validity.valid) {//если форма невалидна
-      showInputError(inputSelector); //показать сообщение об ошибке (formSelector, inputSelector, inputSelector.validationMessage)
+      console.log(inputSelector);
+      this._showInputError(inputSelector); //показать сообщение об ошибке (formSelector, inputSelector, inputSelector.validationMessage)
     } else {
-      hideInputError(inputSelector); //если невалидна скрыть  (formSelector, inputSelector)
+      this._hideInputError(inputSelector); //если невалидна скрыть  (formSelector, inputSelector)
     }
+
   };
 
   //_hasInvalidInput используется в _toggleButtonState
   _hasInvalidInput() {//не перепутать, этот inputSelector внутренний, переименовать, он же
-    return inputList.some((inputSelector) => {//взять из массива и для каждого его элемента
+    return this._inputList.some((inputSelector) => {//взять из массива и для каждого его элемента
           return !inputSelector.validity.valid;//вернуть значение поля validity.valid
         }); //false если не валидны
   }
@@ -289,10 +293,12 @@ class FormValidator{
 
       this._inputList.forEach((inputSelector) => {//дублирует hasInvalidInput, разобраться
         //для каждого элемента inputElement из массива инпутов inputSelector
+
         inputSelector.addEventListener('input', function () {
-          checkInputValidity(inputSelector);//разобраться откуда сюда идет inputSelector, удалить параметры  formSelector, inputSelector
-          toggleButtonState(); //в случае надобности изменим состояние кнопки сабмит    , удалить параметры   inputList, submitButtonSelector, validationConfig
-        });//остановка, добавление двух ф-й выше
+          this._checkInputValidity(inputSelector);
+          //тут не работает блин _checkInputValidity или дочерние
+          this._toggleButtonState(); //в случае надобности изменим состояние кнопки сабмит
+        });
       });
     })
 
@@ -305,6 +311,7 @@ class FormValidator{
 }
 const popupSelector = document.querySelector('.popup_type_profile-edit');//тут на самом деле селектор формы нужен, идет в след строку
 const validation = new FormValidator(validationConfig, popupSelector);
+// console.log(popupSelector, validation);
 
 validation.enableValidation();
 
