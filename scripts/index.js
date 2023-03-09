@@ -1,6 +1,6 @@
 
 
-
+//проверить что из этого использ
 
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupClose = document.querySelectorAll('.popup-close-icon');
@@ -17,7 +17,7 @@ const template = document.querySelector('#template').content;//содержим�
 //переменные форм для ввода
 const popupEdit = document.querySelector('.popup_type_profile-edit');//используется
 const formEditElement = popupEdit.querySelector('.popup__form');
-const popupAdd = document.querySelector('.popup_type_add');
+const popupAdd = document.querySelector('.popup_type_add');//использ
 const formAddlement = popupAdd.querySelector('.popup__form');
 
 //переменные для редактирования добавления карточек
@@ -29,7 +29,7 @@ const bigImage = document.querySelector('.popup_type_image');
 //переменные для большого попапа
 const bigImageLink = document.querySelector('.popup__image');
 const bigImageName = document.querySelector('.popup__signature');
-const bigImageClose = document.querySelector('.popup-close-icon_type_image');//использ
+export const bigImageClose = document.querySelector('.popup-close-icon_type_image');//использ
 
 //переменные инпутов
 const subtittleInput = document.querySelector('[name="subtitle"]');
@@ -39,45 +39,15 @@ const linkInput = document.querySelector('[name="link"]');
 
 
 
-//как вытащить свойства объекта с карточками по умолчанию?
-
 /////////////////////////////////////////////////////
-//карточки по умолчанию
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import { initialCards } from "./cards.js";
+import Card from './card.js';
+import { FormValidator } from './validate.js';
 
 
 
-
-  //переменные для класса карты   тут разобраться что нужно что нет
-tags = {
-
-  // popupClose: document.querySelectorAll('.popup-close-icon'),
-
+//переменные для класса карты   тут разобраться что нужно что нет
+export const tags = {
   signature: '.elements__signature',
   elementsBox: '.elements__box',
   itemImage: '.elements__image',
@@ -85,129 +55,9 @@ tags = {
   buttonLike: '.button-like',
   buttonLikeActive: 'button-like_active',
   elementsDelete: '.elements__delete',
-
-
 }
 
-
-
-class Card {
-
-  constructor(cardData, templateSelector, makeImageBig) {//в templateSelector попадет селектор темплейта при создании экземпляра карточки
-    this._name = cardData.name;
-    this._link = cardData.link;
-    this._templateSelector = templateSelector;//селектор темплейта стал свойством объекта класса Card
-
-    this._makeImageBig = makeImageBig;//передали внешнюю функцию как параметр
-    this._removeItem = this._removeItem.bind(this);//привязываем контекст this к нужному объекту
-    this._addLike = this._addLike.bind(this);//привязываем контекст this к нужному объекту
-  }
-
-  _getTemplate() {
-    //здесь получим template-элемент и склонируем его
-    const templateElement = document.querySelector(this._templateSelector)
-    .content.querySelector(tags.template)
-    .cloneNode(true);//копируем li
-    //селектор темплейта использован при поиске элемента нужного нам темплейта
-    return templateElement;//получили копию темплейта
-  }
-
-  //ф-я удаления карточки
-  _removeItem(event) {
-    event.target.closest(tags.template).remove();
-  };
-
-  _addLike() {
-    this._like.classList.toggle(tags.buttonLikeActive);
-  }
-
-  generateCard() {//затем копия темплейта изменяется пережд вставкой
-    //тут навесим нужные слушатели. вызвав их и заменим содержимое полей. Это последняя функция
-    //слушатели отправить в соответствующую функцию
-    this._element = this._getTemplate();
-    this._imageToOpen = this._element.querySelector(tags.itemImage);//внутренние константы может определить через const,
-    //константы для использования в нескольких методах через this
-    //переменные для лайков
-    this._like = this._element.querySelector(tags.buttonLike);
-    //урна
-    this._iconDelete = this._element.querySelector(tags.elementsDelete);
-    this._setEventListeners();//добавим обработчики событий
-    //меняем содержимое полей
-    this._element.querySelector(tags.signature).textContent = this._name;
-    this._imageToOpen.src = this._link;
-    this._imageToOpen.alt = this._name;
-
-
-    //templateElement заменен на this._element
-
-    return this._element;//получаем готовый элемент для вставки в dom
-  }
-
-  _setEventListeners() {//создадим нужные слушатели
-    //закрытие попапа просмотр изображения по клику на крестик
-    //тут надо не через стрел ф-ю а через  bind
-
-    // добавим в карточку открытие картинки в большом размере
-    this._imageToOpen.addEventListener('click', () => this._makeImageBig(this._name, this._link));
-
-    //вместо использования стрелочной функции для сохранения контекста контекст привязан в свойствах класса
-    // добавим в карточку удаление по иконке
-    this._iconDelete.addEventListener('click', this._removeItem);
-    // добавим в карточку лайки
-    this._like.addEventListener('click', this._addLike);//this._makeImageBig()  this._removeItem  this._addLike
-
-
-    bigImageClose.addEventListener('click', () => {
-      closePopup(bigImage);
-    });
-  //   //слушатель закрытия попапа с большой картинкой по крестику тут переделать на внутренний метод, другие переменные
-
-  //   //cабмит формы
-  //   // formAddlement.addEventListener('submit', submitAddCardForm);
-
-
-
-
-
-  }//конец функции, навешивающей слушатели
-
-}//конец класса
-
-//передать cardData в класс валидации и навесить внутри слушателей и функций, проверяющих поля
-//создать cardData из данных, введенных пользователем, передав cardData на валидацию
-//создать cardData из данных из коробки(6 карточек)
-
-
-// ф-я увеличения картинки и закрытия по крестику        функция в index глобальная, передается классу card, слушатель остается внутри card
-  function makeImageBig(name, link) {
-    openPopup(bigImage);
-    bigImageLink.src = link;
-    bigImageLink.alt = name;
-    bigImageName.textContent = name;
-  };//проверить переменные в глобальной области видимости
-
-
-//далее 2 функции пойдут в главный файл, куда будет импортирован класс card
-// ф-я вставки темплейта в elements__box
-addItems = element => {
-  //общая коробка для вставки карточек
-  const elementsBox = document.querySelector(tags.elementsBox);
-  elementsBox.prepend(element);
-};
-
-createItem = (cardData, templateSelector, makeImageBig) => {
-
-  const defaultCard = new Card(cardData, templateSelector, makeImageBig);//темплейт заменить переменной
-  const element = defaultCard.generateCard();
-  addItems(element);
-}//перебрали массив карточек по дефолту и создали из него карточки
-
-for (const item of initialCards) {
-createItem(item, '#template', makeImageBig);
-}
-//////////////////////////////////////////////////////////////////////валидация
-
-const validationConfig = {
+export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.form__input',
   submitButtonSelector: '.popup__button',
@@ -216,98 +66,35 @@ const validationConfig = {
   // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
 };
 
-class FormValidator{
-  constructor(data, formSelector) {//объект настроек с классами формы, ссылку на HTML-элемент проверяемой формы
-    this._data = data;
-    this._formSelector = formSelector;
-
-    this._inputList = Array.from(this._formSelector.querySelectorAll('.form__input')); //найдем массив инпутов это взято из _setEventListeners   this._data.inputSelector
-    this._submitButtonSelector = this._formSelector.querySelector('.popup__button'); //найдем кнопку сабмит это взято из _setEventListeners здесь будет свойство validationConfig
-
-
-  }
-
-    _showInputError(inputSelector) {
-      const inputErrorClass = this._formSelector.querySelector(`.${inputSelector.id}-error`);//validationConfig. ??
-
-      inputSelector.classList.add(validationConfig.inputErrorClass);//красное подчеркивание
-      inputErrorClass.textContent = inputSelector.validationMessage;//errorMessage
-    }
-
-    _hideInputError(inputSelector) {
-      const inputErrorClass = this._formSelector.querySelector(`.${inputSelector.id}-error`);//в конструкции validationConfig.inputSelector я не уверена
-
-      inputSelector.classList.remove(validationConfig.inputErrorClass);//тут путаница между внутренним inputErrorClass и validationConfig.inputErrorClass разобраться
-      inputErrorClass.textContent = '';//очистить текст ошибки при валидации   тут не работает, или работает?
-    }
-
-
-    //показать/скрыть сообщение об ошибке
-  _checkInputValidity(inputSelector) {//inputSelector раньше шел из hasInvalidInput(), не путать с validationConfig
-    //
-    if (!inputSelector.validity.valid) {//если форма невалидна
-
-      this._showInputError(inputSelector); //показать сообщение об ошибке (formSelector, inputSelector, inputSelector.validationMessage)
-    } else {
-      this._hideInputError(inputSelector); //если невалидна скрыть  (formSelector, inputSelector)
-    }
-
+// ф-я увеличения картинки и закрытия по крестику
+  export function makeImageBig(name, link) {
+    openPopup(bigImage);
+    bigImageLink.src = link;
+    bigImageLink.alt = name;
+    bigImageName.textContent = name;
   };
 
-  //_hasInvalidInput используется в _toggleButtonState
-  _hasInvalidInput() {//не перепутать, этот inputSelector внутренний, переименовать, он же
-    return this._inputList.some((inputSelector) => {//взять из массива и для каждого его элемента
-          return !inputSelector.validity.valid;//вернуть значение поля validity.valid
-        }); //false если не валидны
-  }
+// ф-я вставки темплейта в elements__box
+const addItems = element => {
+  //общая коробка для вставки карточек
+  const elementsBox = document.querySelector(tags.elementsBox);
+  elementsBox.prepend(element);
+};
 
-  // // проверить валидны ли поля инпутов
-// const hasInvalidInput = (inputList) => {
-//   return inputList.some((inputSelector) => {
-//     return !inputSelector.validity.valid;
-//   }); //false если не валидны
-// };
+const createItem = (cardData, templateSelector, makeImageBig) => {
+  const defaultCard = new Card(cardData, templateSelector, makeImageBig);
+  addItems(element);
+}//перебрали массив карточек по дефолту и создали из него карточки
 
+for (const item of initialCards) {//для каждого элемента массива initialCards
+createItem(item, '#template', makeImageBig);
 
-
-  //проверить валидны ли поля и переключить вид кнопки и состояние  submitButtonSelector попадает из внешнего окружения
-  //_toggleButtonState используется в _setEventListeners
-  _toggleButtonState() {
-    if (this._hasInvalidInput()) {//если поля невалидны
-      this._submitButtonSelector.classList.add(validationConfig.inactiveButtonClass); //кнопка некликабельна
-      this._submitButtonSelector.disabled = true;
-    } else {//если валидны
-      this._submitButtonSelector.classList.remove(validationConfig.inactiveButtonClass); //кнопка кликабельна
-      this._submitButtonSelector.disabled = false;
-    }
-  }
-
-
-
-  _setEventListeners() {
-    this._formSelector.addEventListener('submit', () => {
-      // this._inputList = Array.from(formSelector.querySelectorAll(validationConfig.inputSelector)); //найдем массив инпутов
-      // console.log(this._inputList);
-      // this._submitButtonSelector = formSelector.querySelector('.popup__button'); //найдем кнопку сабмит
-      this._toggleButtonState(); //получим данные о валидности и переключим состояние кнопки сабмит
-
-      this._inputList.forEach((inputSelector) => {//дублирует hasInvalidInput, разобраться
-        //для каждого элемента inputElement из массива инпутов inputSelector
-
-        inputSelector.addEventListener('input', () => {
-          this._checkInputValidity(inputSelector);
-          this._toggleButtonState(); //в случае надобности изменим состояние кнопки сабмит
-        });
-      });
-    })
-
-  }
-
-
-  enableValidation() {//публичный класс, вызывающий внутренние
-    this._setEventListeners();
-  }
 }
+//////////////////////////////////////////////////////////////////////валидация
+
+
+
+
 
 // const validationPopupEdit = new FormValidator(validationConfig, popupEdit);
 // const validationPopupAdd = new FormValidator(validationConfig, popupAdd);
@@ -316,11 +103,15 @@ class FormValidator{
 // validationPopupEdit.enableValidation();//вызовем функцию создав обработчики событий
 // validationPopupAdd.enableValidation();
 //навесим обработчики событий на формы
-const formList = Array.from(document.querySelectorAll(validationConfig.formSelector)); //получить массив из форм    раскомментировать
-  formList.forEach((formSelector) => {//для каждого элемента formSelector массива formList
-    const validationForm = new FormValidator(validationConfig, formSelector);
-    validationForm.enableValidation(); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
-  });
+// const formList = Array.from(document.querySelectorAll(validationConfig.formSelector)); //получить массив из форм    раскомментировать
+//   formList.forEach((formSelector) => {//для каждого элемента formSelector массива formList
+    const validationAddForm = new FormValidator(validationConfig, popupAdd);//создадим экземпляры класса валидации
+    const validationEditForm = new FormValidator(validationConfig, popupEdit);//создавать экз из массива форм нельзя поскольку они должны находиться в
+    //публичном поле для вызова из ф-и открытия
+    // validationEditForm.resetValidation();
+    validationAddForm.enableValidation(); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
+    validationEditForm.enableValidation();
+
 
 /////////////////////////////////////////////////////////////////////конец валидации
 
@@ -427,6 +218,7 @@ const formList = Array.from(document.querySelectorAll(validationConfig.formSelec
 
 //функция открытия попапов
 function openPopup(popup) {
+  //тут обнулим значения полей и стоит ли сразу включить валидацию?
   popup.classList.add('popup_opened');
   window.addEventListener('keyup', closeEsc);
 
@@ -441,6 +233,7 @@ function closeEsc(event) {
 
 //функция внесения данных из инпутов в имя и работу при отрытии
 function openEditProfileForm() {
+
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
@@ -478,7 +271,10 @@ popupList.forEach((popup) => { // итерируем массив. объявл�
 
 //открытие попапа для добавления карточек
 buttonAdd.addEventListener('click', () => {
-  formAddlement.reset();//удалить содержание инпутов формы popupAdd
+  // formAddlement.reset();//удалить содержание инпутов формы popupAdd эта хрень не работает
+  // subtittleInput.value = '';
+  validationEditForm.resetValidation();
+  // debugger
   openPopup(popupAdd);
 });
 

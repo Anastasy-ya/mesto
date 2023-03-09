@@ -2,5 +2,5 @@
     opacity: 1;
     visibility: visible;
     transition: visibility 0.5s opacity 0.5s linear;
-    transition-delay:0s;
+    transition-delay:0.2s;
 }
