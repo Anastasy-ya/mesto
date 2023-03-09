@@ -1,5 +1,6 @@
-import { tags, makeImageBig, bigImageClose } from "./index.js";
-// console.log(makeImageBig);
+import { tags,
+  bigImageClose } from "./index.js";
+// console.log(closePopup);
 
 export default class Card {
 
@@ -18,7 +19,6 @@ export default class Card {
     const templateElement = document.querySelector(this._templateSelector)
     .content.querySelector(tags.template)
     .cloneNode(true);//копируем li
-
     return templateElement;//получили копию темплейта
   }
 
@@ -47,38 +47,23 @@ export default class Card {
     this._imageToOpen.src = this._link;
     this._imageToOpen.alt = this._name;
 
-
-    //templateElement заменен на this._element
-
     return this._element;//получаем готовый элемент для вставки в dom
   }
 
   _setEventListeners() {//создадим нужные слушатели
     //закрытие попапа просмотр изображения по клику на крестик
     //тут надо не через стрел ф-ю а через  bind
-
     // добавим в карточку открытие картинки в большом размере
     this._imageToOpen.addEventListener('click', () => this._makeImageBig(this._name, this._link));
-
     //вместо использования стрелочной функции для сохранения контекста контекст привязан в свойствах класса
     // добавим в карточку удаление по иконке
     this._iconDelete.addEventListener('click', this._removeItem);
     // добавим в карточку лайки
     this._like.addEventListener('click', this._addLike);//this._makeImageBig()  this._removeItem  this._addLike
-
-
     bigImageClose.addEventListener('click', () => {
       closePopup(bigImage);
     });
   //   //слушатель закрытия попапа с большой картинкой по крестику тут переделать на внутренний метод, другие переменные
-
-  //   //cабмит формы
-  //   // formAddlement.addEventListener('submit', submitAddCardForm);
-
-
-
-
-
   }//конец функции, навешивающей слушатели
 
 }//конец класса
