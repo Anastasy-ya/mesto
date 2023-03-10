@@ -1,6 +1,5 @@
 import { tags,
   bigImageClose } from "./index.js";
-// console.log(closePopup);
 
 export default class Card {
 
@@ -23,8 +22,10 @@ export default class Card {
   }
 
   //ф-я удаления карточки
-  _removeItem(event) {
-    event.target.closest(tags.template).remove();
+  _removeItem() {
+    this._element.remove();
+    this._element = null;
+    // this._templateSelector
   };
 
   _addLike() {
@@ -41,6 +42,7 @@ export default class Card {
     this._like = this._element.querySelector(tags.buttonLike);
     //урна
     this._iconDelete = this._element.querySelector(tags.elementsDelete);
+    //Окно и кнопка на странице одна, поэтому вешать слушатель нужно глобально
     this._setEventListeners();//добавим обработчики событий
     //меняем содержимое полей
     this._element.querySelector(tags.signature).textContent = this._name;
@@ -60,9 +62,9 @@ export default class Card {
     this._iconDelete.addEventListener('click', this._removeItem);
     // добавим в карточку лайки
     this._like.addEventListener('click', this._addLike);//this._makeImageBig()  this._removeItem  this._addLike
-    bigImageClose.addEventListener('click', () => {
-      closePopup(bigImage);
-    });
+    // bigImageClose.addEventListener('click', () => {
+    //   closePopup(bigImage);
+    // });
   //   //слушатель закрытия попапа с большой картинкой по крестику тут переделать на внутренний метод, другие переменные
   }//конец функции, навешивающей слушатели
 

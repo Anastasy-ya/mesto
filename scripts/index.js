@@ -55,6 +55,9 @@ export const validationConfig = {
   // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
 };
 
+//контейнер для вставки карточек
+const elementsBox = document.querySelector(tags.elementsBox);
+
 // ф-я увеличения картинки и закрытия по крестику
 export function makeImageBig(name, link) {
   openPopup(bigImage);
@@ -66,7 +69,6 @@ export function makeImageBig(name, link) {
 // ф-я вставки темплейта в elements__box
 const addItems = (element) => {
   //общая коробка для вставки карточек tags.elementsBox
-  const elementsBox = document.querySelector(tags.elementsBox);
   elementsBox.prepend(element);
 };
 
@@ -98,7 +100,7 @@ function openPopup(popup) {
 //закрытие попапа по esc
 function closeEsc(event) {
   if (event.key === "Escape") {
-    closePopup(document.querySelector(".popup_opened")); //
+    closePopup(document.querySelector(tags.popupOpened)); //
   }
 }
 
