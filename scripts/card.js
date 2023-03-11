@@ -21,6 +21,7 @@ export default class Card {
     return templateElement;//получили копию темплейта
   }
 
+  
   //ф-я удаления карточки
   _removeItem() {
     this._element.remove();
