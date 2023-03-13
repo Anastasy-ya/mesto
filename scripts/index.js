@@ -190,4 +190,6 @@ export default class Section {
     this._containerSelector = containerSelector;
     this._items = items;
   }
+
+  
 }
