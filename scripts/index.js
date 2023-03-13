@@ -74,8 +74,8 @@ const addItems = (element) => {
 
 const createItem = (cardData, templateSelector, makeImageBig) => {
   const defaultCard = new Card(cardData, templateSelector, makeImageBig);
-  const element = defaultCard.generateCard();
-  addItems(element);
+  const element = defaultCard.generateCard();//навесит слушатели и заменит информацию
+  addItems(element);//сделает prepend
 }; //перебрали массив карточек по дефолту и создали из него карточки
 
 for (const item of initialCards) {
@@ -170,3 +170,24 @@ popupList.forEach(function (popup) {
     }
   });
 });
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//- Содержит публичный метод, который отвечает за отрисовку всех элементов.
+//Отрисовка каждого отдельного элемента должна осуществляться функцией `renderer`.
+// Содержит публичный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер.
+//У класса `Section` нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер
+
+
+export default class Section {
+  constructor({ items, renderer }, containerSelector) {//Первым параметром конструктора принимает объект с двумя свойствами: items и renderer
+  //Свойство items — массив карточек
+  //Свойство renderer — функция которая описывает логику создания новой карточки
+  //селектор контейнера, в который нужно добавлять созданные элементы
+    this._renderer = renderer;
+    this._containerSelector = containerSelector;
+    this._items = items;
+  }
+}
