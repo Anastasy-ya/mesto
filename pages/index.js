@@ -24,7 +24,7 @@ const buttonAdd = document.querySelector(".add-button");
 //переменные для увеличения картинки
 const bigImage = document.querySelector(".popup_type_image");
 
-//переменные для большого попапа
+//переменные для большого попапа 
 const bigImageLink = document.querySelector(".popup__image");
 const bigImageName = document.querySelector(".popup__signature");
 export const bigImageClose = document.querySelector(
@@ -148,7 +148,7 @@ popupList.forEach((popup) => {
   });
 });
 
-//открытие попапа для добавления карточек 
+//открытие попапа для добавления карточек
 buttonAdd.addEventListener("click", () => {
   formAddlement.reset(); //удалить содержание инпутов формы popupAdd
   validationAddForm.resetValidation(); //удалить текст и оформление ошибки
