@@ -1,6 +1,7 @@
-import { initialCards } from "./cards.js";
-import Card from "./card.js";
-import { FormValidator } from "./validate.js";
+import { initialCards } from "../utils/cards.js";
+import Card from "../components/card";
+import FormValidator from "../components/validate";
+// console.log(Card, FormValidator);
 
 //переменные для темплейта
 const buttonEdit = document.querySelector(".profile__edit-button");
@@ -26,7 +27,9 @@ const bigImage = document.querySelector(".popup_type_image");
 //переменные для большого попапа
 const bigImageLink = document.querySelector(".popup__image");
 const bigImageName = document.querySelector(".popup__signature");
-export const bigImageClose = document.querySelector(".popup-close-icon_type_image");
+export const bigImageClose = document.querySelector(
+  ".popup-close-icon_type_image"
+);
 
 //переменные инпутов
 const subtittleInput = document.querySelector('[name="subtitle"]');
@@ -34,16 +37,16 @@ const linkInput = document.querySelector('[name="link"]');
 
 //переменные для класса карты   тут разобраться что нужно что нет и разделить на 2: для индекса и для кард
 export const tags = {
-  popupOpened:".popup_opened",
-  classPopupOpened: "popup_opened",//добавление класса без точки
+  popupOpened: ".popup_opened",
+  classPopupOpened: "popup_opened", //добавление класса без точки
   templateBox: "#template",
-  signature: ".elements__signature",//card
+  signature: ".elements__signature", //card
   elementsBox: ".elements__box",
-  itemImage: ".elements__image",//card
+  itemImage: ".elements__image", //card
   template: ".elements__item",
-  buttonLike: ".button-like",//card
-  buttonLikeActive: "button-like_active",//card
-  elementsDelete: ".elements__delete",//card
+  buttonLike: ".button-like", //card
+  buttonLikeActive: "button-like_active", //card
+  elementsDelete: ".elements__delete", //card
 };
 
 export const validationConfig = {
@@ -74,8 +77,8 @@ const addItems = (element) => {
 
 const createItem = (cardData, templateSelector, makeImageBig) => {
   const defaultCard = new Card(cardData, templateSelector, makeImageBig);
-  const element = defaultCard.generateCard();//навесит слушатели и заменит информацию
-  addItems(element);//сделает prepend
+  const element = defaultCard.generateCard(); //навесит слушатели и заменит информацию
+  addItems(element); //сделает prepend
 }; //перебрали массив карточек по дефолту и создали из него карточки
 
 for (const item of initialCards) {
@@ -145,10 +148,10 @@ popupList.forEach((popup) => {
   });
 });
 
-//открытие попапа для добавления карточек
+//открытие попапа для добавления карточек 
 buttonAdd.addEventListener("click", () => {
   formAddlement.reset(); //удалить содержание инпутов формы popupAdd
-  validationAddForm.resetValidation();//удалить текст и оформление ошибки
+  validationAddForm.resetValidation(); //удалить текст и оформление ошибки
   openPopup(popupAdd);
 });
 
@@ -171,25 +174,29 @@ popupList.forEach(function (popup) {
   });
 });
 
-
-
-
 ///////////////////////////////////////////////////////////////////
 //- Содержит публичный метод, который отвечает за отрисовку всех элементов.
 //Отрисовка каждого отдельного элемента должна осуществляться функцией `renderer`.
 // Содержит публичный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер.
 //У класса `Section` нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер
 
+// export default class Section {
+//   constructor({ items, renderer }, containerSelector) {//Первым параметром конструктора принимает объект с двумя свойствами: items и renderer
+//   //Свойство items — массив карточек
+//   //Свойство renderer — функция которая описывает логику создания новой карточки
+//   //селектор контейнера, в который нужно добавлять созданные элементы
+//     this._renderer = renderer;
+//     this._containerSelector = containerSelector;
+//     this._items = items;
+//   }
 
-export default class Section {
-  constructor({ items, renderer }, containerSelector) {//Первым параметром конструктора принимает объект с двумя свойствами: items и renderer
-  //Свойство items — массив карточек
-  //Свойство renderer — функция которая описывает логику создания новой карточки
-  //селектор контейнера, в который нужно добавлять созданные элементы
-    this._renderer = renderer;
-    this._containerSelector = containerSelector;
-    this._items = items;
-  }
+// }
 
-  
-}
+// const section = new Section({
+//   someItems,//items
+//   function createItem(cardData, templateSelector, makeImageBig) {//renderer
+//   const defaultCard = new Card(cardData, templateSelector, makeImageBig);
+//   return const element = defaultCard.generateCard()
+//   }
+// },//навесит слушатели и заменит информацию}
+// someContainerSelector);//containerSelector
