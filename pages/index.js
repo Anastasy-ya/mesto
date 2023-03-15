@@ -1,6 +1,7 @@
 import { initialCards } from "../utils/cards.js";
-import Card from "../components/card";
-import FormValidator from "../components/validate";
+import Card from "../components/card.js";
+import FormValidator from "../components/validate.js";
+// import Section from "../components/section.js";//это заработает потом
 // console.log(Card, FormValidator);
 
 //переменные для темплейта
@@ -24,7 +25,7 @@ const buttonAdd = document.querySelector(".add-button");
 //переменные для увеличения картинки
 const bigImage = document.querySelector(".popup_type_image");
 
-//переменные для большого попапа 
+//переменные для большого попапа
 const bigImageLink = document.querySelector(".popup__image");
 const bigImageName = document.querySelector(".popup__signature");
 export const bigImageClose = document.querySelector(
