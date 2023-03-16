@@ -40,7 +40,7 @@ const linkInput = document.querySelector('[name="link"]');
 export const tags = {
   popupOpened: ".popup_opened",
   classPopupOpened: "popup_opened", //добавление класса без точки
-  templateBox: "#template",
+  templateBox: document.querySelector("#template"),//не факт что здесь нужен поиск в глобальной области
   signature: ".elements__signature", //card
   elementsBox: ".elements__box",
   itemImage: ".elements__image", //card
@@ -62,30 +62,9 @@ export const validationConfig = {
 //контейнер для вставки карточек
 const elementsBox = document.querySelector(tags.elementsBox);
 
-// ф-я увеличения картинки и закрытия по крестику
-export function makeImageBig(name, link) {
-  openPopup(bigImage);
-  bigImageLink.src = link;
-  bigImageLink.alt = name;
-  bigImageName.textContent = name;
-}
 
-// ф-я вставки темплейта в elements__box
-const addItems = (element) => {
-  //общая коробка для вставки карточек tags.elementsBox
-  elementsBox.prepend(element);
-};
 
-const createItem = (cardData, templateSelector, makeImageBig) => {
-  const defaultCard = new Card(cardData, templateSelector, makeImageBig);
-  const element = defaultCard.generateCard(); //навесит слушатели и заменит информацию
-  addItems(element); //сделает prepend
-}; //перебрали массив карточек по дефолту и создали из него карточки
 
-for (const item of initialCards) {
-  //для каждого элемента массива initialCards
-  createItem(item, tags.templateBox, makeImageBig);
-}
 
 //создадим экземпляры класса FormValidator для включения валидации
 const validationAddForm = new FormValidator(validationConfig, popupAdd); //создадим экземпляры класса валидации
@@ -175,29 +154,92 @@ popupList.forEach(function (popup) {
   });
 });
 
-///////////////////////////////////////////////////////////////////
+
+
+
+// ф-я увеличения картинки и закрытия по крестику
+export const makeImageBig = (name, link) => {
+  openPopup(bigImage);
+  bigImageLink.src = link;
+  bigImageLink.alt = name;
+  bigImageName.textContent = name;
+}
+
+
+
+// // ф-я вставки темплейта в elements__box
+// const addItems = (element) => {
+//   //общая коробка для вставки карточек tags.elementsBox
+//   elementsBox.prepend(element);
+// };
+
+// const createItem = (item, templateSelector, makeImageBig) => {
+//   const defaultCard = new Card(item, templateSelector, makeImageBig);
+//   const element = defaultCard.generateCard(); //навесит слушатели и заменит информацию
+//   addItems(element); //сделает prepend
+// }; //перебрали массив карточек по дефолту и создали из него карточки
+
+// for (const item of initialCards) {
+//   //для каждого элемента массива initialCards
+//   createItem(item, tags.templateBox, makeImageBig);
+// }
+
+
+///////////////////////////////////////////////////////////////////8 пр
 //- Содержит публичный метод, который отвечает за отрисовку всех элементов.
 //Отрисовка каждого отдельного элемента должна осуществляться функцией `renderer`.
 // Содержит публичный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер.
 //У класса `Section` нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер
 
-// export default class Section {
-//   constructor({ items, renderer }, containerSelector) {//Первым параметром конструктора принимает объект с двумя свойствами: items и renderer
-//   //Свойство items — массив карточек
-//   //Свойство renderer — функция которая описывает логику создания новой карточки
-//   //селектор контейнера, в который нужно добавлять созданные элементы
-//     this._renderer = renderer;
-//     this._containerSelector = containerSelector;
-//     this._items = items;
-//   }
 
-// }
+export default class Section {
+  constructor({ items, renderer }, containerSelector) {//Первым параметром конструктора принимает объект с двумя свойствами: items и renderer
+  //Свойство items — массив карточек
+  //Свойство renderer — функция которая описывает логику создания новой карточки
+  //селектор контейнера, в который нужно добавлять созданные элементы
+    this._renderer = renderer;
+    this._containerSelector = document.querySelector(containerSelector);
+    this._items = items;
+  }
 
-// const section = new Section({
-//   someItems,//items
-//   function createItem(cardData, templateSelector, makeImageBig) {//renderer
-//   const defaultCard = new Card(cardData, templateSelector, makeImageBig);
-//   return const element = defaultCard.generateCard()
-//   }
-// },//навесит слушатели и заменит информацию}
-// someContainerSelector);//containerSelector
+  addItems(element) {
+    //общая коробка для вставки карточек tags.elementsBox
+    this._containerSelector.prepend(element);
+  }
+
+  _clear() {//очистить контейнер перед вставкой
+    this._containerSelector.innerHTML = '';
+  }
+
+  renderItems() {//очищает контейнер, затем для каждого элемента
+    //массива применяет ф-ю renderer, которая отрисует и вставит элементы в dom
+    // this._clear();//временно убрано
+
+    this._items.forEach(item => {
+      this._renderer(item);
+    })
+  }
+
+}//конец класса Section
+
+
+
+const section = new Section({
+  items: initialCards,//items первый параметр для экз класса section
+  renderer: (item) => {//ф-я renderer бывшая createItem, второй параметр,
+    //разобраться как передать ф-ю makeImageBig  item бывший cardData
+    //значение бокса скрыто в tags.templateBox
+
+  const сard = new Card(// сard не найдена!!!!!!!!!!!!!
+    item,//первый параметр экз класса сard
+    tags.templateBox,//второй параметр экз класса сard
+    makeImageBig// 3 параметр экз класса сard
+    );//конец экз класса сard
+    console.log(item, tags.templateBox, makeImageBig);
+  const element = card.generateCard();
+  section.addItems(element);
+  }//конец ф-и renderer
+},//навесит слушатели и заменит информацию}
+tags.elementsBox);//containerSelector  третий параметр экз класса section
+
+section.renderItems();

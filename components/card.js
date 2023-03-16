@@ -1,12 +1,12 @@
 import { tags, bigImageClose } from "../pages/index.js";
 
 export default class Card {
-  constructor(cardData, templateSelector, makeImageBig) {
+  constructor(item, templateSelector, makeImageBig) {//, makeImageBig временно убрана
     //в templateSelector попадет селектор темплейта при создании экземпляра карточки
-    this._name = cardData.name;
-    this._link = cardData.link;
+    this._name = item.name;
+    this._link = item.link;
     this._templateSelector = templateSelector; //селектор темплейта стал свойством объекта класса Card
-    this._makeImageBig = makeImageBig; //передали внешнюю функцию как параметр
+    this._makeImageBig = makeImageBig; //передали внешнюю функцию как параметр  временно убрана
     this._removeItem = this._removeItem.bind(this); //привязываем контекст this к нужному объекту
     this._addLike = this._addLike.bind(this); //привязываем контекст this к нужному объекту
   }
