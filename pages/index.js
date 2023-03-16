@@ -1,66 +1,37 @@
-import { initialCards } from "../utils/cards.js";
+import {
+  initialCards,
+  tags,
+  popupAdd,
+  popupEdit,
+  nameInput,
+  jobInput,
+  profileName,
+  profileJob,
+  buttonEdit,
+  formEditElement,
+  popupList,
+  buttonAdd,
+  formAddlement,
+  subtittleInput,
+  linkInput,
+  bigImageLink,
+  bigImageName,
+  bigImage,
+  validationConfig,
+
+
+
+
+
+
+
+} from "../utils/constants.js";
 import Card from "../components/card.js";
 import FormValidator from "../components/validate.js";
 // import Section from "../components/section.js";//это заработает потом
-// console.log(Card, FormValidator);
+console.log();
 
-//переменные для темплейта
-const buttonEdit = document.querySelector(".profile__edit-button");
-const popupClose = document.querySelectorAll(".popup-close-icon");
-const popupList = Array.from(document.querySelectorAll(".popup")); // найдем все попапы на странице
-const nameInput = document.querySelector('[name="Name"]');
-const jobInput = document.querySelector('[name="About"]');
-const profileName = document.querySelector(".profile__name");
-const profileJob = document.querySelector(".profile__about");
 
-//переменные форм для ввода
-const popupEdit = document.querySelector(".popup_type_profile-edit");
-const formEditElement = popupEdit.querySelector(".popup__form");
-const popupAdd = document.querySelector(".popup_type_add");
-export const formAddlement = popupAdd.querySelector(".popup__form");
-
-//переменные для редактирования добавления карточек
-const buttonAdd = document.querySelector(".add-button");
-
-//переменные для увеличения картинки
-const bigImage = document.querySelector(".popup_type_image");
-
-//переменные для большого попапа
-const bigImageLink = document.querySelector(".popup__image");
-const bigImageName = document.querySelector(".popup__signature");
-export const bigImageClose = document.querySelector(
-  ".popup-close-icon_type_image"
-);
-
-//переменные инпутов
-const subtittleInput = document.querySelector('[name="subtitle"]');
-const linkInput = document.querySelector('[name="link"]');
-
-//переменные для класса карты   тут разобраться что нужно что нет и разделить на 2: для индекса и для кард
-export const tags = {
-  popupOpened: ".popup_opened",
-  classPopupOpened: "popup_opened", //добавление класса без точки
-  templateBox: document.querySelector("#template"),//не факт что здесь нужен поиск в глобальной области
-  signature: ".elements__signature", //card
-  elementsBox: ".elements__box",
-  itemImage: ".elements__image", //card
-  template: ".elements__item",
-  buttonLike: ".button-like", //card
-  buttonLikeActive: "button-like_active", //card
-  elementsDelete: ".elements__delete", //card
-};
-
-export const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_inactive",
-  inputErrorClass: "form__input_type_error",
-  // errorClass: 'popup__error_visible'не нужен поскольку сообщение об ошибке не скрывается, а стирается
-};
-
-//контейнер для вставки карточек
-const elementsBox = document.querySelector(tags.elementsBox);
 
 
 
@@ -224,22 +195,28 @@ export default class Section {
 
 
 
-const section = new Section({
+const sectionCards = new Section({
   items: initialCards,//items первый параметр для экз класса section
   renderer: (item) => {//ф-я renderer бывшая createItem, второй параметр,
     //разобраться как передать ф-ю makeImageBig  item бывший cardData
     //значение бокса скрыто в tags.templateBox
 
   const сard = new Card(// сard не найдена!!!!!!!!!!!!!
-    item,//первый параметр экз класса сard
+    item,//первый параметр экз класса сard, попадает из Section.renderItems()
     tags.templateBox,//второй параметр экз класса сard
     makeImageBig// 3 параметр экз класса сard
     );//конец экз класса сard
-    console.log(item, tags.templateBox, makeImageBig);
+    // console.log(item, tags.templateBox, makeImageBig);
   const element = card.generateCard();
-  section.addItems(element);
+  sectionCards.addItems(element);
   }//конец ф-и renderer
 },//навесит слушатели и заменит информацию}
 tags.elementsBox);//containerSelector  третий параметр экз класса section
 
-section.renderItems();
+sectionCards.renderItems();
+
+
+
+
+
+

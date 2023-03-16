@@ -1,4 +1,6 @@
-import { tags, bigImageClose } from "../pages/index.js";
+import { tags } from "../utils/constants.js";
+// import { makeImageBig } from "../pages/index.js";//это скорее всего лишнее
+// console.log(tags, bigImageClose, 'проверяем импорт в card');
 
 export default class Card {
   constructor(item, templateSelector, makeImageBig) {//, makeImageBig временно убрана
@@ -51,6 +53,7 @@ export default class Card {
     this._imageToOpen.alt = this._name;
 
     return this._element; //получаем готовый элемент для вставки в dom
+
   }
 
   _setEventListeners() {

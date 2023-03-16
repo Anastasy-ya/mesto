@@ -1,4 +1,4 @@
-import { validationConfig } from "../pages/index.js";
+import { validationConfig } from "../utils/constants.js";
 
 export default class FormValidator {
   constructor(data, formSelector) {
