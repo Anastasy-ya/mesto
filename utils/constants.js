@@ -61,7 +61,7 @@ export const buttonAdd = document.querySelector(".add-button");//index
 export const bigImage = document.querySelector(".popup_type_image");//index
 
 //переменные для большого попапа
-export const bigImageLink = document.querySelector(".popup__image");//index
+export const bigImageLink = document.querySelector(".popup__image");//index  
 export const bigImageName = document.querySelector(".popup__signature");//index
 export const bigImageClose = document.querySelector(
   ".popup-close-icon_type_image"
