@@ -1,19 +1,23 @@
 import { validationConfig } from "../utils/constants.js";
+import {
+  tags,
+
+} from "../utils/constants.js";
 
 export default class FormValidator {
-  constructor(data, formSelector) {
+  constructor(data, popupSelector) {
     //объект настроек с классами формы, ссылку на HTML-элемент проверяемой формы
     this._data = data;
-    this._formSelector = formSelector;
+    this._popupSelector = popupSelector;
     this._inputList = Array.from(
-      this._formSelector.querySelectorAll(".form__input")
+      this._popupSelector.querySelectorAll(".form__input")
     ); //найдем массив инпутов это взято из _setEventListeners   this._data.inputSelector
-    this._submitButtonSelector =
-      this._formSelector.querySelector(".popup__button"); //найдем кнопку сабмит это взято из _setEventListeners здесь будет свойство validationConfig
+    this._submitButtonSelector = this._popupSelector.querySelector(".popup__button");
+    this._form = this._popupSelector.querySelector(tags.popupForm);
   }
 
   _showInputError(inputSelector) {
-    const inputErrorClass = this._formSelector.querySelector(
+    const inputErrorClass = this._popupSelector.querySelector(
       `.${inputSelector.id}-error`
     ); //validationConfig. ??
     inputSelector.classList.add(validationConfig.inputErrorClass); //красное подчеркивание
@@ -21,11 +25,12 @@ export default class FormValidator {
   }
 
   _hideInputError(inputSelector) {
-    const inputErrorClass = this._formSelector.querySelector(
+    const inputErrorClass = this._popupSelector.querySelector(
       `.${inputSelector.id}-error`
     ); //в конструкции validationConfig.inputSelector я не уверена
     // formAddlement.reset();//удалить содержание инпутов формы popupAdd эта хрень не работает
     // console.log(formAddlement);
+
     inputSelector.classList.remove(validationConfig.inputErrorClass); //тут путаница между внутренним inputErrorClass и validationConfig.inputErrorClass разобраться
     inputErrorClass.textContent = ""; //очистить текст ошибки при валидации   тут не работает, или работает?
   }
@@ -83,9 +88,11 @@ export default class FormValidator {
     //очищаем ошибки с инпутов
     this._inputList.forEach((inputSelector) => {
       this._hideInputError(inputSelector);
+
     });
     //управляем кнопкой
     this._toggleButtonState();
+    
   }
 
   enableValidation() {

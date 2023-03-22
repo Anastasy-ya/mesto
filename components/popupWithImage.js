@@ -7,11 +7,11 @@ import {
 
 //класс Popup для картинки
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, item) {//тут разобраться как передать объект
+  constructor(popupSelector, [{ name, link }]) {//тут разобраться как передать объект
     super(popupSelector);
-    this._name = item.name;//не определяется item.name
-    this._link = item.link;//не определяется
-    console.log(item)
+    this._name = name;
+    this._link = link;
+    // console.log(item)
   }
 
   open() {

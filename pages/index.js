@@ -8,16 +8,17 @@ import {
   profileName,
   profileJob,
   buttonEdit,
-  formEditElement,
+  formEditElement,//это удалить
   popupList,
   buttonAdd,
-  formAddlement,
+  formAddlement,//это удалить
   subtittleInput,
   linkInput,
   bigImageLink,
   bigImageName,
   bigImage,
   validationConfig,
+  // formElement,//
 
 
 } from "../utils/constants.js";
@@ -45,7 +46,7 @@ function applySubmitEdit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  popupWithFormEdit.close();
+  // popupWithFormEdit.close();
 };
 
 function applySubmitAdd(evt) {//добавим новую карточку
@@ -56,7 +57,7 @@ function applySubmitAdd(evt) {//добавим новую карточку
       renderer,//навесит слушатели и заменит информацию}
     tags.elementsBox);//containerSelector  третий параметр экз класса section
     usersCards.renderItems();//отработало, норм
-    popupWithFormAdd.close();
+    // popupWithFormAdd.close();
     // closePopup(popupAdd);
   };
 
@@ -106,8 +107,10 @@ popupWithFormAdd.setEventListeners();
 
 //слушатель событий по кнопке редактирования профиля
 buttonEdit.addEventListener("click", () => {
-  validationEditForm.resetValidation();
-  popupWithFormEdit.setEventListeners();
+  validationEditForm.resetValidation();//сбросить старые ошибки
+  popupWithFormEdit.setEventListeners();//здесь событие не передаем поскольку событие возникнет позже
+  nameInput.value = profileName.textContent;//подставить сохраненные значения полей в инпуты при открытии
+  jobInput.value = profileJob.textContent;
   popupWithFormEdit.open();
   //добавить валидацию
 
@@ -117,16 +120,21 @@ buttonAdd.addEventListener("click", () => {
   // formAddlement.reset(); //удалить содержание инпутов формы popupAdd  перенесено в класс Popup
   validationAddForm.resetValidation(); //удалить текст и оформление ошибки
   // openPopup(popupAdd);
-  // popupWithFormAdd.setEventListeners();
+  popupWithFormAdd.setEventListeners();
   popupWithFormAdd.open();//возможно здесь не надо сразу вызывать
 
 });
 
 
 
+
+
+
+
 function handleCardClick() {//второй параметр экз класса сard
   const popupWithImage = new PopupWithImage(bigImage, initialCards);//тут заменить значения параметров
   popupWithImage.open();
+  popupWithImage.setEventListeners();
   //создадим экземпляр класса для попапа с картинкой
 };
 

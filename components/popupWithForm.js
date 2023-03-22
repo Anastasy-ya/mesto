@@ -9,6 +9,7 @@ export default class PopupWithForm extends Popup {
     //applySubmit будет вызвана по сабмиту в сетэвентлистенерс
     super(popupSelector);
     this._applySubmit = applySubmit;
+    this._form = this._popupSelector.querySelector(tags.popupForm);
 }
 
   _getInputValues() {
@@ -19,12 +20,19 @@ export default class PopupWithForm extends Popup {
 //- Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
 //должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
 
-    
+    //закрытие esc
+    super.setEventListeners();
+
+    this._form.addEventListener("submit", (event) => {
+      console.log(event);
+      this._applySubmit();
+    })
 
   }
 
   close() {
-    this._popupSelector.classList.remove(tags.classPopupOpened);
+    super.close();
+    this._form.reset();
     // formAddlement.reset(); //ошибки сбрасываются в классе валидации, здесь только значения полей
 //- Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
   }
@@ -34,9 +42,3 @@ export default class PopupWithForm extends Popup {
 
 }//конец класса PopupWithForm
 
-//Классы section и card отработали, закрытие и открытие попапов реализовано через класс popup
-//навесить слушатели на закрытие попапов и вызвать соответствующий метод
-//разобраться почему не закрываются попапы в листенерах попапа
-
-
-//

@@ -37,6 +37,7 @@ export const tags = {
   buttonLike: ".button-like", //card
   buttonLikeActive: "button-like_active", //card
   elementsDelete: ".elements__delete", //card
+  popupForm: ".popup__form",
 };
 
 //переменные для темплейта
@@ -54,6 +55,8 @@ export const formEditElement = popupEdit.querySelector(".popup__form");//index
 export const popupAdd = document.querySelector(".popup_type_add");//index
 export const formAddlement = popupAdd.querySelector(".popup__form");//index
 
+// export const formElement = .querySelector(".popup__form");
+
 //переменные для редактирования добавления карточек
 export const buttonAdd = document.querySelector(".add-button");//index
 
@@ -61,7 +64,7 @@ export const buttonAdd = document.querySelector(".add-button");//index
 export const bigImage = document.querySelector(".popup_type_image");//index
 
 //переменные для большого попапа
-export const bigImageLink = document.querySelector(".popup__image");//index  
+export const bigImageLink = document.querySelector(".popup__image");//index
 export const bigImageName = document.querySelector(".popup__signature");//index
 export const bigImageClose = document.querySelector(
   ".popup-close-icon_type_image"
