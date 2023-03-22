@@ -1,27 +1,27 @@
 export const initialCards = [
   {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+    name: "Работает?",
+    link: "https://kartinkof.club/uploads/posts/2022-03/1648305469_3-kartinkof-club-p-memi-it-3.jpg",
   },
   {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+    name: "Нажать",
+    link: "http://risovach.ru/upload/2014/01/mem/it_41358427_orig_.jpeg",
   },
   {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+    name: "Some text",
+    link: "http://memesmix.net/media/created/9fnay6.jpg",
   },
   {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+    name: "Никогда",
+    link: "https://the-steppe.com/pictures/files/Gulnar/05may/05meme/risovach.ru-9.jpg",
   },
   {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+    name: "и я того же мнения",
+    link: "https://avatars.dzeninfra.ru/get-zen_doc/5231677/pub_63b84ce545b6847d177f732d_63b84e13838a4c4c05a0dbd5/scale_1200",
   },
   {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+    name: "и я того же мнения",
+    link: "https://www.tinkoff.ru/api/invest-gw/social/file/v1/cache/post/image/45b3863f-33b5-4fe2-a272-31f1b9b52fb9?size=small&appName=socialweb&platform=web",
   },
 ];
 
