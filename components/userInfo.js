@@ -29,7 +29,7 @@ export default class UserInfo {
     // evt.preventDefault();
     this._profileName.textContent = nameInput;
     this._profileJob.textContent = jobInput;
-    console.log(nameInput);
+    console.log(nameInput, jobInput);
   }
 
 }//конец класса UserInfo

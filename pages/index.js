@@ -122,20 +122,25 @@ buttonAdd.addEventListener("click", () => {
 
 // console.log(initialCards, ...initialCards);
 
-function handleCardClick() {//второй параметр экз класса сard
-  initialCards.forEach((item) => {
-  const popupWithImage = new PopupWithImage(bigImage, item);//тут заменить значения параметров
-  popupWithImage.open();
-  popupWithImage.setEventListeners();
-  })
-  //создадим экземпляр класса для попапа с картинкой
-};
+// function handleCardClick() {//второй параметр экз класса сard
+//   // items.forEach((item) => {
+//   const popupWithImage = new PopupWithImage(bigImage, item);//тут заменить значения параметров
+//   popupWithImage.open();
+//   popupWithImage.setEventListeners();
+//   // })
+//   //создадим экземпляр класса для попапа с картинкой
+// };
 
 function renderer(item) {//ф-я renderer бывшая createItem, второй параметр,
   //разобраться как передать ф-ю makeImageBig  item бывший cardData
   //значение бокса скрыто в tags.templateBox
 // items.forEach((item) => {
-const card = new Card( item, handleCardClick, tags.templateBox);
+const card = new Card( item, () => {
+  const popupWithImage = new PopupWithImage(bigImage, item);//тут заменить значения параметров
+  popupWithImage.open();
+  popupWithImage.setEventListeners();
+},
+tags.templateBox);
   // console.log(item);
 const element = card.generateCard();
 sectionCards.addItems(element);
