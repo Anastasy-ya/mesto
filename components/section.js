@@ -14,16 +14,20 @@ export default class Section {
   }
 
   _clear() {//очистить контейнер перед вставкой
+    // console.log(this._containerSelector);
     this._containerSelector.innerHTML = '';
   }
 
-  renderItems() {//очищает контейнер, затем для каждого элемента
+  renderItems(item) {//очищает контейнер, затем для каждого элемента
     //массива применяет ф-ю renderer, которая отрисует и вставит элементы в dom
     // this._clear();//временно убрано
 
-    this._items.forEach(item => {
+
+      // console.log(item);
       this._renderer(item);
-    })
+      // this._clear();
+      // console.log('отработала ф-я renderItems');
+
   }
 
 }//конец класса Section

@@ -1,3 +1,13 @@
+import {
+
+  nameInput,
+  jobInput,
+  profileName,
+  profileJob
+
+
+} from "../utils/constants.js";
+
 export default class UserInfo {
   constructor({ profileName, profileJob }) {
     this._profileName = profileName;
@@ -7,16 +17,19 @@ export default class UserInfo {
   getUserInfo() {
 //- Содержит публичный метод `getUserInfo`, который возвращает объект с данными пользователя.
 //Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
-    nameInput.value = this._profileName.textContent;
-    jobInput.value = this._profileJob.textContent;
+
+    name: this._profileName.textContent;
+    about: this._profileJob.textContent;
     // validationEditForm.resetValidation();//надо сбросить ошибки, но не факт, что это будет работать отсюда
   }
 
-  setUserInfo(evt) {
+  setUserInfo(nameInput, jobInput) {
 //принимает новые данные пользователя и добавляет их на страницу.
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
+    // console.log(this._profileName, this._profileJob);
+    // evt.preventDefault();
+    this._profileName.textContent = nameInput;
+    this._profileJob.textContent = jobInput;
+    console.log(nameInput);
   }
 
 }//конец класса UserInfo

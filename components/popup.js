@@ -15,6 +15,7 @@ export default class Popup {//отвечает за открытие и закр
 
   close() {
     this._popupSelector.classList.remove(tags.classPopupOpened);
+    window.removeEventListener("keyup", this._handleEscClose(event));
     // window.removeEventListener("keyup", closeEsc);
   }
 

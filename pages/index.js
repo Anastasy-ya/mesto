@@ -1,5 +1,3 @@
-//разобраться как передать в открывающуюся картинку не только 1 объект из ититиал кардс
-//разобраться с сохранением данных
 
 
 
@@ -37,6 +35,11 @@ import UserInfo from "../components/userInfo.js";
 // console.log(Card, FormValidator, Section, PopupWithImage, PopupWithForm);
 
 
+///////////////////////////////////////////////////////////
+//класс UserInfo
+const userInfo = new UserInfo({ profileName, profileJob });
+// console.log({ profileName, profileJob });
+/////////////////////////////////
 
 
 //FormValidator
@@ -47,24 +50,7 @@ validationAddForm.enableValidation(); //выполнить ф-ю, которая
 validationEditForm.enableValidation();
 
 
-function applySubmitEdit(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  // popupWithFormEdit.close();
-};
 
-function applySubmitAdd(evt) {//добавим новую карточку
-  //здесь один классс будет сохранять информацию о польз, а другой создавать карточку
-    evt.preventDefault();
-    const usersCards = new Section({
-      name: subtittleInput.value, link: linkInput.value },//items первый параметр для экз класса section
-      renderer,//навесит слушатели и заменит информацию}
-    tags.elementsBox);//containerSelector  третий параметр экз класса section
-    usersCards.renderItems();//отработало, норм
-    // popupWithFormAdd.close();
-    // closePopup(popupAdd);
-  };
 
 /////////////////////////////////////////
 
@@ -73,7 +59,7 @@ const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd);//доба�
 popupWithFormEdit.setEventListeners();
 popupWithFormAdd.setEventListeners();
 
-
+// console.log(popupWithFormEdit.setEventListeners());
 //////////////////////////////////////
 
 // //функция сохранения имени и информации о работе
@@ -98,7 +84,7 @@ popupWithFormAdd.setEventListeners();
 // //это еще не переписано
 
 
-
+// console.log(nameInput.value);
 
 
 
@@ -109,13 +95,13 @@ popupWithFormAdd.setEventListeners();
 //навесим слушатель событий на submit формы
 // formEditElement.addEventListener("submit", submitEditProfileForm);
 
-
 //слушатель событий по кнопке редактирования профиля
 buttonEdit.addEventListener("click", () => {
   validationEditForm.resetValidation();//сбросить старые ошибки
   popupWithFormEdit.setEventListeners();//здесь событие не передаем поскольку событие возникнет позже
-  nameInput.value = profileName.textContent;//подставить сохраненные значения полей в инпуты при открытии
-  jobInput.value = profileJob.textContent;
+  // nameInput.value = profileName.textContent;//подставить сохраненные значения полей в инпуты при открытии
+  // jobInput.value = profileJob.textContent;
+  userInfo.getUserInfo();
   popupWithFormEdit.open();
   //добавить валидацию
 
@@ -134,22 +120,26 @@ buttonAdd.addEventListener("click", () => {
 
 
 
-
+// console.log(initialCards, ...initialCards);
 
 function handleCardClick() {//второй параметр экз класса сard
-  const popupWithImage = new PopupWithImage(bigImage, initialCards);//тут заменить значения параметров
+  initialCards.forEach((item) => {
+  const popupWithImage = new PopupWithImage(bigImage, item);//тут заменить значения параметров
   popupWithImage.open();
   popupWithImage.setEventListeners();
+  })
   //создадим экземпляр класса для попапа с картинкой
 };
 
 function renderer(item) {//ф-я renderer бывшая createItem, второй параметр,
   //разобраться как передать ф-ю makeImageBig  item бывший cardData
   //значение бокса скрыто в tags.templateBox
-const card = new Card({ item, handleCardClick }, tags.templateBox);
-  // console.log(item, tags.templateBox, makeImageBig);
+// items.forEach((item) => {
+const card = new Card( item, handleCardClick, tags.templateBox);
+  // console.log(item);
 const element = card.generateCard();
 sectionCards.addItems(element);
+// });
 }//конец ф-и renderer
 
 
@@ -162,8 +152,9 @@ sectionCards.addItems(element);
 //У класса `Section` нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер
 
 //Section для индекса
+// initialCards.forEach((...item) => {
 const sectionCards = new Section({
-  items: initialCards },//items первый параметр для экз класса section
+  initialCards },//items первый параметр для экз класса section
   renderer,
   // renderer: (item) => {//ф-я renderer бывшая createItem, второй параметр,
   //   //разобраться как передать ф-ю makeImageBig  item бывший cardData
@@ -178,11 +169,33 @@ const sectionCards = new Section({
 //навесит слушатели и заменит информацию}
 tags.elementsBox);//containerSelector  третий параметр экз класса section
 
-sectionCards.renderItems();//отработало, норм
+initialCards.forEach((item) => {
+sectionCards.renderItems(item);//отработало, норм
+})
+// })
 
-///////////////////////////////////////////////////////////
 
+function applySubmitAdd(evt) {//добавим новую карточку
+  //здесь один классс будет сохранять информацию о польз, а другой создавать карточку
+    evt.preventDefault();
+    const usersCards = new Section({
+      name: subtittleInput.value, link: linkInput.value },//items первый параметр для экз класса section
+      renderer,//навесит слушатели и заменит информацию}
+    tags.elementsBox);//containerSelector  третий параметр экз класса section
+    usersCards.renderItems();//отработало, норм
+    // popupWithFormAdd.close();
+    // closePopup(popupAdd);
+  };
 
+function applySubmitEdit() {
+  // console.log(evt);
+  // evt.preventDefault();
+  // profileName.textContent = nameInput.value;//заменить на экз класса userInfo
+  // profileJob.textContent = jobInput.value;
+  userInfo.setUserInfo(nameInput.value, jobInput.value);//сюда подставить значения полей из инпутов
+  // console.log(item);
+  // popupWithFormEdit.close();
+};
 
 
 

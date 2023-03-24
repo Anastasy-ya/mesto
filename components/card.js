@@ -82,7 +82,7 @@ import { tags } from "../utils/constants.js";
 //выше сохраненный старый код
 
 export default class Card {
-  constructor({ item, handleCardClick }, templateSelector) {//(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
+  constructor(item, handleCardClick, templateSelector) {//(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
     //в templateSelector попадет селектор темплейта при создании экземпляра карточки
     this._name = item.name;
     this._link = item.link;

@@ -1,6 +1,7 @@
 import Popup from "../components/popup.js";
 import {
   tags,
+  inputList
 } from "../utils/constants.js";
 
 //класс Popup для форм
@@ -10,10 +11,18 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._applySubmit = applySubmit;
     this._form = this._popupSelector.querySelector(tags.popupForm);
+    this._inputList = inputList;
 }
 
   _getInputValues() {
 //- Содержит приватный метод `_getInputValues`, который собирает данные всех полей формы.
+    this._inputValues = {};
+
+    this._inputList.forEach((input) => {
+      this._inputValues[input.name] = input.value;
+    });
+    console.log(this._inputValues);
+    return this._inputValues;
   }
 
   setEventListeners() {//вызовется при открытии и не забыть удалить слушатели после закрытия
@@ -23,16 +32,21 @@ export default class PopupWithForm extends Popup {
     //закрытие esc
     super.setEventListeners();
 
-    this._form.addEventListener("submit", (event) => {
-      console.log(event);
-      this._applySubmit();
-    })
+    this._form.addEventListener("submit", (evt) => {
+      evt.preventDefault()
+      // console.log(this._applySubmit(this._getInputValues()));
+      this._applySubmit(this._getInputValues());
+      this.close();
+
+    });
 
   }
 
   close() {
-    super.close();
+    // console.log('сработал метод клоус попапа для формы')
     this._form.reset();
+    super.close();
+
     // formAddlement.reset(); //ошибки сбрасываются в классе валидации, здесь только значения полей
 //- Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
   }
