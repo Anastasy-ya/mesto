@@ -1,4 +1,4 @@
-
+//оформить, включить валидацию
 
 
 import {
@@ -56,8 +56,35 @@ validationEditForm.enableValidation();
 
 const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit);//добавим информацию о пользователе
 const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd);//добавим новую карточку
-popupWithFormEdit.setEventListeners();
-popupWithFormAdd.setEventListeners();
+// popupWithFormEdit.setEventListeners();//отключение слушателей отключает валидацию
+// popupWithFormAdd.setEventListeners();
+
+
+
+function applySubmitAdd(items) {//добавим новую карточку
+  //здесь один классс будет сохранять информацию о польз, а другой создавать карточку
+    // evt.preventDefault();
+    // console.log(subtittleInput.value, linkInput.value);
+    const usersCards = new Section(//undefined
+
+      { items } ,//items первый параметр для экз класса section
+      renderer(items),//навесит слушатели и заменит информацию}
+    tags.elementsBox);//containerSelector  третий параметр экз класса section
+    usersCards.renderItems();//отработало, норм
+    // popupWithFormAdd.close();
+    // closePopup(popupAdd);
+  };
+
+function applySubmitEdit() {
+  // console.log(evt);
+  // evt.preventDefault();
+  // profileName.textContent = nameInput.value;//заменить на экз класса userInfo
+  // profileJob.textContent = jobInput.value;
+  userInfo.setUserInfo(nameInput.value, jobInput.value);//сюда подставить значения полей из инпутов
+  // console.log(item);
+  // popupWithFormEdit.close();
+};
+
 
 // console.log(popupWithFormEdit.setEventListeners());
 //////////////////////////////////////
@@ -180,27 +207,6 @@ sectionCards.renderItems(item);//отработало, норм
 // })
 
 
-function applySubmitAdd(evt) {//добавим новую карточку
-  //здесь один классс будет сохранять информацию о польз, а другой создавать карточку
-    evt.preventDefault();
-    const usersCards = new Section({
-      name: subtittleInput.value, link: linkInput.value },//items первый параметр для экз класса section
-      renderer,//навесит слушатели и заменит информацию}
-    tags.elementsBox);//containerSelector  третий параметр экз класса section
-    usersCards.renderItems();//отработало, норм
-    // popupWithFormAdd.close();
-    // closePopup(popupAdd);
-  };
-
-function applySubmitEdit() {
-  // console.log(evt);
-  // evt.preventDefault();
-  // profileName.textContent = nameInput.value;//заменить на экз класса userInfo
-  // profileJob.textContent = jobInput.value;
-  userInfo.setUserInfo(nameInput.value, jobInput.value);//сюда подставить значения полей из инпутов
-  // console.log(item);
-  // popupWithFormEdit.close();
-};
 
 
 

@@ -18,13 +18,13 @@ export default class Section {
     this._containerSelector.innerHTML = '';
   }
 
-  renderItems(item) {//очищает контейнер, затем для каждого элемента
+  renderItems(items) {//очищает контейнер, затем для каждого элемента
     //массива применяет ф-ю renderer, которая отрисует и вставит элементы в dom
     // this._clear();//временно убрано
 
 
       // console.log(item);
-      this._renderer(item);
+      this._renderer(items);
       // this._clear();
       // console.log('отработала ф-я renderItems');
 

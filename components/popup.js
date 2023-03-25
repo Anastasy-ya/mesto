@@ -10,12 +10,12 @@ export default class Popup {//отвечает за открытие и закр
 
   open() {
     this._popupSelector.classList.add(tags.classPopupOpened);
-    window.addEventListener("keyup", this._handleEscClose(event));//
+    window.addEventListener("keyup", this._handleEscClose);//
   }
 
   close() {
     this._popupSelector.classList.remove(tags.classPopupOpened);
-    window.removeEventListener("keyup", this._handleEscClose(event));
+    window.removeEventListener("keyup", this._handleEscClose);
     // window.removeEventListener("keyup", closeEsc);
   }
 

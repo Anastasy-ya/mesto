@@ -38,7 +38,7 @@ export const tags = {
   buttonLikeActive: "button-like_active", //card
   elementsDelete: ".elements__delete", //card
   popupForm: ".popup__form",
-  formInput: "form__input",
+  // formInput: "form__input",//это кажется не нужно
 };
 
 //переменные для темплейта
@@ -76,7 +76,7 @@ export const linkInput = document.querySelector('[name="link"]');//index
 export const nameInput = document.querySelector('[name="Name"]');//index
 export const jobInput = document.querySelector('[name="About"]');//index
 
-export const inputList = document.querySelectorAll(tags.formInput);
+export const inputList = document.querySelectorAll(".form__input");
 
 
 

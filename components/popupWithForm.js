@@ -17,7 +17,7 @@ export default class PopupWithForm extends Popup {
   _getInputValues() {
 //- Содержит приватный метод `_getInputValues`, который собирает данные всех полей формы.
     this._inputValues = {};
-
+    // console.log(this._inputList);
     this._inputList.forEach((input) => {
       this._inputValues[input.name] = input.value;
     });
@@ -29,23 +29,26 @@ export default class PopupWithForm extends Popup {
 //- Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
 //должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
 
-    //закрытие esc
     super.setEventListeners();
 
+    // this._submitListener =
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault()
-      // console.log(this._applySubmit(this._getInputValues()));
-      this._applySubmit();
+      this._applySubmit(this._getInputValues());
+      console.log(this._getInputValues());
       this.close();
 
     });
-
   }
 
   close() {
     // console.log('сработал метод клоус попапа для формы')
-    this._form.reset();
     super.close();
+    this._form.reset();
+
+    // this._form.removeEventListener("submit", this._submitListener);//не работает
+
+
 
     // formAddlement.reset(); //ошибки сбрасываются в классе валидации, здесь только значения полей
 //- Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.

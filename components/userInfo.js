@@ -17,10 +17,11 @@ export default class UserInfo {
   getUserInfo() {
 //- Содержит публичный метод `getUserInfo`, который возвращает объект с данными пользователя.
 //Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
-
-    name: this._profileName.textContent;
-    about: this._profileJob.textContent;
+    return {
+      name: this._profileName.textContent,
+      about: this._profileJob.textContent,
     // validationEditForm.resetValidation();//надо сбросить ошибки, но не факт, что это будет работать отсюда
+    }
   }
 
   setUserInfo(nameInput, jobInput) {

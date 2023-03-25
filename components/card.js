@@ -84,7 +84,7 @@ import { tags } from "../utils/constants.js";
 export default class Card {
   constructor(item, handleCardClick, templateSelector) {//(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
     //в templateSelector попадет селектор темплейта при создании экземпляра карточки
-    this._name = item.name;
+    this._name = item.subtitle;
     this._link = item.link;
     this._templateSelector = templateSelector; //селектор темплейта стал свойством объекта класса Card
     this._handleCardClick = handleCardClick; //передали внешнюю функцию как параметр  временно убрана
