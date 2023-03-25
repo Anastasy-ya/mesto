@@ -1,4 +1,5 @@
-//оформить, включить валидацию
+//оформить, включить валидацию,
+//найти потерянные имена в карточках, скорее всего переданные и принятые названия полей не совпали
 
 
 import {
@@ -62,6 +63,7 @@ const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd);//доба�
 
 
 function applySubmitAdd(items) {//добавим новую карточку
+  console.log(items);
   //здесь один классс будет сохранять информацию о польз, а другой создавать карточку
     // evt.preventDefault();
     // console.log(subtittleInput.value, linkInput.value);
@@ -71,6 +73,7 @@ function applySubmitAdd(items) {//добавим новую карточку
       renderer(items),//навесит слушатели и заменит информацию}
     tags.elementsBox);//containerSelector  третий параметр экз класса section
     usersCards.renderItems();//отработало, норм
+    console.log('отработала генерация карточек')
     // popupWithFormAdd.close();
     // closePopup(popupAdd);
   };
@@ -168,9 +171,10 @@ const card = new Card( item, () => {
   popupWithImage.setEventListeners();
 },
 tags.templateBox);
-  // console.log(item);
+
 const element = card.generateCard();
 sectionCards.addItems(element);
+// console.log(element);
 // });
 }//конец ф-и renderer
 
