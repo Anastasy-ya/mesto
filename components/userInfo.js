@@ -1,12 +1,12 @@
-import {
+// import {
 
-  nameInput,
-  jobInput,
-  profileName,
-  profileJob
+//   nameInput,
+//   jobInput,
+//   profileName,
+//   profileJob
 
 
-} from "../utils/constants.js";
+// } from "../utils/constants.js";
 
 export default class UserInfo {
   constructor({ profileName, profileJob }) {
@@ -30,7 +30,6 @@ export default class UserInfo {
     // evt.preventDefault();
     this._profileName.textContent = nameInput;
     this._profileJob.textContent = jobInput;
-    console.log(nameInput, jobInput);
   }
 
 }//конец класса UserInfo

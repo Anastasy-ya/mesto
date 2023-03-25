@@ -1,5 +1,5 @@
-//оформить, включить валидацию,
-//найти потерянные имена в карточках, скорее всего переданные и принятые названия полей не совпали
+
+
 
 
 import {
@@ -83,7 +83,6 @@ sectionCards.addItems(element);
 
 
 function applySubmitAdd(items) {//добавим новую карточку
-  console.log(items);
   //здесь один классс будет сохранять информацию о польз, а другой создавать карточку
     // evt.preventDefault();
     // console.log(subtittleInput.value, linkInput.value);
@@ -151,7 +150,12 @@ buttonEdit.addEventListener("click", () => {
   popupWithFormEdit.setEventListeners();//здесь событие не передаем поскольку событие возникнет позже
   // nameInput.value = profileName.textContent;//подставить сохраненные значения полей в инпуты при открытии
   // jobInput.value = profileJob.textContent;
-  userInfo.getUserInfo();
+
+
+  // userInfo.getUserInfo();//функция срабатывает, но значения никуда не попадают
+  popupWithFormEdit.setInputValues(userInfo.getUserInfo());
+
+
   popupWithFormEdit.open();
   //добавить валидацию
 

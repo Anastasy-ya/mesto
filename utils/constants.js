@@ -48,6 +48,7 @@ export const popupList = Array.from(document.querySelectorAll(".popup")); // н�
 
 export const profileName = document.querySelector(".profile__name");//index
 export const profileJob = document.querySelector(".profile__about");//index
+console.log(profileName, profileJob);
 
 //переменные форм для ввода
 export const popupEdit = document.querySelector(".popup_type_profile-edit");//index
@@ -73,8 +74,8 @@ export const bigImageClose = document.querySelector(
 //переменные инпутов
 export const subtittleInput = document.querySelector('[name="subtitle"]');//index
 export const linkInput = document.querySelector('[name="link"]');//index
-export const nameInput = document.querySelector('[name="Name"]');//index
-export const jobInput = document.querySelector('[name="About"]');//index
+export const nameInput = document.querySelector('[name="name"]');//index
+export const jobInput = document.querySelector('[name="about"]');//index
 
 export const inputList = document.querySelectorAll(".form__input");
 

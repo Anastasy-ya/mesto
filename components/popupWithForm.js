@@ -17,12 +17,10 @@ export default class PopupWithForm extends Popup {
   _getInputValues() {
 //- Содержит приватный метод `_getInputValues`, который собирает данные всех полей формы.
     this._inputValues = {};
-    // console.log(this._inputList);
     this._inputList.forEach((input) => {
 
       this._inputValues[input.name] = input.value;
     });
-    console.log(this._inputValues);
     return this._inputValues;
   }
 
@@ -55,6 +53,13 @@ export default class PopupWithForm extends Popup {
 //- Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
   }
 //- Кроме селектора попапа принимает в конструктор колбэк сабмита формы.
+
+
+setInputValues(data) {
+  this._inputList.forEach((input) => {
+    input.value = data[input.name];
+  });
+}
 
 
 
