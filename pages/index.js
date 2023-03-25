@@ -62,6 +62,26 @@ const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd);//доба�
 
 
 
+
+function renderer(item) {//ф-я renderer бывшая createItem, второй параметр,
+  //разобраться как передать ф-ю makeImageBig  item бывший cardData
+  //значение бокса скрыто в tags.templateBox
+// items.forEach((item) => {
+const card = new Card( item, () => {
+  const popupWithImage = new PopupWithImage(bigImage, item);//тут заменить значения параметров
+  popupWithImage.open();
+  popupWithImage.setEventListeners();
+},
+tags.templateBox);
+
+const element = card.generateCard();
+sectionCards.addItems(element);
+// console.log(element);
+// });
+}//конец ф-и renderer
+
+
+
 function applySubmitAdd(items) {//добавим новую карточку
   console.log(items);
   //здесь один классс будет сохранять информацию о польз, а другой создавать карточку
@@ -73,7 +93,7 @@ function applySubmitAdd(items) {//добавим новую карточку
       renderer(items),//навесит слушатели и заменит информацию}
     tags.elementsBox);//containerSelector  третий параметр экз класса section
     usersCards.renderItems();//отработало, норм
-    console.log('отработала генерация карточек')
+    console.log('отработала генерация карточки')
     // popupWithFormAdd.close();
     // closePopup(popupAdd);
   };
@@ -161,22 +181,7 @@ buttonAdd.addEventListener("click", () => {
 //   //создадим экземпляр класса для попапа с картинкой
 // };
 
-function renderer(item) {//ф-я renderer бывшая createItem, второй параметр,
-  //разобраться как передать ф-ю makeImageBig  item бывший cardData
-  //значение бокса скрыто в tags.templateBox
-// items.forEach((item) => {
-const card = new Card( item, () => {
-  const popupWithImage = new PopupWithImage(bigImage, item);//тут заменить значения параметров
-  popupWithImage.open();
-  popupWithImage.setEventListeners();
-},
-tags.templateBox);
 
-const element = card.generateCard();
-sectionCards.addItems(element);
-// console.log(element);
-// });
-}//конец ф-и renderer
 
 
 
