@@ -1,13 +1,3 @@
-// import {
-
-//   nameInput,
-//   jobInput,
-//   profileName,
-//   profileJob
-
-
-// } from "../utils/constants.js";
-
 export default class UserInfo {
   constructor({ profileName, profileJob }) {
     this._profileName = profileName;
@@ -20,16 +10,13 @@ export default class UserInfo {
     return {
       name: this._profileName.textContent,
       about: this._profileJob.textContent,
-    // validationEditForm.resetValidation();//надо сбросить ошибки, но не факт, что это будет работать отсюда
     }
   }
 
   setUserInfo(nameInput, jobInput) {
 //принимает новые данные пользователя и добавляет их на страницу.
-    // console.log(this._profileName, this._profileJob);
-    // evt.preventDefault();
     this._profileName.textContent = nameInput;
     this._profileJob.textContent = jobInput;
   }
 
-}//конец класса UserInfo
+}

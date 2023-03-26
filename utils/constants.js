@@ -48,7 +48,6 @@ export const popupList = Array.from(document.querySelectorAll(".popup")); // н�
 
 export const profileName = document.querySelector(".profile__name");//index
 export const profileJob = document.querySelector(".profile__about");//index
-console.log(profileName, profileJob);
 
 //переменные форм для ввода
 export const popupEdit = document.querySelector(".popup_type_profile-edit");//index
@@ -78,9 +77,6 @@ export const nameInput = document.querySelector('[name="name"]');//index
 export const jobInput = document.querySelector('[name="about"]');//index
 
 export const inputList = document.querySelectorAll(".form__input");
-
-
-
 
 export const validationConfig = {//index
   formSelector: ".popup__form",

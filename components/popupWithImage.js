@@ -7,20 +7,18 @@ import {
 
 //класс Popup для картинки
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, item) {//тут разобраться как передать объект
+  constructor(popupSelector, item) {
     super(popupSelector);
-    this._name = item.name;
+    this._name = item.title;
     this._link = item.link;
-    // console.log(item)
   }
 
   open() {
-    // openPopup(bigImage);
     bigImageLink.src = this._link;//проверить как называются вхдящие поля name link
     bigImageLink.alt = this._name;
     bigImageName.textContent = this._name;
+    // console.log(this._name);
     this._popupSelector.classList.add(tags.classPopupOpened);
   }
-  //перезапишет метод open В методе open класса PopupWithImage
-  // нужно вставлять в попап картинку и атрибут src изображения.
-  }//конец класса PopupWithImage
+
+}
