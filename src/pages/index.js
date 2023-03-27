@@ -31,8 +31,8 @@ const validationEditForm = new FormValidator(validationConfig, popupEdit); //с�
 validationAddForm.enableValidation(); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
 validationEditForm.enableValidation();
 
-const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit, tags.classPopupOpened);//добавим информацию о пользователе
-const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd, tags.classPopupOpened);//добавим новую карточку
+const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit, tags);//добавим информацию о пользователе
+const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd, tags);//добавим новую карточку
 
 popupWithFormAdd.setEventListeners();
 popupWithFormEdit.setEventListeners();

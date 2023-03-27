@@ -8,8 +8,8 @@ import {
 //входящая функция определит что именно делать с данными: сохранить в профиле или создать новую карточку
 //applySubmit будет вызвана по сабмиту формы
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, applySubmit, classPopupOpened) {
-    super(popupSelector, classPopupOpened);
+  constructor(popupSelector, applySubmit, tags) {
+    super(popupSelector, tags);
     this._applySubmit = applySubmit;
     this._form = this._popupSelector.querySelector(tags.popupForm);
     this._inputList = inputList;

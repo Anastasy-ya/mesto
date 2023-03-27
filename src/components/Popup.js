@@ -1,16 +1,18 @@
-import {
-  tags,
-} from "../utils/constants.js";
+// import {
+//   tags,
+// } from "../utils/constants.js";
 
 //отвечает за открытие и закрытие попапа
 export default class Popup {
-  constructor(popupSelector, classPopupOpened) {
+  constructor(popupSelector, tags) {
     this._popupSelector = popupSelector;
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._classPopupOpened = classPopupOpened;
+    this._classPopupOpened = tags.classPopupOpened;
+    // console.log(this._classPopupOpened);
   }
 
   open() {
+
     this._popupSelector.classList.add(this._classPopupOpened);
     window.addEventListener("keyup", this._handleEscClose);//
   }
