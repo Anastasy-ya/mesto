@@ -13,6 +13,7 @@ export default class PopupWithForm extends Popup {
     this._applySubmit = applySubmit;
     this._form = this._popupSelector.querySelector(tags.popupForm);
     this._inputList = inputList;
+
   }
 
   //собирает данные всех полей формы для дальнейшего сохранения в карточку или новые данные польз.
@@ -27,6 +28,7 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
+      // console.log(evt);
       evt.preventDefault()
       this._applySubmit(this._getInputValues());
 
@@ -49,4 +51,3 @@ export default class PopupWithForm extends Popup {
   }
 
 }
-

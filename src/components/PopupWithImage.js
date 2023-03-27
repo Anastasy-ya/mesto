@@ -11,13 +11,14 @@ export default class PopupWithImage extends Popup {
     super(popupSelector, classPopupOpened);
     this._name = item.title;
     this._link = item.link;
-    this._classPopupOpened = classPopupOpened;
+
   }
 
   open() {
-    bigImageLink.src = this._link;
+    bigImageLink.src = this._link;//проверить как называются вхдящие поля name link
     bigImageLink.alt = this._name;
     bigImageName.textContent = this._name;
+    // console.log(this._classPopupOpened);
     this._popupSelector.classList.add(this._classPopupOpened);
   }
 

@@ -11,7 +11,7 @@ export default class Popup {
   }
 
   open() {
-    this._popupSelector.classList.add(this._classPopupOpened);//tags.classPopupOpened
+    this._popupSelector.classList.add(this._classPopupOpened);
     window.addEventListener("keyup", this._handleEscClose);//
   }
 
