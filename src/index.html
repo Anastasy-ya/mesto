@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--<link rel="icon" href="#" type="image">-->
     <title lang="en">Mesto-Russia</title>
-    <link rel="stylesheet" href="./pages/index.css" />
+    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   </head>
 
   <body class="root">
     <div class="page">
       <header class="header">
         <div class="header__box">
-          <img class="header__logo" alt="Логотип" src="./images/Vector.svg" />
+          <img class="header__logo" alt="Логотип" src="<%=require('./images/Vector.svg')%>" />
         </div>
       </header>
       <main class="content">
@@ -21,7 +21,7 @@
             <img
               class="profile__avatar"
               alt="Аватар профиля"
-              src="./images/image.jpg"
+              src="<%=require('./images/image.jpg')%>"
             />
             <div class="profile__info">
               <div class="profile__info-box">
@@ -47,7 +47,7 @@
           <li class="elements__item">
             <img
               class="elements__image"
-              src="./images/item-kalmikia.jpg"
+              src="<%=require('./images/item-kalmikia.jpg')%>"
               alt="Калмыкские степи"
             />
             <button
@@ -162,7 +162,7 @@
               aria-label="Close"
             ></button>
             <img
-              src="./images/no-image.jpg"
+              src="<%=require('./images/no-image.jpg')%>"
               alt="Изображение отсутствует"
               class="popup__image"
             />
@@ -176,6 +176,6 @@
         <p class="footer__text">© 2020 Mesto Russia</p>
       </footer>
     </div>
-    <script type="module" src="./pages/index.js"></script>
+    <!-- <script type="module" src="./pages/index.js"></script> -->
   </body>
 </html>

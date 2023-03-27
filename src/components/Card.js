@@ -1,7 +1,7 @@
 import { tags } from "../utils/constants.js";
 
 export default class Card {
-  constructor(item, handleCardClick, templateSelector) {//(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
+  constructor(item, handleCardClick, templateSelector) {
     //в templateSelector попадет селектор темплейта при создании экземпляра карточки
     this._name = item.title;//title
     this._link = item.link;
@@ -15,7 +15,7 @@ export default class Card {
     //получим template-элемент и склонируем его
     //селектор темплейта использован при поиске элемента нужного нам темплейта
     const templateElement = document
-      .querySelector('#template')
+      .querySelector('#template')//this._templateSelector
       .content.querySelector(tags.template)
       .cloneNode(true);
     return templateElement;

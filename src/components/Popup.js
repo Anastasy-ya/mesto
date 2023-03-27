@@ -4,18 +4,19 @@ import {
 
 //отвечает за открытие и закрытие попапа
 export default class Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector, classPopupOpened) {
     this._popupSelector = popupSelector;
     this._handleEscClose = this._handleEscClose.bind(this);
+    this._classPopupOpened = classPopupOpened;
   }
 
   open() {
-    this._popupSelector.classList.add(tags.classPopupOpened);
+    this._popupSelector.classList.add(this._classPopupOpened);//tags.classPopupOpened
     window.addEventListener("keyup", this._handleEscClose);//
   }
 
   close() {
-    this._popupSelector.classList.remove(tags.classPopupOpened);
+    this._popupSelector.classList.remove(this._classPopupOpened);
     window.removeEventListener("keyup", this._handleEscClose);
   }
 

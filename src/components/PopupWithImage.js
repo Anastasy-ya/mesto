@@ -7,18 +7,18 @@ import {
 
 //класс Popup для картинки
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, item) {
-    super(popupSelector);
+  constructor(popupSelector, item, classPopupOpened) {
+    super(popupSelector, classPopupOpened);
     this._name = item.title;
     this._link = item.link;
+    this._classPopupOpened = classPopupOpened;
   }
 
   open() {
-    bigImageLink.src = this._link;//проверить как называются вхдящие поля name link
+    bigImageLink.src = this._link;
     bigImageLink.alt = this._name;
     bigImageName.textContent = this._name;
-    // console.log(this._name);
-    this._popupSelector.classList.add(tags.classPopupOpened);
+    this._popupSelector.classList.add(this._classPopupOpened);
   }
 
 }

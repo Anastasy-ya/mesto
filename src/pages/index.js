@@ -1,4 +1,5 @@
-// ошибка при добавлении карточки и закрытие попапа
+import './index.css';
+
 import {
   initialCards,
   tags,
@@ -13,12 +14,12 @@ import {
   bigImage,
   validationConfig,
 } from "../utils/constants.js";
-import Card from "../components/card.js";
-import FormValidator from "../components/validate.js";
-import Section from "../components/section.js";
-import PopupWithImage from "../components/popupWithImage.js";
-import PopupWithForm from "../components/popupWithForm.js";
-import UserInfo from "../components/userInfo.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/Validate.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 //класс UserInfo
 const userInfo = new UserInfo({ profileName, profileJob });
@@ -30,8 +31,8 @@ const validationEditForm = new FormValidator(validationConfig, popupEdit); //с�
 validationAddForm.enableValidation(); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
 validationEditForm.enableValidation();
 
-const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit);//добавим информацию о пользователе
-const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd);//добавим новую карточку
+const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit, tags.classPopupOpened);//добавим информацию о пользователе
+const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd, tags.classPopupOpened);//добавим новую карточку
 
 popupWithFormAdd.setEventListeners();
 popupWithFormEdit.setEventListeners();
