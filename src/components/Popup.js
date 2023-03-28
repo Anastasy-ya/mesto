@@ -1,18 +1,14 @@
-// import {
-//   tags,
-// } from "../utils/constants.js";
-
 //отвечает за открытие и закрытие попапа
 export default class Popup {
   constructor(popupSelector, tags) {
     this._popupSelector = popupSelector;
     this._handleEscClose = this._handleEscClose.bind(this);
     this._classPopupOpened = tags.classPopupOpened;
+    this._popupCloseIcon = tags.popupCloseIcon;
     // console.log(this._classPopupOpened);
   }
 
   open() {
-
     this._popupSelector.classList.add(this._classPopupOpened);
     window.addEventListener("keyup", this._handleEscClose);//
   }
@@ -35,7 +31,7 @@ export default class Popup {
     });
     //закрытие по клику на поле
     this._popupSelector.addEventListener("mouseup", (event) => {
-      if(event.target === event.currentTarget || event.target.classList.contains("popup-close-icon")) {
+      if(event.target === event.currentTarget || event.target.classList.contains(this._popupCloseIcon)) {
       this.close();
       }
     });

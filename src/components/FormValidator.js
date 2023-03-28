@@ -1,24 +1,21 @@
-import { validationConfig } from "../utils/constants.js";
-import {
-  tags
-} from "../utils/constants.js";
-
 export default class FormValidator {
-  constructor(data, popupSelector) {
-    this._data = data;
+  constructor(popupSelector, tags) {
+    // this._data = data;
     this._popupSelector = popupSelector;
     this._inputList = Array.from(
-      this._popupSelector.querySelectorAll(".form__input")
+      this._popupSelector.querySelectorAll(tags.inputSelector)
     ); //найдем массив инпутов
-    this._submitButtonSelector = this._popupSelector.querySelector(".popup__button");
+    this._submitButtonSelector = this._popupSelector.querySelector(tags.submitButtonSelector);
     this._form = this._popupSelector.querySelector(tags.popupForm);
+    this._inactiveButtonClass = tags.inactiveButtonClass;
+    this._inputErrorSign = tags.inputErrorSign;
   }
 
   _showInputError(inputSelector) {
     const inputErrorClass = this._popupSelector.querySelector(
       `.${inputSelector.id}-error`
     );
-    inputSelector.classList.add(validationConfig.inputErrorClass); //красное подчеркивание
+    inputSelector.classList.add(this._inputErrorSign); //красное подчеркивание
     inputErrorClass.textContent = inputSelector.validationMessage; //errorMessage
   }
 
@@ -26,13 +23,12 @@ export default class FormValidator {
     const inputErrorClass = this._popupSelector.querySelector(
       `.${inputSelector.id}-error`
     );
-    inputSelector.classList.remove(validationConfig.inputErrorClass); //тут путаница между внутренним inputErrorClass и validationConfig.inputErrorClass разобраться
-    inputErrorClass.textContent = ""; //очистить текст ошибки при валидации   тут не работает, или работает?
+    inputSelector.classList.remove(this._inputErrorSign);
+    inputErrorClass.textContent = ""; //очистить текст ошибки при валидации
   }
 
   //показать/скрыть сообщение об ошибке
   _checkInputValidity(inputSelector) {
-    //inputSelector раньше шел из hasInvalidInput(), не путать с validationConfig
     if (!inputSelector.validity.valid) {
       //если форма невалидна
       this._showInputError(inputSelector); //показать сообщение об ошибке (formSelector, inputSelector, inputSelector.validationMessage)
@@ -43,9 +39,8 @@ export default class FormValidator {
 
   //_hasInvalidInput используется в _toggleButtonState
   _hasInvalidInput() {
-    //не перепутать, этот inputSelector внутренний, переименовать, он же
     return this._inputList.some((inputSelector) => {
-      //взять из массива и для каждого его элемента
+      //если хотя бы один элемент валиден
       return !inputSelector.validity.valid; //вернуть значение поля validity.valid
     }); //false если не валидны
   }
@@ -56,13 +51,13 @@ export default class FormValidator {
     if (this._hasInvalidInput()) {
       //если поля невалидны
       this._submitButtonSelector.classList.add(
-        validationConfig.inactiveButtonClass
+        this._inactiveButtonClass
       ); //кнопка некликабельна
       this._submitButtonSelector.disabled = true;
     } else {
       //если валидны
       this._submitButtonSelector.classList.remove(
-        validationConfig.inactiveButtonClass
+        this._inactiveButtonClass
       ); //кнопка кликабельна
       this._submitButtonSelector.disabled = false;
     }

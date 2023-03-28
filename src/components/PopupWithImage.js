@@ -1,24 +1,20 @@
-import Popup from "../components/popup.js";
-import {
-  tags,
-  bigImageLink,
-  bigImageName,
-  } from "../utils/constants.js";
+import Popup from "../components/Popup.js";
 
 //класс Popup для картинки
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, item, classPopupOpened) {
-    super(popupSelector, classPopupOpened);
-    this._name = item.title;
-    this._link = item.link;
+  constructor(popupSelector, tags, consts) {
+    super(popupSelector, tags);
 
+    this._bigImageLink = consts.bigImageLink;
+    this._bigImageName = consts.bigImageName;
   }
 
-  open() {
-    bigImageLink.src = this._link;//проверить как называются вхдящие поля name link
-    bigImageLink.alt = this._name;
-    bigImageName.textContent = this._name;
-    // console.log(this._classPopupOpened);
+  open(item) {
+    this._name = item.title;
+    this._link = item.link;
+    this._bigImageLink.src = this._link;//проверить как называются вхдящие поля name link
+    this._bigImageLink.alt = this._name;
+    this._bigImageName.textContent = this._name;
     this._popupSelector.classList.add(this._classPopupOpened);
   }
 

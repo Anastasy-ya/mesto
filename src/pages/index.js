@@ -1,21 +1,16 @@
-import './index.css';
-
 import {
+  consts,
   initialCards,
   tags,
   popupAdd,
   popupEdit,
-  nameInput,
-  jobInput,
   profileName,
   profileJob,
-  buttonEdit,
   buttonAdd,
   bigImage,
-  validationConfig,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
-import FormValidator from "../components/Validate.js";
+import FormValidator from "../components/FormValidator.js";//переименовать
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -25,21 +20,21 @@ import UserInfo from "../components/UserInfo.js";
 const userInfo = new UserInfo({ profileName, profileJob });
 
 //FormValidator
-const validationAddForm = new FormValidator(validationConfig, popupAdd); //создадим экземпляры класса валидации
-const validationEditForm = new FormValidator(validationConfig, popupEdit); //создавать экз из массива форм нельзя поскольку они должны находиться в
+const validationAddForm = new FormValidator(popupAdd, tags); //создадим экземпляры класса валидации
+const validationEditForm = new FormValidator(popupEdit, tags); //создавать экз из массива форм нельзя поскольку они должны находиться в
 //публичном поле для вызова из ф-и открытия
 validationAddForm.enableValidation(); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
 validationEditForm.enableValidation();
 
-const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit, tags);//добавим информацию о пользователе
-const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd, tags);//добавим новую карточку
+const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit, tags, consts);//добавим информацию о пользователе
+const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd, tags, consts);//добавим новую карточку
 
 popupWithFormAdd.setEventListeners();
 popupWithFormEdit.setEventListeners();
 
 
 //слушатель событий по кнопке редактирования профиля
-buttonEdit.addEventListener("click", () => {
+consts.buttonEdit.addEventListener("click", () => {
   validationEditForm.resetValidation();//сбросить старые ошибки
   popupWithFormEdit.setInputValues(userInfo.getUserInfo());
   popupWithFormEdit.open();
@@ -54,16 +49,18 @@ const userCards = new Section(
   initialCards ,//items первый параметр для экз класса section
   renderer,
   tags.elementsBox);//containerSelector  третий параметр экз класса section
-
 userCards.renderItems();
+
+//Каждый попап нужно создать только 1 раз  в теле файла и вызвать у него 1 раз setEventListeners,
+//так как попапы всегда находятся в DOM и достаточно 1 раз навесить все обработчики на них.
+const popupWithImage = new PopupWithImage(bigImage, tags, consts);
+popupWithImage.setEventListeners();
 
 function renderer(item) {//второй параметр
   const card = new Card( item, () => {
-    const popupWithImage = new PopupWithImage(bigImage, item);
-    popupWithImage.open();
-    popupWithImage.setEventListeners();
+    popupWithImage.open(item);
   },
-  tags.templateBox);
+  tags.templateBox, tags);
   const element = card.generateCard();
   return element;
 }
@@ -73,6 +70,6 @@ function applySubmitAdd(data) {//добавит новую карточку
   userCards.addItems(data);
 };
 
-function applySubmitEdit() {
-  userInfo.setUserInfo(nameInput.value, jobInput.value);
+function applySubmitEdit({ name, about }) {
+  userInfo.setUserInfo({ name, about });
 };

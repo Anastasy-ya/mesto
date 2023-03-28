@@ -13,10 +13,10 @@ export default class UserInfo {
     }
   }
 
-  setUserInfo(nameInput, jobInput) {
+  setUserInfo({ name, about }) {
 //принимает новые данные пользователя и добавляет их на страницу.
-    this._profileName.textContent = nameInput;
-    this._profileJob.textContent = jobInput;
+    this._profileName.textContent = name;
+    this._profileJob.textContent = about;
   }
 
 }

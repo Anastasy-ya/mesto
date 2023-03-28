@@ -22,7 +22,6 @@ export default class Section {
     this._items.forEach((item) => {
     this.addItems(item);
     })
-
   }
 
 }
