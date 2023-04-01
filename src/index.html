@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--<link rel="icon" href="#" type="image">-->
+    <title lang="en">Mesto-Russia</title>
+    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
+  </head>
+
+  <body class="root">
+    <div class="page">
+      <header class="header">
+        <div class="header__box">
+          <img class="header__logo" alt="Логотип" src="<%=require('./images/Vector.svg')%>" />
+        </div>
+      </header>
+      <main class="content">
+        <section class="profile">
+          <div class="profile__person">
+            <img
+              class="profile__avatar"
+              alt="Аватар профиля"
+              src="<%=require('./images/image.jpg')%>"
+            />
+            <div class="profile__info">
+              <div class="profile__info-box">
+                <h1 class="profile__name">Вася Пупкин</h1>
+                <button
+                  class="profile__edit-button"
+                  type="button"
+                  aria-label="Edit"
+                ></button>
+              </div>
+              <p class="profile__about">Сын маминой подруги</p>
+            </div>
+          </div>
+          <button class="add-button" type="button" aria-label="Add"></button>
+        </section>
+        <section class="elements">
+          <ul class="elements__box">
+
+          </ul>
+        </section>
+        <!--темплейт-->
+        <template id="template">
+          <li class="elements__item">
+            <img
+              class="elements__image"
+              src="<%=require('./images/item-kalmikia.jpg')%>"
+              alt="Калмыкские степи"
+            />
+            <button
+              class="elements__delete"
+              type="button"
+              aria-label="Delete"
+            ></button>
+            <div class="elements__die">
+              <h2 class="elements__signature">Калмыкия</h2>
+              <button
+                class="button-like"
+                type="button"
+                aria-label="Like"
+              ></button>
+            </div>
+          </li>
+        </template>
+
+        <!--popup edit-->
+        <div class="popup popup_type_profile-edit">
+          <!--popup_opened-->
+          <div class="popup__container">
+            <button
+              class="popup-close-icon"
+              type="button"
+              aria-label="Close"
+            ></button>
+            <h2 class="popup__heading">Редактировать профиль</h2>
+            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+              <label class="form__label">
+                <input
+                  type="text"
+                  name="name"
+                  class="form__input"
+                  placeholder="Вася Пупкин"
+                  required
+                  minlength="2"
+                  maxlength="40"
+                  id="form__name-input"
+                /><!--popup__input-error - основное оформление текста-->
+                <span class="form__input-error form__name-input-error"></span>
+              </label>
+              <label class="form__label">
+                <input
+                  type="text"
+                  name="about"
+                  class="form__input"
+                  placeholder="Сын маминой подруги"
+                  required
+                  minlength="2"
+                  maxlength="200"
+                  id="form__about-input"
+                />
+                <span class="form__input-error form__about-input-error"></span>
+              </label>
+              <button class="popup__button" type="submit" aria-label="Save"><!--popup__button_inactive-->
+                Cохранить
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!--popup add-->
+        <div class="popup popup_type_add">
+          <!--popup_opened-->
+          <div class="popup__container">
+            <button
+              class="popup-close-icon"
+              type="button"
+              aria-label="Close"
+            ></button>
+            <h2 class="popup__heading">Новое место</h2>
+            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+              <label class="form__label">
+                <input
+                  type="text"
+                  name="title"
+                  class="form__input"
+                  placeholder="Название"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                  id="form__title-input"
+                />
+                <span class="form__input-error form__title-input-error"></span>
+              </label>
+              <label class="form__label">
+                <input
+                  type="url"
+                  name="link"
+                  class="form__input"
+                  placeholder="Ссылка на картинку"
+                  required
+                  id="form__url-input"
+                />
+                <span class="form__input-error form__url-input-error"></span>
+              </label>
+              <button class="popup__button" type="submit" aria-label="Save"><!--popup__button_inactive-->
+                Cоздать
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!--popup big image-->
+        <figure class="popup popup_type_image">
+          <!--popup_opened-->
+          <div class="popup__image-container">
+            <button
+              class="popup-close-icon popup-close-icon_type_image"
+              type="button"
+              aria-label="Close"
+            ></button>
+            <img
+              src="<%=require('./images/no-image.jpg')%>"
+              alt="Изображение отсутствует"
+              class="popup__image"
+            />
+            <figcaption class="popup__signature">
+              Изображение отсутствует
+            </figcaption>
+          </div>
+        </figure>
+      </main>
+      <footer class="footer">
+        <p class="footer__text">© 2020 Mesto Russia</p>
+      </footer>
+    </div>
+    <!-- <script type="module" src="./pages/index.js"></script> -->
+  </body>
+</html>

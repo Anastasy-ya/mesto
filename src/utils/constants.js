@@ -1,0 +1,61 @@
+export const initialCards = [
+  {
+    title: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    title: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    title: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    title: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    title: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    title: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+//селекторы для классов
+export const tags = {
+  popupOpened: ".popup_opened", //пока не используется
+  classPopupOpened: "popup_opened", //добавление класса без точки
+  templateBox: "#template",//заменить темплейт в кард  пока не используется document.querySelector("#template")
+  signature: ".elements__signature",
+  elementsBox: ".elements__box",//index
+  itemImage: ".elements__image",
+  templateItem: ".elements__item",
+  buttonLike: ".button-like",
+  buttonLikeActive: "button-like_active",
+  elementsDelete: ".elements__delete",
+  popupForm: ".popup__form",
+  popupCloseIcon: "popup-close-icon",
+  submitButtonSelector: ".popup__button",
+  inputErrorSign: "form__input_type_error",//подсветка ошибки красным
+  inputSelector: ".form__input",
+  formSelector: ".popup__form",
+  inactiveButtonClass: "popup__button_inactive",
+};
+
+export const consts = {
+  bigImageLink: document.querySelector(".popup__image"),//index
+  bigImageName: document.querySelector(".popup__signature"),//index
+  buttonEdit: document.querySelector(".profile__edit-button"),//index
+}
+
+export const profileName = document.querySelector(".profile__name");//index
+export const profileJob = document.querySelector(".profile__about");//index
+export const popupEdit = document.querySelector(".popup_type_profile-edit");//index
+export const popupAdd = document.querySelector(".popup_type_add");//index
+export const buttonAdd = document.querySelector(".add-button");//index
+export const bigImage = document.querySelector(".popup_type_image");//index
+export const elementsBox = document.querySelector(tags.elementsBox);
