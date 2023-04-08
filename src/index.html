@@ -18,11 +18,14 @@
       <main class="content">
         <section class="profile">
           <div class="profile__person">
-            <img
-              class="profile__avatar"
-              alt="Аватар профиля"
-              src="<%=require('./images/image.jpg')%>"
-            />
+            <button class="profile__overlay">  
+              <!--привести в порядок оформление-->
+              <img
+                class="profile__avatar"
+                alt="Аватар профиля"
+                src="<%=require('./images/image.jpg')%>"
+              />
+            </button>
             <div class="profile__info">
               <div class="profile__info-box">
                 <h1 class="profile__name">Вася Пупкин</h1>
@@ -57,11 +60,14 @@
             ></button>
             <div class="elements__die">
               <h2 class="elements__signature">Калмыкия</h2>
-              <button
-                class="button-like"
-                type="button"
-                aria-label="Like"
-              ></button>
+              <div class="elements__like-container">
+                <button
+                  class="button-like"
+                  type="button"
+                  aria-label="Like"
+                ></button>
+                <span class="form__like-counter">0</span><!--проверить по пикселю-->
+              </div>
             </div>
           </li>
         </template>
@@ -171,6 +177,55 @@
             </figcaption>
           </div>
         </figure>
+
+        <!--popup delete--><!--разобраться с размером отступов-->
+        <div class="popup popup_type_delete">
+          <!--popup_opened-->
+          <div class="popup__container">
+            <button
+              class="popup-close-icon"
+              type="button"
+              aria-label="Close"
+            ></button>
+            <h2 class="popup__heading">Вы уверены?</h2>
+            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+              <button class="popup__button" type="submit" aria-label="Save"><!--popup__button_inactive-->
+                Да
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!--popup reload avatar--><!--отступ под вилдом-->
+        <div class="popup popup_type_reload-avatar">
+          <!--popup_opened-->
+          <div class="popup__container">
+            <button
+              class="popup-close-icon"
+              type="button"
+              aria-label="Close"
+            ></button>
+            <h2 class="popup__heading">Обновить аватар</h2>
+            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+              </label>
+              <label class="form__label">
+                <input
+                  type="url"
+                  name="link"
+                  class="form__input"
+                  placeholder="Ссылка на картинку"
+                  required
+                  id="form__url-input"
+                />
+                <span class="form__input-error form__url-input-error"></span>
+              </label>
+              <button class="popup__button" type="submit" aria-label="Save"><!--popup__button_inactive-->
+                Cохранить
+              </button>
+            </form>
+          </div>
+        </div>
+
       </main>
       <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>

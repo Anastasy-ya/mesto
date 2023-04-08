@@ -1,11 +1,12 @@
 export default class Card {
   constructor(item, handleCardClick, templateSelector, tags) {//(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
     //в templateSelector попадет селектор темплейта при создании экземпляра карточки
-    this._name = item.title;//title
+    this._name = item.name;//title
     this._link = item.link;
+    this._likes = item.likes;
     this._templateSelector = templateSelector; //селектор темплейта стал свойством объекта класса Card
     this._handleCardClick = handleCardClick; //передали внешнюю функцию как параметр  временно убрана
-    this._removeItem = this._removeItem.bind(this); //привязываем контекст this к нужному объекту
+    this.removeItem = this.removeItem.bind(this); //привязываем контекст this к нужному объекту
     this._addLike = this._addLike.bind(this); //привязываем контекст this к нужному объекту
     this._templateItem = tags.templateItem;
     this._itemImage = tags.itemImage;
@@ -13,8 +14,7 @@ export default class Card {
     this._buttonLikeActive = tags.buttonLikeActive;
     this._elementsDelete = tags.elementsDelete;
     this._signature = tags.signature;
-
-
+    // this._popupDelete = document.querySelector('.popup_type_delete');
   }
 
   _getTemplate() {
@@ -29,7 +29,7 @@ export default class Card {
   }
 
   //ф-я удаления карточки
-  _removeItem() {
+  removeItem() {//сделаем метод внешним для использования в index
     this._element.remove();
     this._element = null;
   }
@@ -53,6 +53,9 @@ export default class Card {
     this._element.querySelector(this._signature).textContent = this._name;
     this._imageToOpen.src = this._link;
     this._imageToOpen.alt = this._name;
+    this._likesCounter();//отобразить лайки
+    //
+
     return this._element; //получаем готовый элемент для вставки в dom
   }
 
@@ -63,9 +66,20 @@ export default class Card {
     );
     //для сохранения контекста он привязан в свойствах класса
     //удаление по иконке
-    this._iconDelete.addEventListener("click", this._removeItem);
+    this._iconDelete.addEventListener("click", this.removeItem);//this._removeItem
     //лайки
     this._like.addEventListener("click", this._addLike);
   }
+
+  _likesCounter() {
+    this._likeCounter = this._element.querySelector('.form__like-counter');
+    // console.log(this._likes.length);
+    this._likeCounter.textContent = this._likes.length;
+  }
+
+//   _openPopupDelete() {
+//     this._popupDelete
+
+//   }
 
 }
