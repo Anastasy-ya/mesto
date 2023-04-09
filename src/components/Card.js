@@ -49,7 +49,7 @@ export default class Card {
     console.log('лайк удален removeLike');
   }
 
-  generateCard() {
+  generateCard(item) {
     //затем копия темплейта изменяется пережд вставкой
     //тут навесим нужные слушатели и заменим содержимое полей
     this._element = this._getTemplate();
@@ -92,9 +92,7 @@ export default class Card {
   }
 
   likesCounter() {
-    
-    // console.log(this._likes.length);
-    this._likeCounter.textContent = this._likes.length;
+    this._likeCounter.textContent = this._likes.length;//this._likes.length
     console.log('каунтер сработал');
   }
 

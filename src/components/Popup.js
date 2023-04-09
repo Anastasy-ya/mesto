@@ -18,17 +18,15 @@ export default class Popup {
     window.removeEventListener("keyup", this._handleEscClose);
   }
 
-  _handleEscClose(event) {
-    if (event.key === "Escape") {
+  _handleEscClose = (evt) => {
+    if (evt.key === "Escape") {
       this.close();
     }
   }
 
   setEventListeners() {
     //закрытие esc
-    window.addEventListener("keydown", (event) => {
-      this._handleEscClose(event);//esc
-    });
+    // window.addEventListener("keydown", this._handleEscClose);
     //закрытие по клику на поле
     this._popupSelector.addEventListener("mouseup", (event) => {
       if(event.target === event.currentTarget || event.target.classList.contains(this._popupCloseIcon)) {

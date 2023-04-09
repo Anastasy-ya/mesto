@@ -104,6 +104,7 @@ function applySubmitAdd(data) {//добавит новую карточку, в�
   api.addCard(data)
   .then(res => {
     userCards.addItems(res)
+    // userCards.clear();
   })
   .catch((err) => {
     console.log(err, 'ошибка при добавлении новой карточки');
@@ -124,28 +125,24 @@ const userCards = new Section(
     () => {//handleCardClick открывает попап с картинкой
       popupWithImage.open(item);
     },
+
     function checkLike(id) {//checkLike,
       if(!card.сheckUserLike()) {//если нет лайка польз
         api.addLike(id)//сделать запрос к серверу на добавление 
-        .then((res) => {
-          console.log(res, 'успешно:добавление лайка в index вызывает каунтер и меняет оформление');//отобразить лайк finally посчитать количество лайков
-          // card.
-          // debugger
-          card.addLike();//изменить оформление и обновить счетчик
-          card.likesCounter();
-        })
-        .catch((err) => console.log(err, 'ошибка: добавление лайка в index вызывает каунтер и меняет оформление'))
-        // .finally
-        ;
+          .then((res) => {
+            console.log(res, 'успешно:добавление лайка в index вызывает каунтер и меняет оформление');//отобразить лайк finally посчитать количество лайков
+            card.addLike();//изменить оформление и обновить счетчик
+            card.likesCounter();
+          })
+          .catch((err) => console.log(err, 'ошибка: добавление лайка в index вызывает каунтер и меняет оформление'));
       } else {
-      api.removeLike(id)
-        .then((res) => {
-          console.log(res, 'успешно: удаление лайка в index вызывает каунтер и меняет оформление');
-          // debugger
-          card.removeLike();
-          card.likesCounter();
-        })
-        .catch((err) => console.log(err, 'ошибка: удаление лайка в index вызывает каунтер и меняет оформление'));
+        api.removeLike(id)
+          .then((res) => {
+            console.log(res, 'успешно: удаление лайка в index вызывает каунтер и меняет оформление');
+            card.removeLike();
+            card.likesCounter();
+          })
+          .catch((err) => console.log(err, 'ошибка: удаление лайка в index вызывает каунтер и меняет оформление'));
     }
   },//checkLike,
     tags.templateBox, //templateSelector
@@ -159,6 +156,7 @@ const userCards = new Section(
           api.deleteCard(id)
             .then(() => {
               card.removeItem();
+              // userCards.clear();
             })
             .catch((err) => {
               console.log(err, 'ошибка при удалении карточки'); // выведем ошибку
@@ -170,8 +168,7 @@ const userCards = new Section(
     },
     userId,//конец параметров для card
     );//card
-    const element = card.generateCard();
-    // card.likesCounter();
+    const element = card.generateCard(item);
     return element;
   },//ф-я renderer
   tags.elementsBox,);//containerSelector второй параметр экз класса section

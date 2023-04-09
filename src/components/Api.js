@@ -83,4 +83,10 @@ export default class Api {
     }).then(res => this._checkResponce(res));
   }
 
+  // getLikeCount(id) {
+  //   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+  //     headers: this._headers,
+  //   }).then(res => this._checkResponce(res));
+  // }
+
 }//Api
