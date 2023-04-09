@@ -2,21 +2,17 @@ export default class Api {
   constructor(baseUrl, headers) {//, authorization
     this._baseUrl = baseUrl;
     this._headers = headers;
-
-    // this._authorization = authorization;
   }
 
-  _checkResponce(res) {//вынесем отдельно повторяющийся метод
+  _checkResponce(res) {//повторяющийся кот (^˵◕ω◕˵^)
     if (res.ok) {
       return res.json();
-
     }
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {//https://mesto.nomoreparties.co/v1/cohort-62/cards для карточек
+    return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     })
       .then(res => this._checkResponce(res))
@@ -37,7 +33,6 @@ export default class Api {
     })
       .then(res => this._checkResponce(res))
   }//setUserData
-
 
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {

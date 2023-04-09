@@ -1,4 +1,4 @@
-import "./index.css";//   ЭТА СТРОКА ОБЯЗАТЕЛЬНА
+import "./index.css";//   ЭТА СТРОКА ОБЯЗАТЕЛЬНА (ಠ益ಠ)
 import {
   consts,
   tags,
@@ -49,6 +49,7 @@ popupWithFormEditAvatar.setEventListeners();//нов
 
 
 function applySubmitEditAvatar({ link }) {//ф-я, делающая запрос к серверу и сохраняющая данные профиля
+  popupWithFormEditAvatar.showPreloader('Cохранение...');
   api.saveAvatar(link)
   .then(res => {
     //получили положительный ответ сервера, сохраним в dom
@@ -58,7 +59,9 @@ function applySubmitEditAvatar({ link }) {//ф-я, делающая запрос
   .catch((err) => {
     console.log(err, 'ошибка при изменении аватара польз');
   })
-;
+  .finally(() => {
+    popupWithFormEditAvatar.hidePreloader();
+  });
 };
 
 //слушатель событий по кнопке редактирования профиля
@@ -78,16 +81,10 @@ profileOverlay.addEventListener("click", () => {
   popupWithFormEditAvatar.open();
 });
 
-
-
 //Каждый попап нужно создать только 1 раз  в теле файла и вызвать у него 1 раз setEventListeners,
 //так как попапы всегда находятся в DOM и достаточно 1 раз навесить все обработчики на них.
 const popupWithImage = new PopupWithImage(bigImage, tags, consts);
 popupWithImage.setEventListeners();
-
-
-
-
 
 //экземпляр класса api для получения карточек
 const api = new Api(
@@ -98,9 +95,9 @@ const api = new Api(
   }
 );
 
-
 //ф-я будет сохранять карточку
 function applySubmitAdd(data) {//добавит новую карточку, вместо data name link передать
+  popupWithFormAdd.showPreloader('Создание...');
   api.addCard(data)
   .then(res => {
     userCards.addItems(res)
@@ -109,19 +106,19 @@ function applySubmitAdd(data) {//добавит новую карточку, в�
   .catch((err) => {
     console.log(err, 'ошибка при добавлении новой карточки');
   })
+  .finally(() => {
+    popupWithFormAdd.hidePreloader();
+  });
 //по сабмиту произойдет отправка данных методом post на сервер, в случае положительного ответа ответ создаст карточку
-
 };//applySubmitAdd
-
-// api.removeLike('643260378bc80547d11fc6af');
-
-
 
 //экземпляр класса Section для рендеринга карточек
 const userCards = new Section(
   (item) => {//ф-я renderer, первый параметр Section
     const card = new Card(
+
     item,
+
     () => {//handleCardClick открывает попап с картинкой
       popupWithImage.open(item);
     },
@@ -130,7 +127,7 @@ const userCards = new Section(
       if(!card.сheckUserLike()) {//если нет лайка польз
         api.addLike(id)//сделать запрос к серверу на добавление 
           .then((res) => {
-            console.log(res, 'успешно:добавление лайка в index вызывает каунтер и меняет оформление');//отобразить лайк finally посчитать количество лайков
+            console.log(res, 'успешно:добавление лайка в index вызывает каунтер и меняет оформление');
             card.addLike();//изменить оформление и обновить счетчик
             card.likesCounter();
           })
@@ -143,10 +140,13 @@ const userCards = new Section(
             card.likesCounter();
           })
           .catch((err) => console.log(err, 'ошибка: удаление лайка в index вызывает каунтер и меняет оформление'));
-    }
-  },//checkLike,
+      }
+    },//checkLike
+
     tags.templateBox, //templateSelector
+
     tags,
+
     function() {//handlerRemoveCard
       const popupWithWarning = new PopupWithWarning(
         popupWarning, //
@@ -165,13 +165,16 @@ const userCards = new Section(
       );
       popupWithWarning.open();
       popupWithWarning.setEventListeners();
-    },
+    },//handlerRemoveCard
+
     userId,//конец параметров для card
+
     );//card
+
     const element = card.generateCard(item);
     return element;
   },//ф-я renderer
-  tags.elementsBox,);//containerSelector второй параметр экз класса section
+  tags.elementsBox);//containerSelector второй параметр экз класса section
 
 //Получение данных при перезагрузке страницы: данные польз и карточки
 Promise.all([api.getUserData(), api.getInitialCards() ])//получим данные при перезагрузке страницы
@@ -189,16 +192,20 @@ Promise.all([api.getUserData(), api.getInitialCards() ])//получим дан�
   console.log(err, 'ошибка при загрузке страницы'); // выведем ошибку в консоль
 });
 
-
 //сохранение данных пользователя: имя и инф. Получает данные из PopupWitnForm и передает их в запрос на сервер,
 //после обновления данных на сервере страницаобновляется с новыми данными
 function applySubmitEdit(data) {//{ name, about }
+  popupWithFormEdit.showPreloader('Сохранение...');
   api.setUserData(data)
   .then(res => {
     userInfo.setUserInfo(res)
   })
   .catch((err) => {
     console.log(err, 'ошибка при редактировании имени и данных пользователя'); // выведем ошибку в консоль
+  })
+  .finally(() => {
+    popupWithFormEdit.hidePreloader();
   });
 };//applySubmitEdit
+//( o˘◡˘o)
 

@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
     super(popupSelector, tags, consts);
     this._applySubmit = applySubmit;
     this._form = this._popupSelector.querySelector(tags.popupForm);
+    this._submitButton = this._form.querySelector(tags.submitButtonSelector);
     this._inputList = Array.from(
       this._form.querySelectorAll(tags.inputSelector)
     ); //найдем массив инпутов
@@ -46,6 +47,14 @@ export default class PopupWithForm extends Popup {
     this._inputList.forEach((input) => {
       input.value = data[input.name];
     });
+  }
+
+  showPreloader(text) {
+    this._submitButton.textContent = text;
+  }
+
+  hidePreloader() {
+    this._submitButton.textContent = '';
   }
 
 }
