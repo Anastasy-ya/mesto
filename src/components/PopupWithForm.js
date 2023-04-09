@@ -49,12 +49,8 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  showPreloader(text) {
+  preloader(text) {
     this._submitButton.textContent = text;
-  }
-
-  hidePreloader() {
-    this._submitButton.textContent = '';
   }
 
 }

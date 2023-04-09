@@ -49,7 +49,7 @@ popupWithFormEditAvatar.setEventListeners();//нов
 
 
 function applySubmitEditAvatar({ link }) {//ф-я, делающая запрос к серверу и сохраняющая данные профиля
-  popupWithFormEditAvatar.showPreloader('Cохранение...');
+  popupWithFormEditAvatar.preloader('Cохранение...');
   api.saveAvatar(link)
   .then(res => {
     //получили положительный ответ сервера, сохраним в dom
@@ -60,7 +60,7 @@ function applySubmitEditAvatar({ link }) {//ф-я, делающая запрос
     console.log(err, 'ошибка при изменении аватара польз');
   })
   .finally(() => {
-    popupWithFormEditAvatar.hidePreloader();
+    popupWithFormEditAvatar.preloader('Cохранить');
   });
 };
 
@@ -97,7 +97,7 @@ const api = new Api(
 
 //ф-я будет сохранять карточку
 function applySubmitAdd(data) {//добавит новую карточку, вместо data name link передать
-  popupWithFormAdd.showPreloader('Создание...');
+  popupWithFormAdd.preloader('Создание...');
   api.addCard(data)
   .then(res => {
     userCards.addItems(res)
@@ -107,7 +107,7 @@ function applySubmitAdd(data) {//добавит новую карточку, в�
     console.log(err, 'ошибка при добавлении новой карточки');
   })
   .finally(() => {
-    popupWithFormAdd.hidePreloader();
+    popupWithFormAdd.preloader('Cоздать');
   });
 //по сабмиту произойдет отправка данных методом post на сервер, в случае положительного ответа ответ создаст карточку
 };//applySubmitAdd
@@ -195,7 +195,7 @@ Promise.all([api.getUserData(), api.getInitialCards() ])//получим дан�
 //сохранение данных пользователя: имя и инф. Получает данные из PopupWitnForm и передает их в запрос на сервер,
 //после обновления данных на сервере страницаобновляется с новыми данными
 function applySubmitEdit(data) {//{ name, about }
-  popupWithFormEdit.showPreloader('Сохранение...');
+  popupWithFormEdit.preloader('Сохранение...');
   api.setUserData(data)
   .then(res => {
     userInfo.setUserInfo(res)
@@ -204,7 +204,7 @@ function applySubmitEdit(data) {//{ name, about }
     console.log(err, 'ошибка при редактировании имени и данных пользователя'); // выведем ошибку в консоль
   })
   .finally(() => {
-    popupWithFormEdit.hidePreloader();
+    popupWithFormEdit.preloader('Cохранить');
   });
 };//applySubmitEdit
 //( o˘◡˘o)
