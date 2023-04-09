@@ -59,7 +59,6 @@ export default class Api {
   }
 
   //этот метод будет вызван в публичной функции index.js deleteCard,
-  //а затем передан в метод Card
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
@@ -79,7 +78,7 @@ export default class Api {
 
   removeLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: "PUT",
+      method: "DELETE",
       headers: this._headers,
     }).then(res => this._checkResponce(res));
   }

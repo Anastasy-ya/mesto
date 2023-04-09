@@ -56,7 +56,7 @@ function applySubmitEditAvatar({ link }) {//ф-я, делающая запрос
     popupWithFormEditAvatar.close();
   })
   .catch((err) => {
-    alert(err);
+    console.log(err, 'ошибка при изменении аватара польз');
   })
 ;
 };
@@ -112,7 +112,7 @@ function applySubmitAdd(data) {//добавит новую карточку, в�
 
 };//applySubmitAdd
 
-
+// api.removeLike('643260378bc80547d11fc6af');
 
 
 
@@ -124,13 +124,29 @@ const userCards = new Section(
     () => {//handleCardClick открывает попап с картинкой
       popupWithImage.open(item);
     },
-    checkLike,
+    function checkLike(id) {//checkLike,
+      if(!card.сheckUserLike()) {
+        api.addLike(id)
+        .then((res) => {
+          console.log(res, 'успешно добавлен лайк');//отобразить лайк
+        })
+        .catch((err) => console.log(err, 'ошибка добавления лайка'));
+    } else {
+      api.removeLike(id)
+        .then((res) => {
+          console.log(res, 'успешно удален лайк')
+        })
+        .catch((err) => console.log(err, 'ошибка удаления лайка'));
+    }
+  },//checkLike,
     tags.templateBox, //templateSelector
     tags,
     function() {//handlerRemoveCard
       const popupWithWarning = new PopupWithWarning(
-      popupWarning, //
-        (id) => {
+        popupWarning, //
+        tags,
+        item._id,
+        function applySubmitDeleteCard(id) {
           api.deleteCard(id)
             .then(() => {
               card.removeItem();
@@ -138,14 +154,12 @@ const userCards = new Section(
             .catch((err) => {
               console.log(err, 'ошибка при удалении карточки'); // выведем ошибку
             });
-        },//applySubmit из PopupWithWarning   сюда нужно передать метод кард, удаляющий карточку
-        tags,
-        item._id
+        },//applySubmit из PopupWithWarning
       );
       popupWithWarning.open();
       popupWithWarning.setEventListeners();
     },
-    userId,
+    userId,//конец параметров для card
     );//card
     const element = card.generateCard();
     // card.likesCounter();
@@ -184,30 +198,43 @@ function applySubmitEdit(data) {//{ name, about }
 
 // api.addLike('6432156bf27d6947b9b30e19');//работаeт
 
-function checkLike(item, id) {
+// function checkLike(item, id) {
+//     if(card.сheckUserLike()) {
+//       api.addLike(id)
+//       .then((res) => {
+//         console.log(res, 'успешно добавлен лайк');//отобразить лайк
+//       })
+//       .catch((err) => console.log(err, 'ошибка добавления лайка'));
+//   } else {
+//     api.removeLike(id)
+//       .then((res) => {
+//         console.log(res, 'успешно удален лайк')
+//       })
+//       .catch((err) => console.log(err, 'ошибка удаления лайка'));
+//   }
+// };
 
-  const isLiked = item.likes.forEach((like) => {
-    console.log(like._id);
-    if(like._id === this._userId) {
-      return true;//тут
-    }
-  });
+
+
+
+
+  // });
   // .includes(this._userId);
   // const isLiked = item.likes.forEach(_id) {.includes(this._userId)};
   // console.log(item.likes);
-  if (isLiked) {//неправильная проверка
-    api.addLike(id)
-      .then((res) => {
-        console.log(res, 'успешно добавлен лайк');//отобразить лайк
-        // card.setLikes(res.likes);
-      })
-      .catch((err) => console.log(err, 'ошибка добавления лайка'));
-  } else {
-    api.removeLike(id)
-      .then((res) => {
-        console.log(res, 'успешно удален лайк')
-        // card.setLikes(res.likes);
-      })
-      .catch((err) => console.log(err, 'ошибка удаления лайка'));
-  }
-}
+  // if (isLiked) {//неправильная проверка
+  //   api.addLike(id)
+  //     .then((res) => {
+  //       console.log(res, 'успешно добавлен лайк');//отобразить лайк
+  //       // card.setLikes(res.likes);
+  //     })
+  //     .catch((err) => console.log(err, 'ошибка добавления лайка'));
+  // } else {
+  //   api.removeLike(id)
+  //     .then((res) => {
+  //       console.log(res, 'успешно удален лайк')
+  //       // card.setLikes(res.likes);
+  //     })
+  //     .catch((err) => console.log(err, 'ошибка удаления лайка'));
+  // }
+// }

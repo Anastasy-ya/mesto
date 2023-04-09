@@ -19,7 +19,7 @@ export default class Section {
   renderItems(items) {//очищает контейнер, затем для каждого элемента
     //массива применяет ф-ю renderer, которая отрисует и вставит элементы в dom
     this._clear();
-    items.forEach((item) => {
+    items.reverse().forEach((item) => {
     this.addItems(item);
     })
   }

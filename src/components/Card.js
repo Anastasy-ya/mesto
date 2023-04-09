@@ -63,6 +63,8 @@ export default class Card {
     this._imageToOpen.alt = this._name;
     this._element.id = `${this._id}`;
     this._likesCounter();//отобразить лайки
+    this.сheckUserLike();//поменять стиль отмеченных фото
+    console.log(this.сheckUserLike());
     //
 
     return this._element; //получаем готовый элемент для вставки в dom
@@ -77,7 +79,7 @@ export default class Card {
     //удаление по иконке
     this._iconDelete.addEventListener("click", this._handlerRemoveCard);//  this.removeItem было, перенаправлено через попап подстверждения  this._handlerRemoveCard
     //лайки
-    this._like.addEventListener("click", () => this._checkLike(this._item, this._id)); // this._addLike
+    this._like.addEventListener("click", () => this._checkLike(this._id)); // this._addLike внешняя ф-я, вызываемая по событию
   }
 
   _likesCounter() {
@@ -85,5 +87,19 @@ export default class Card {
     // console.log(this._likes.length);
     this._likeCounter.textContent = this._likes.length;
   }
+
+  сheckUserLike() {//возвращает true усли карточка лайкнута польз
+    this._likes.some((user) => {
+      return this._isLiked = (this._userId === user._id);
+    });
+    if (this._isLiked) {
+      console.log('лайкнуто', this._isLiked);//тут порядок
+      // this._addLike();
+      this._like.classList.add(this._buttonLikeActive);
+      return true;
+    } else {
+      this._like.classList.remove(this._buttonLikeActive);
+      return false;
+    }}
 
 }
