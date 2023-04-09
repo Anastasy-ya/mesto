@@ -5,7 +5,6 @@ export default class Popup {
     this._handleEscClose = this._handleEscClose.bind(this);
     this._classPopupOpened = tags.classPopupOpened;
     this._popupCloseIcon = tags.popupCloseIcon;
-    // console.log(this._classPopupOpened);
   }
 
   open() {

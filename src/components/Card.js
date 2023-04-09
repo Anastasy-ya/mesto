@@ -9,8 +9,6 @@ export default class Card {
     this._templateSelector = templateSelector; //селектор темплейта стал свойством объекта класса Card
     this._handleCardClick = handleCardClick; //передали внешнюю функцию как параметр  временно убрана
     this._handlerRemoveCard = handlerRemoveCard;//внешняя ф-я, открывающая попап с подтверждением
-    // this.removeItem = this.removeItem.bind(this); //привязываем контекст this к нужному объекту
-    // this._addLike = this._addLike.bind(this); //привязываем контекст this к нужному объекту
     this._templateItem = tags.templateItem;
     this._itemImage = tags.itemImage;
     this._buttonLike = tags.buttonLike;
