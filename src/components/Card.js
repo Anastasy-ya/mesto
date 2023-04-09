@@ -35,7 +35,7 @@ export default class Card {
 
   //ф-я удаления карточки
   removeItem() {//сделаем метод внешним для использования в index
-      this._element.remove();//сюда выполнение не доходит, найти ошибку, возможно нужно перенести весь хвост в индекс
+      this._element.remove();
       this._element = null;
   }
 
@@ -70,7 +70,7 @@ export default class Card {
     this._imageToOpen.alt = this._name;
     this._element.id = `${this._id}`;
     this.likesCounter();//отобразить лайки
-    this.сheckUserLike();//поменять стиль отмеченных фото
+    // this.сheckUserLike();//поменять стиль отмеченных фото
     console.log(this.сheckUserLike());
     //
 
@@ -84,14 +84,11 @@ export default class Card {
     );
     //для сохранения контекста он привязан в свойствах класса
     //удаление по иконке
-    this._iconDelete.addEventListener("click", this._handlerRemoveCard);//  this.removeItem было, перенаправлено через попап подстверждения  this._handlerRemoveCard
+    this._iconDelete.addEventListener("click", this._handlerRemoveCard);
     //лайки
     this._like.addEventListener("click", () => {
-      
-      
       this._checkLike(this._id);
-      // this.likesCounter();
-    }); // this._addLike внешняя ф-я, вызываемая по событию
+    });
   }
 
   likesCounter() {
