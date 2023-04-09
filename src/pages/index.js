@@ -6,6 +6,7 @@ import {
   popupEdit,
   profileName,
   profileJob,
+  buttonEdit,
   buttonAdd,
   bigImage,
   profileAvatar,
@@ -61,7 +62,7 @@ function applySubmitEditAvatar({ link }) {//ф-я, делающая запрос
 };
 
 //слушатель событий по кнопке редактирования профиля
-consts.buttonEdit.addEventListener("click", () => {
+buttonEdit.addEventListener("click", () => {
   validationEditForm.resetValidation();//сбросить старые ошибки
   popupWithFormEdit.setInputValues(userInfo.getUserInfo());
   popupWithFormEdit.open();
@@ -105,7 +106,7 @@ function applySubmitAdd(data) {//добавит новую карточку, в�
     userCards.addItems(res)
   })
   .catch((err) => {
-    alert(err);
+    console.log(err, 'ошибка при добавлении новой карточки');
   })
 //по сабмиту произойдет отправка данных методом post на сервер, в случае положительного ответа ответ создаст карточку
 
@@ -135,7 +136,7 @@ const userCards = new Section(
               card.removeItem();
             })
             .catch((err) => {
-              console.log(err); // выведем ошибку
+              console.log(err, 'ошибка при удалении карточки'); // выведем ошибку
             });
         },//applySubmit из PopupWithWarning   сюда нужно передать метод кард, удаляющий карточку
         tags,
@@ -165,7 +166,7 @@ Promise.all([api.getUserData(), api.getInitialCards() ])//получим дан�
   //получить инф о карточках и вставить
 })
 .catch((err) => {
-  alert(err); // выведем ошибку в консоль
+  console.log(err, 'ошибка при загрузке страницы'); // выведем ошибку в консоль
 });
 
 
@@ -177,11 +178,11 @@ function applySubmitEdit(data) {//{ name, about }
     userInfo.setUserInfo(res)
   })
   .catch((err) => {
-    alert(err); // выведем ошибку в консоль
+    console.log(err, 'ошибка при редактировании имени и данных пользователя'); // выведем ошибку в консоль
   });
 };//applySubmitEdit
 
-api.addLike('6432156bf27d6947b9b30e19');
+// api.addLike('6432156bf27d6947b9b30e19');//работаeт
 
 function checkLike(item, id) {
 
