@@ -2,6 +2,7 @@ export default class Api {
   constructor(baseUrl, headers) {//, authorization
     this._baseUrl = baseUrl;
     this._headers = headers;
+
     // this._authorization = authorization;
   }
 
@@ -47,11 +48,40 @@ export default class Api {
     .then(res => this._checkResponce(res))
   };//addCard
 
-  // getLikes() {//используется после getInitialCards
-  //   (res) => {
-  //     console.log(res.likes.length);
-  //   }
-  // }
+  saveAvatar(link) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    }).then(res => this._checkResponce(res));
+  }
 
+  //этот метод будет вызван в публичной функции index.js deleteCard,
+  //а затем передан в метод Card
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(res => this._checkResponce(res));
+  }
+
+  addLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(res => this._checkResponce(res));
+  }
+
+
+
+
+  removeLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(res => this._checkResponce(res));
+  }
 
 }//Api

@@ -1,7 +1,6 @@
-import './index.css';
+import "./index.css";//   ЭТА СТРОКА ОБЯЗАТЕЛЬНА
 import {
   consts,
-  // initialCards,
   tags,
   popupAdd,
   popupEdit,
@@ -9,6 +8,10 @@ import {
   profileJob,
   buttonAdd,
   bigImage,
+  profileAvatar,
+  popupEditAvatar,
+  profileOverlay,
+  popupWarning,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";//переименовать
@@ -19,22 +22,43 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupWithWarning from "../components/PopupWithWarning.js";
 
+let userId;//определим переменную чтобы записать в нее значение внутри ф-и
+
 //класс UserInfo
-const userInfo = new UserInfo({ profileName, profileJob });
+const userInfo = new UserInfo({ profileName, profileJob, profileAvatar });//, profileAvatar
 
 //FormValidator
 const validationAddForm = new FormValidator(popupAdd, tags); //создадим экземпляры класса валидации
 const validationEditForm = new FormValidator(popupEdit, tags); //создавать экз из массива форм нельзя поскольку они должны находиться в
 //публичном поле для вызова из ф-и открытия
+const validationEditAvatar = new FormValidator(popupEditAvatar, tags);
 validationAddForm.enableValidation(); //выполнить ф-ю, которая навесит слушатели событий полям ввода и кнопке
 validationEditForm.enableValidation();
+validationEditAvatar.enableValidation();
 
 const popupWithFormEdit = new PopupWithForm(popupEdit, applySubmitEdit, tags, consts);//добавим информацию о пользователе
 const popupWithFormAdd = new PopupWithForm(popupAdd, applySubmitAdd, tags, consts);//добавим новую карточку
+const popupWithFormEditAvatar = new PopupWithForm(popupEditAvatar, applySubmitEditAvatar, tags, consts);//попап редактирования фото  замениьть вторую ф-ю
+// console.log(popupWithFormEditAvatar);
+// window.addEventListener("click", evt => console.log(evt.target));
 
 popupWithFormAdd.setEventListeners();
 popupWithFormEdit.setEventListeners();
+popupWithFormEditAvatar.setEventListeners();//нов
 
+
+function applySubmitEditAvatar({ link }) {//ф-я, делающая запрос к серверу и сохраняющая данные профиля
+  api.saveAvatar(link)
+  .then(res => {
+    //получили положительный ответ сервера, сохраним в dom
+    userInfo.setUserInfo(res);
+    popupWithFormEditAvatar.close();
+  })
+  .catch((err) => {
+    alert(err);
+  })
+;
+};
 
 //слушатель событий по кнопке редактирования профиля
 consts.buttonEdit.addEventListener("click", () => {
@@ -47,12 +71,13 @@ buttonAdd.addEventListener("click", () => {
   validationAddForm.resetValidation(); //удалить текст и оформление ошибки
   popupWithFormAdd.open();//возможно здесь не надо сразу вызывать
 });
+//редактирование профиля
+profileOverlay.addEventListener("click", () => {
+  validationEditAvatar.resetValidation();
+  popupWithFormEditAvatar.open();
+});
 
-// const userCards = new Section(
-//   initialCards ,//items первый параметр для экз класса section
-//   renderer,
-//   tags.elementsBox);//containerSelector  третий параметр экз класса section
-// userCards.renderItems();
+
 
 //Каждый попап нужно создать только 1 раз  в теле файла и вызвать у него 1 раз setEventListeners,
 //так как попапы всегда находятся в DOM и достаточно 1 раз навесить все обработчики на них.
@@ -61,10 +86,6 @@ popupWithImage.setEventListeners();
 
 
 
-
-
-
-/////////////////////////////////////////////////////////////////////////////
 
 
 //экземпляр класса api для получения карточек
@@ -91,22 +112,51 @@ function applySubmitAdd(data) {//добавит новую карточку, в�
 };//applySubmitAdd
 
 
+
+
+
 //экземпляр класса Section для рендеринга карточек
 const userCards = new Section(
-  (item) => {//ф-я renderer
-    const card = new Card( item, () => {
+  (item) => {//ф-я renderer, первый параметр Section
+    const card = new Card(
+    item,
+    () => {//handleCardClick открывает попап с картинкой
       popupWithImage.open(item);
     },
-    tags.templateBox, tags);
+    checkLike,
+    tags.templateBox, //templateSelector
+    tags,
+    function() {//handlerRemoveCard
+      const popupWithWarning = new PopupWithWarning(
+      popupWarning, //
+        (id) => {
+          api.deleteCard(id)
+            .then(() => {
+              card.removeItem();
+            })
+            .catch((err) => {
+              console.log(err); // выведем ошибку
+            });
+        },//applySubmit из PopupWithWarning   сюда нужно передать метод кард, удаляющий карточку
+        tags,
+        item._id
+      );
+      popupWithWarning.open();
+      popupWithWarning.setEventListeners();
+    },
+    userId,
+    );//card
     const element = card.generateCard();
     // card.likesCounter();
     return element;
-  },
+  },//ф-я renderer
   tags.elementsBox,);//containerSelector второй параметр экз класса section
 
 //Получение данных при перезагрузке страницы: данные польз и карточки
 Promise.all([api.getUserData(), api.getInitialCards() ])//получим данные при перезагрузке страницы
 .then(([userData, initialCards]) => {
+  userId = userData._id;
+  // console.log(initialCards[owner]);
   //подгрузить данные о пользоавтеле
   userInfo.setUserInfo(userData);
     //отрендерить карточки
@@ -131,31 +181,32 @@ function applySubmitEdit(data) {//{ name, about }
   });
 };//applySubmitEdit
 
-function deleteCard(item) {
-//сюда адаптировать код ниже
-};
+api.addLike('6432156bf27d6947b9b30e19');
 
+function checkLike(item, id) {
 
-// (card) {
-//   popupWarning.showWaitingText("Удаление...");
-//   api
-//     .deleteCard(card._cardId)
-//     .then(() => {
-//       card.delete();
-//       popupWarning.close();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//     .finally(() => {
-//       popupWarning.showWaitingText("Да");
-//     });
-// }
-
-const popupWithWarning = new PopupWithWarning(
-  'popup_type_delete',
-  deleteCard,//кажется тут нам надо ф-ю удаления
-  tags
-);
-
-popupWithWarning.setEventListeners();
+  const isLiked = item.likes.forEach((like) => {
+    console.log(like._id);
+    if(like._id === this._userId) {
+      return true;//тут
+    }
+  });
+  // .includes(this._userId);
+  // const isLiked = item.likes.forEach(_id) {.includes(this._userId)};
+  // console.log(item.likes);
+  if (isLiked) {//неправильная проверка
+    api.addLike(id)
+      .then((res) => {
+        console.log(res, 'успешно добавлен лайк');//отобразить лайк
+        // card.setLikes(res.likes);
+      })
+      .catch((err) => console.log(err, 'ошибка добавления лайка'));
+  } else {
+    api.removeLike(id)
+      .then((res) => {
+        console.log(res, 'успешно удален лайк')
+        // card.setLikes(res.likes);
+      })
+      .catch((err) => console.log(err, 'ошибка удаления лайка'));
+  }
+}

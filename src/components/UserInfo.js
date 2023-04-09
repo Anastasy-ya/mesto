@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor({ profileName, profileJob }) {
+  constructor({ profileName, profileJob, profileAvatar }) {//, avatar
     this._profileName = profileName;
     this._profileJob = profileJob;
+    this._profileAvatar = profileAvatar;
   }
 
   getUserInfo() {
@@ -10,13 +11,15 @@ export default class UserInfo {
     return {
       name: this._profileName.textContent,
       about: this._profileJob.textContent,
+      avatar: this._profileAvatar.src,
     }
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about, avatar }) {
 //принимает новые данные пользователя и добавляет их на страницу.
     this._profileName.textContent = name;
     this._profileJob.textContent = about;
+    this._profileAvatar.src = avatar;
   }
 
 }
