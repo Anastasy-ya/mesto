@@ -10,7 +10,7 @@ export default class Card {
     this._handleCardClick = handleCardClick; //передали внешнюю функцию как параметр  временно убрана
     this._handlerRemoveCard = handlerRemoveCard;//внешняя ф-я, открывающая попап с подтверждением
     // this.removeItem = this.removeItem.bind(this); //привязываем контекст this к нужному объекту
-    this._addLike = this._addLike.bind(this); //привязываем контекст this к нужному объекту
+    // this._addLike = this._addLike.bind(this); //привязываем контекст this к нужному объекту
     this._templateItem = tags.templateItem;
     this._itemImage = tags.itemImage;
     this._buttonLike = tags.buttonLike;
@@ -39,8 +39,14 @@ export default class Card {
       this._element = null;
   }
 
-  _addLike() {
-    this._like.classList.toggle(this._buttonLikeActive);
+  addLike() {
+    this._like.classList.add(this._buttonLikeActive);
+    console.log('лайкнут addLike');
+  }
+
+  removeLike() {
+    this._like.classList.remove(this._buttonLikeActive);
+    console.log('лайк удален removeLike');
   }
 
   generateCard() {
@@ -50,6 +56,7 @@ export default class Card {
     this._imageToOpen = this._element.querySelector(this._itemImage);
     //переменные для лайков
     this._like = this._element.querySelector(this._buttonLike);
+    this._likeCounter = this._element.querySelector('.form__like-counter');
     //урна
     this._iconDelete = this._element.querySelector(this._elementsDelete);
     if (this._ownerId !== this._userId) {
@@ -62,7 +69,7 @@ export default class Card {
     this._imageToOpen.src = this._link;
     this._imageToOpen.alt = this._name;
     this._element.id = `${this._id}`;
-    this._likesCounter();//отобразить лайки
+    this.likesCounter();//отобразить лайки
     this.сheckUserLike();//поменять стиль отмеченных фото
     console.log(this.сheckUserLike());
     //
@@ -79,13 +86,19 @@ export default class Card {
     //удаление по иконке
     this._iconDelete.addEventListener("click", this._handlerRemoveCard);//  this.removeItem было, перенаправлено через попап подстверждения  this._handlerRemoveCard
     //лайки
-    this._like.addEventListener("click", () => this._checkLike(this._id)); // this._addLike внешняя ф-я, вызываемая по событию
+    this._like.addEventListener("click", () => {
+      
+      
+      this._checkLike(this._id);
+      // this.likesCounter();
+    }); // this._addLike внешняя ф-я, вызываемая по событию
   }
 
-  _likesCounter() {
-    this._likeCounter = this._element.querySelector('.form__like-counter');
+  likesCounter() {
+    
     // console.log(this._likes.length);
     this._likeCounter.textContent = this._likes.length;
+    console.log('каунтер сработал');
   }
 
   сheckUserLike() {//возвращает true усли карточка лайкнута польз
@@ -93,11 +106,12 @@ export default class Card {
       return this._isLiked = (this._userId === user._id);
     });
     if (this._isLiked) {
-      console.log('лайкнуто', this._isLiked);//тут порядок
+      console.log(this._name, 'true проверка сheckUserLike');//тут порядок
       // this._addLike();
       this._like.classList.add(this._buttonLikeActive);
       return true;
     } else {
+      console.log(this._name, 'false проверка сheckUserLike');
       this._like.classList.remove(this._buttonLikeActive);
       return false;
     }}

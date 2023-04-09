@@ -125,18 +125,27 @@ const userCards = new Section(
       popupWithImage.open(item);
     },
     function checkLike(id) {//checkLike,
-      if(!card.сheckUserLike()) {
-        api.addLike(id)
+      if(!card.сheckUserLike()) {//если нет лайка польз
+        api.addLike(id)//сделать запрос к серверу на добавление 
         .then((res) => {
-          console.log(res, 'успешно добавлен лайк');//отобразить лайк
+          console.log(res, 'успешно:добавление лайка в index вызывает каунтер и меняет оформление');//отобразить лайк finally посчитать количество лайков
+          // card.
+          // debugger
+          card.addLike();//изменить оформление и обновить счетчик
+          card.likesCounter();
         })
-        .catch((err) => console.log(err, 'ошибка добавления лайка'));
-    } else {
+        .catch((err) => console.log(err, 'ошибка: добавление лайка в index вызывает каунтер и меняет оформление'))
+        // .finally
+        ;
+      } else {
       api.removeLike(id)
         .then((res) => {
-          console.log(res, 'успешно удален лайк')
+          console.log(res, 'успешно: удаление лайка в index вызывает каунтер и меняет оформление');
+          // debugger
+          card.removeLike();
+          card.likesCounter();
         })
-        .catch((err) => console.log(err, 'ошибка удаления лайка'));
+        .catch((err) => console.log(err, 'ошибка: удаление лайка в index вызывает каунтер и меняет оформление'));
     }
   },//checkLike,
     tags.templateBox, //templateSelector
