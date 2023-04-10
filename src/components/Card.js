@@ -78,7 +78,7 @@ export default class Card {
     this._imageToOpen.alt = this._name;
     this._element.id = `${this._id}`;
     this.likesCounter(item); //отобразить лайки
-    debugger
+    // debugger
     // this.сheckUserLike();//поменять стиль отмеченных фото
     console.log("лайкнута?", this.сheckUserLike());
     //
@@ -102,13 +102,14 @@ export default class Card {
     // debugger
     this._likeCounter.textContent = likes.length; //this._likes.length
     console.log("каунтер сработал", "переданные значения:", likes.length);
+    // this._like.classList.toggle(this._buttonLikeActive);
   }
 
   сheckUserLike() {
     //возвращает true усли карточка лайкнута польз
-    this._likes.some((user) => {
-      return (this._isLiked = this._userId === user._id);
-    });
+   this._likes.some((user) => {
+      return (this._isLiked = (this._userId === user._id));
+    })
     if (this._isLiked) {
       console.log("Название: ", this._name, ", проверка сheckUserLike = true "); //тут порядок
       // this._addLike();
