@@ -8,12 +8,22 @@ export default class PopupWithWarning extends Popup {
     this._id = id;
   }
 
+  _addApplyFunction = (evt) => {
+    evt.preventDefault();
+    this.close();
+    this._applySubmit(this._id);
+  }
+
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this.close();
-      this._applySubmit(this._id);
-    });
+    // debugger
+    this._form.addEventListener("submit", (evt) => this._addApplyFunction(evt));
+  }
+
+  close() {//не удаляется и накапливается слушатель
+    super.close();
+    this._form.removeEventListener("submit", (evt) =>
+      this._addApplyFunction(evt)
+    );
   }
 }
