@@ -174,6 +174,7 @@ const userCards = new Section(
       },
 
       function checkLike(id) {
+        // debugger
         //checkLike,
         if (!card.сheckUserLike()) {
           //если нет лайка польз
@@ -181,28 +182,32 @@ const userCards = new Section(
             .addLike(id) //сделать запрос к серверу на добавление
             .then((res) => {
               console.log(
-                res,
+                'в каунтер попадает:', res,
                 "успешно:добавление лайка в index вызывает каунтер и меняет оформление"
               );
-              card.addLike(); //изменить оформление и обновить счетчик
-              card.likesCounter();
+              card.addLike(); //изменить оформление и обновить счетчик (до обновления страницы)
+              card.likesCounter(res);
+              // card.addLike();
             })
             .catch((err) =>
               console.log(
                 err,
                 "ошибка: добавление лайка в index вызывает каунтер и меняет оформление"
-              )
-            );
+              ))
+            // .finallyy(() => {
+            //   // card.сheckUserLike();
+            // });
         } else {
           api
             .removeLike(id)
             .then((res) => {
               console.log(
-                res,
+                'в каунтер попадает:', res,
                 "успешно: удаление лайка в index вызывает каунтер и меняет оформление"
               );
-              card.removeLike();
-              card.likesCounter();
+              card.removeLike();//изменить оформление и обновить счетчик (до обновления страницы)
+              card.likesCounter(res);
+              // card.removeLike();
             })
             .catch((err) =>
               console.log(

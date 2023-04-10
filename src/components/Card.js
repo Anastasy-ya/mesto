@@ -77,7 +77,8 @@ export default class Card {
     this._imageToOpen.src = this._link;
     this._imageToOpen.alt = this._name;
     this._element.id = `${this._id}`;
-    this.likesCounter(); //отобразить лайки
+    this.likesCounter(item); //отобразить лайки
+    debugger
     // this.сheckUserLike();//поменять стиль отмеченных фото
     console.log("лайкнута?", this.сheckUserLike());
     //
@@ -97,9 +98,10 @@ export default class Card {
     });
   }
 
-  likesCounter() {
-    this._likeCounter.textContent = this._likes.length; //this._likes.length
-    console.log("каунтер сработал");
+  likesCounter({ likes }) {
+    // debugger
+    this._likeCounter.textContent = likes.length; //this._likes.length
+    console.log("каунтер сработал", "переданные значения:", likes.length);
   }
 
   сheckUserLike() {
@@ -108,12 +110,12 @@ export default class Card {
       return (this._isLiked = this._userId === user._id);
     });
     if (this._isLiked) {
-      console.log("Название: ", this._name, ", true проверка сheckUserLike"); //тут порядок
+      console.log("Название: ", this._name, ", проверка сheckUserLike = true "); //тут порядок
       // this._addLike();
       this._like.classList.add(this._buttonLikeActive);
       return true;
     } else {
-      console.log("Название: ", this._name, ", false проверка сheckUserLike");
+      console.log("Название: ", this._name, ", проверка сheckUserLike = false ");
       this._like.classList.remove(this._buttonLikeActive);
       return false;
     }
