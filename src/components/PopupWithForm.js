@@ -12,7 +12,6 @@ export default class PopupWithForm extends Popup {
     this._inputList = Array.from(
       this._form.querySelectorAll(tags.inputSelector)
     ); //найдем массив инпутов
-
   }
 
   //собирает данные всех полей формы для дальнейшего сохранения в карточку или новые данные польз.
@@ -25,14 +24,14 @@ export default class PopupWithForm extends Popup {
   }
 
   _addApplySubmitFunction = (evt) => {
-    evt.preventDefault()
+    evt.preventDefault();
     this._applySubmit(this._getInputValues());
     this.close();
-  }
+  };
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", this._addApplySubmitFunction);
+    this._form.addEventListener("submit", (evt) => this._addApplySubmitFunction(evt));
   }
 
   //Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
@@ -52,6 +51,4 @@ export default class PopupWithForm extends Popup {
   preloader(text) {
     this._submitButton.textContent = text;
   }
-
 }
-

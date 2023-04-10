@@ -1,14 +1,23 @@
 export default class Card {
-  constructor(item, handleCardClick, checkLike, templateSelector, tags, handlerRemoveCard, userId) {//(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
+  constructor(
+    item,
+    handleCardClick,
+    checkLike,
+    templateSelector,
+    tags,
+    handlerRemoveCard,
+    userId
+  ) {
+    //(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
     //в templateSelector попадет селектор темплейта при создании экземпляра карточки
     this._item = item;
-    this._name = item.name;//title
+    this._name = item.name; //title
     this._link = item.link;
     this._likes = item.likes;
     this._id = item._id;
     this._templateSelector = templateSelector; //селектор темплейта стал свойством объекта класса Card
     this._handleCardClick = handleCardClick; //передали внешнюю функцию как параметр  временно убрана
-    this._handlerRemoveCard = handlerRemoveCard;//внешняя ф-я, открывающая попап с подтверждением
+    this._handlerRemoveCard = handlerRemoveCard; //внешняя ф-я, открывающая попап с подтверждением
     this._templateItem = tags.templateItem;
     this._itemImage = tags.itemImage;
     this._buttonLike = tags.buttonLike;
@@ -32,19 +41,20 @@ export default class Card {
   }
 
   //ф-я удаления карточки
-  removeItem() {//сделаем метод внешним для использования в index
-      this._element.remove();
-      this._element = null;
+  removeItem() {
+    //сделаем метод внешним для использования в index
+    this._element.remove();
+    this._element = null;
   }
 
   addLike() {
     this._like.classList.add(this._buttonLikeActive);
-    console.log('лайкнут addLike');
+    console.log("лайкнут addLike");
   }
 
   removeLike() {
     this._like.classList.remove(this._buttonLikeActive);
-    console.log('лайк удален removeLike');
+    console.log("лайк удален removeLike");
   }
 
   generateCard(item) {
@@ -54,12 +64,12 @@ export default class Card {
     this._imageToOpen = this._element.querySelector(this._itemImage);
     //переменные для лайков
     this._like = this._element.querySelector(this._buttonLike);
-    this._likeCounter = this._element.querySelector('.form__like-counter');
+    this._likeCounter = this._element.querySelector(".form__like-counter");
     //урна
     this._iconDelete = this._element.querySelector(this._elementsDelete);
     if (this._ownerId !== this._userId) {
-      this._iconDelete.remove()
-    };
+      this._iconDelete.remove();
+    }
     //Окно и кнопка на странице одна, поэтому вешать слушатель нужно глобально
     this._setEventListeners(); //добавим обработчики событий
     //меняем содержимое полей
@@ -67,9 +77,9 @@ export default class Card {
     this._imageToOpen.src = this._link;
     this._imageToOpen.alt = this._name;
     this._element.id = `${this._id}`;
-    this.likesCounter();//отобразить лайки
+    this.likesCounter(); //отобразить лайки
     // this.сheckUserLike();//поменять стиль отмеченных фото
-    console.log(this.сheckUserLike());
+    console.log("лайкнута?", this.сheckUserLike());
     //
 
     return this._element; //получаем готовый элемент для вставки в dom
@@ -77,9 +87,7 @@ export default class Card {
 
   _setEventListeners() {
     //открытие картинки в большом размере
-    this._imageToOpen.addEventListener("click", () =>
-      this._handleCardClick()
-    );
+    this._imageToOpen.addEventListener("click", () => this._handleCardClick());
     //для сохранения контекста он привязан в свойствах класса
     //удаление по иконке
     this._iconDelete.addEventListener("click", this._handlerRemoveCard);
@@ -90,23 +98,24 @@ export default class Card {
   }
 
   likesCounter() {
-    this._likeCounter.textContent = this._likes.length;//this._likes.length
-    console.log('каунтер сработал');
+    this._likeCounter.textContent = this._likes.length; //this._likes.length
+    console.log("каунтер сработал");
   }
 
-  сheckUserLike() {//возвращает true усли карточка лайкнута польз
+  сheckUserLike() {
+    //возвращает true усли карточка лайкнута польз
     this._likes.some((user) => {
-      return this._isLiked = (this._userId === user._id);
+      return (this._isLiked = this._userId === user._id);
     });
     if (this._isLiked) {
-      console.log(this._name, 'true проверка сheckUserLike');//тут порядок
+      console.log("Название: ", this._name, ", true проверка сheckUserLike"); //тут порядок
       // this._addLike();
       this._like.classList.add(this._buttonLikeActive);
       return true;
     } else {
-      console.log(this._name, 'false проверка сheckUserLike');
+      console.log("Название: ", this._name, ", false проверка сheckUserLike");
       this._like.classList.remove(this._buttonLikeActive);
       return false;
-    }}
-
+    }
+  }
 }

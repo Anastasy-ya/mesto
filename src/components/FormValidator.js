@@ -5,7 +5,9 @@ export default class FormValidator {
     this._inputList = Array.from(
       this._popupSelector.querySelectorAll(tags.inputSelector)
     ); //найдем массив инпутов
-    this._submitButtonSelector = this._popupSelector.querySelector(tags.submitButtonSelector);
+    this._submitButtonSelector = this._popupSelector.querySelector(
+      tags.submitButtonSelector
+    );
     this._form = this._popupSelector.querySelector(tags.popupForm);
     this._inactiveButtonClass = tags.inactiveButtonClass;
     this._inputErrorSign = tags.inputErrorSign;
@@ -50,15 +52,11 @@ export default class FormValidator {
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       //если поля невалидны
-      this._submitButtonSelector.classList.add(
-        this._inactiveButtonClass
-      ); //кнопка некликабельна
+      this._submitButtonSelector.classList.add(this._inactiveButtonClass); //кнопка некликабельна
       this._submitButtonSelector.disabled = true;
     } else {
       //если валидны
-      this._submitButtonSelector.classList.remove(
-        this._inactiveButtonClass
-      ); //кнопка кликабельна
+      this._submitButtonSelector.classList.remove(this._inactiveButtonClass); //кнопка кликабельна
       this._submitButtonSelector.disabled = false;
     }
   }

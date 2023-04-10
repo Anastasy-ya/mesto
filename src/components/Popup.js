@@ -9,7 +9,7 @@ export default class Popup {
 
   open() {
     this._popupSelector.classList.add(this._classPopupOpened);
-    window.addEventListener("keyup", this._handleEscClose);//
+    window.addEventListener("keyup", this._handleEscClose); //
   }
 
   close() {
@@ -21,17 +21,19 @@ export default class Popup {
     if (evt.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   setEventListeners() {
     //закрытие esc
     // window.addEventListener("keydown", this._handleEscClose);
     //закрытие по клику на поле
     this._popupSelector.addEventListener("mouseup", (event) => {
-      if(event.target === event.currentTarget || event.target.classList.contains(this._popupCloseIcon)) {
-      this.close();
+      if (
+        event.target === event.currentTarget ||
+        event.target.classList.contains(this._popupCloseIcon)
+      ) {
+        this.close();
       }
     });
   }
-
 }
