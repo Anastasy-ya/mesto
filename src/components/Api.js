@@ -6,7 +6,7 @@ export default class Api {
   }
 
   _checkResponce(res) {
-    //повторяющийся кот (^˵◕ω◕˵^)
+    //повторяющийся кот (^˵◕ω◕˵^)(^˵◕ω◕˵^)(^˵◕ω◕˵^)
     if (res.ok) {
       return res.json();
     }

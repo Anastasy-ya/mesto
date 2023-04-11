@@ -26,7 +26,7 @@ export default class PopupWithForm extends Popup {
   _addApplySubmitFunction = (evt) => {
     evt.preventDefault();
     this._applySubmit(this._getInputValues());
-    this.close();
+    // this.close();
   };
 
   setEventListeners() {
@@ -38,7 +38,7 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
-    this._form.removeEventListener("submit", this._addApplySubmitFunction);
+    // this._form.removeEventListener("submit", this._addApplySubmitFunction);
   }
 
   //вставляет данные из userInfo(имя и профессия) в форму Edit при открытии

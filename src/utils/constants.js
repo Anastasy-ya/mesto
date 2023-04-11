@@ -17,6 +17,8 @@ export const tags = {
   inputSelector: ".form__input",
   formSelector: ".popup__form",
   inactiveButtonClass: "popup__button_inactive",
+  popupImage: ".popup__image",
+  popupSignature: ".popup__signature",
 };
 
 export const consts = {

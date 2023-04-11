@@ -48,23 +48,33 @@ export default class Card {
     this._element = null;
   }
 
-
+  setLike() {//вызвать в глобальной области
+    if (!this.сheckUserLike()) {
+      this._addLike();
+      this._likeCounter.textContent ++;
+    } else {
+      this._removeLike();
+      this._likeCounter.textContent --;
+    }
+  }
  
 
-  addLike() {
+  _addLike() {
     this._likeSelector.classList.add(this._buttonLikeActive);
     console.log("лайкнут addLike");
     console.log('лайки этой карточки: ', this.likes);
-    this._likes.push({
-      cohort: "cohort-62",
-      name: this._name,
-      _id: this._userId,
-});
+    
+//     this._likes.push({
+//       cohort: "cohort-62",
+//       name: this._name,
+//       _id: this._userId,
+// });
   }
 
-  removeLike() {
+  _removeLike() {
     this._likeSelector.classList.remove(this._buttonLikeActive);
     console.log("лайк удален removeLike");
+    
   //   this._likes.forEach((like) => {
   //     like = {
   //     cohort: "cohort-62",
@@ -94,7 +104,7 @@ export default class Card {
     this._imageToOpen.src = this._link;
     this._imageToOpen.alt = this._name;
     this._element.id = `${this._id}`;
-    !this.сheckUserLike() ? this.removeLike() : this.addLike();
+    !this.сheckUserLike() ? this._removeLike() : this._addLike();
     this.likesCounter(item); //отобразить лайки
     // debugger
     // this.сheckUserLike();//поменять стиль отмеченных фото
@@ -148,3 +158,28 @@ export default class Card {
     // }
   }
 }
+
+
+
+// addLike() {
+//   this._likeSelector.classList.add(this._buttonLikeActive);
+//   console.log("лайкнут addLike");
+//   console.log('лайки этой карточки: ', this.likes);
+//   this._likeCounter.textContent ++;
+//   // this.likes.push();
+//   // this._likes.push({
+//   //   cohort: "cohort-62",
+//   //   name: this._name,
+//   //   _id: this._userId,
+//   // });
+// }
+
+// removeLike() {
+//   this._likeSelector.classList.remove(this._buttonLikeActive);
+//   console.log("лайк удален removeLike");
+//   this._likeCounter.textContent --;
+//   // this.likes.length --;
+// }
+// //   this._likes.forEach((like) => {
+// //     if (like.some("_id" = `${this._userId}`)) {like.remove()};
+// // })

@@ -99,7 +99,7 @@ profileOverlay.addEventListener("click", () => {
 
 //Каждый попап нужно создать только 1 раз  в теле файла и вызвать у него 1 раз setEventListeners,
 //так как попапы всегда находятся в DOM и достаточно 1 раз навесить все обработчики на них.
-const popupWithImage = new PopupWithImage(bigImage, tags, consts);
+const popupWithImage = new PopupWithImage(bigImage, tags);
 popupWithImage.setEventListeners();
 
 //экземпляр класса api для получения карточек
@@ -132,6 +132,7 @@ function applySubmitAdd(data) {
     .addCard(data)
     .then((res) => {
       userCards.addItems(res);
+      popupWithFormAdd.close();
       // userCards.clear();
     })
     .catch((err) => {
@@ -152,6 +153,7 @@ function applySubmitEdit(data) {
     .setUserData(data)
     .then((res) => {
       userInfo.setUserInfo(res);
+      popupWithFormEdit.close();
     })
     .catch((err) => {
       console.log(err, "ошибка при редактировании имени и данных пользователя"); // выведем ошибку в консоль
@@ -160,6 +162,13 @@ function applySubmitEdit(data) {
       popupWithFormEdit.preloader("Cохранить");
     });
 } //applySubmitEdit
+
+function createCard() {
+
+};//createCard
+
+
+
 
 //экземпляр класса Section для рендеринга карточек
 const userCards = new Section(
@@ -185,7 +194,7 @@ const userCards = new Section(
                 'в каунтер попадает:', res,
                 "успешно:добавление лайка в index вызывает каунтер и меняет оформление"
               );
-              card.addLike(); //изменить оформление и обновить счетчик (до обновления страницы)
+              card.setLike(); //изменить оформление и обновить счетчик (до обновления страницы)
               card.likesCounter(res);
               // card.addLike();
             })
@@ -205,7 +214,7 @@ const userCards = new Section(
                 'в каунтер попадает:', res,
                 "успешно: удаление лайка в index вызывает каунтер и меняет оформление"
               );
-              card.removeLike();//изменить оформление и обновить счетчик (до обновления страницы)
+              card.setLike(); ;//изменить оформление и обновить счетчик (до обновления страницы)
               card.likesCounter(res);
               // card.removeLike();
             })
@@ -228,9 +237,8 @@ const userCards = new Section(
           popupWarning, //
           tags,
           item._id,
-          function applySubmitDeleteCard(id) {
-            api
-              .deleteCard(id)
+          function applySubmitDeleteCard(id) {//applySubmit из PopupWithWarning
+            api.deleteCard(id)
               .then(() => {
                 card.removeItem();
                 // userCards.clear();
@@ -241,7 +249,7 @@ const userCards = new Section(
           } //applySubmit из PopupWithWarning
         );
         popupWithWarning.open();
-        popupWithWarning.setEventListeners();
+        popupWithWarning.setEventListeners();//вынести в глобальную область
       }, //handlerRemoveCard
 
       userId //конец параметров для card

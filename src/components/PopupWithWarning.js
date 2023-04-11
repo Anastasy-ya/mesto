@@ -17,13 +17,13 @@ export default class PopupWithWarning extends Popup {
   setEventListeners() {
     super.setEventListeners();
     // debugger
-    this._form.addEventListener("submit", (evt) => this._addApplyFunction(evt));
+    window.addEventListener("submit", this._addApplyFunction);
   }
 
-  close() {//не удаляется и накапливается слушатель
-    super.close();
-    this._form.removeEventListener("submit", (evt) =>
-      this._addApplyFunction(evt)
-    );
-  }
+  // close() {//не удаляется и накапливается слушатель
+  //   super.close();
+  //   this._form.removeEventListener("submit", (evt) =>
+  //     this._addApplyFunction(evt)
+  //   );
+  // }
 }
