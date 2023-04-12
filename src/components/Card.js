@@ -95,18 +95,29 @@ export default class Card {
     this._imageToOpen.addEventListener("click", () => this._handleCardClick());
     //для сохранения контекста он привязан в свойствах класса
     //удаление по иконке
-    this._iconDelete.addEventListener("click", () => this._handlerRemoveCard(this._id, this._element));
+    this._iconDelete.addEventListener("click", (evt) => this._handlerRemoveCard(this._id, this._element,  this._item));
     //лайки
     this._likeSelector.addEventListener("click", () => {
       this._checkLike(this._id);
     });
   }
 
+  // handlerTrashClick(evt) {
+  //   this._handlerRemoveCard(
+  //     this._id,
+  //     () => {
+  //       const target = evt.target;
+  //       this._removeItem(target);
+  //     },
+  //     this
+  //   )
+  // }
+
   //ф-я удаления карточки
-  removeItem() {
+  removeItem(element) {
     //сделаем метод внешним для использования в index
-    this._element.remove();
-    this._element = null;
+    element.remove();
+    // this._element = null;
   }
 
   likesCounter({ likes }) {

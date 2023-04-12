@@ -112,12 +112,13 @@ function applySubmitEditAvatar({ link }) {
 const popupWithWarning = new PopupWithWarning(
   popupWarning, //
   tags,
-  (element, id) => {//applySubmit из PopupWithWarning
+  (id, element, item) => {//applySubmit из PopupWithWarning
     api.deleteCard(id)
       .then(() => {
         // console.log(makeCard(item));
-        element.remove();
-        // .removeItem();//userCards.addItems(makeCard(item))
+        makeCard(item)
+        .removeItem(element);//userCards.addItems(makeCard(item))
+        popupWithWarning.close();
         })
       .catch((err) => {
         console.log(err, "ошибка при удалении карточки"); // выведем ошибку
@@ -235,9 +236,9 @@ function makeCard(item) {
     }, //checkLike
     tags.templateBox, //templateSelector
     tags,
-    function (id, item) {
+    function (id, element, item) {
       //handlerRemoveCard
-      popupWithWarning.open(id, item);
+      popupWithWarning.open(id, element, item);
     }, //handlerRemoveCard
     userId //конец параметров для card
   ); //card

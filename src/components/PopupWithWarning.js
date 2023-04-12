@@ -7,10 +7,11 @@ export default class PopupWithWarning extends Popup {
     this._form = this._popupSelector.querySelector(tags.popupForm);
   }
 
-  open(id, element) {
+  open(id, element, item) {
     super.open();
     this._element = element;
     this._id = id;
+    this._item = item;
   }
 
   // setNewHandler(action) {
@@ -21,8 +22,8 @@ export default class PopupWithWarning extends Popup {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this.close();
-      this._applySubmit(this._element, this._id);
+      // this.close();
+      this._applySubmit(this._id, this._element, this._item);
     });
   }
 
