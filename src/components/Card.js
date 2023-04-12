@@ -8,16 +8,15 @@ export default class Card {
     handlerRemoveCard,
     userId
   ) {
-    //(item, templateSelector, makeImageBig)  ({ item, handleCardClick }, templateSelector)
     //в templateSelector попадет селектор темплейта при создании экземпляра карточки
     this._item = item;
-    this._name = item.name; //title
+    this._name = item.name;
     this._link = item.link;
     this._likes = item.likes;
     this._id = item._id;
-    this._templateSelector = templateSelector; //селектор темплейта стал свойством объекта класса Card
-    this._handleCardClick = handleCardClick; //передали внешнюю функцию как параметр  временно убрана
-    this._handlerRemoveCard = handlerRemoveCard; //внешняя ф-я, открывающая попап с подтверждением
+    this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
+    this._handlerRemoveCard = handlerRemoveCard;//ф-я, открывающая попап с подтверждением
     this._templateItem = tags.templateItem;
     this._itemImage = tags.itemImage;
     this._buttonLike = tags.buttonLike;
@@ -93,9 +92,8 @@ export default class Card {
   _setEventListeners() {
     //открытие картинки в большом размере
     this._imageToOpen.addEventListener("click", () => this._handleCardClick());
-    //для сохранения контекста он привязан в свойствах класса
     //удаление по иконке
-    this._iconDelete.addEventListener("click", () => this._handlerTrashClick());//(this._id, this._element,  this._item));
+    this._iconDelete.addEventListener("click", () => this._handlerTrashClick());
     //лайки
     this._likeSelector.addEventListener("click", () => {
       this._checkLike(this._id);
@@ -115,7 +113,7 @@ export default class Card {
   //ф-я удаления карточки
   _removeItem() {
     this._element.remove();
-    // this._element = null;
+    this._element = null;
   }
 
   likesCounter({ likes }) {

@@ -24,9 +24,6 @@ export default class Popup {
   };
 
   setEventListeners() {
-    //закрытие esc
-    // window.addEventListener("keydown", this._handleEscClose);
-    //закрытие по клику на поле
     this._popupSelector.addEventListener("mouseup", (event) => {
       if (
         event.target === event.currentTarget ||
