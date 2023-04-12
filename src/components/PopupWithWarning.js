@@ -1,29 +1,25 @@
 import Popup from "../components/Popup.js";
 
 export default class PopupWithWarning extends Popup {
-  constructor(popupSelector, tags, id, applySubmit) {
+  constructor(popupSelector, tags, applySubmit) {
     super(popupSelector, tags);
     this._applySubmit = applySubmit; //внешн ф-я для вызова по сабмиту
     this._form = this._popupSelector.querySelector(tags.popupForm);
-    this._id = id;
   }
 
-  _addApplyFunction = (evt) => {
-    evt.preventDefault();
-    this.close();
-    this._applySubmit(this._id);
+  open(id, element) {
+    super.open();
+    this._element = element;
+    this._id = id;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    // debugger
-    window.addEventListener("submit", this._addApplyFunction);
+    this._form.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+      this.close();
+      this._applySubmit(this._element, this._id);
+    });
   }
 
-  // close() {//не удаляется и накапливается слушатель
-  //   super.close();
-  //   this._form.removeEventListener("submit", (evt) =>
-  //     this._addApplyFunction(evt)
-  //   );
-  // }
 }

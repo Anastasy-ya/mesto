@@ -41,47 +41,27 @@ export default class Card {
     //получили копию элемента для изменения и дальнейшей вставки в dom
   }
 
-  //ф-я удаления карточки
-  removeItem() {
-    //сделаем метод внешним для использования в index
-    this._element.remove();
-    this._element = null;
-  }
-
-  setLike() {//вызвать в глобальной области
+  setLike({ likes }) {//вызвать в глобальной области
+    
     if (!this.сheckUserLike()) {
       this._addLike();
       this._likeCounter.textContent ++;
     } else {
       this._removeLike();
       this._likeCounter.textContent --;
-    }
+    };
+    this._likes = likes;
+    console.log('новые значения массива лайков', likes);
   }
  
-
   _addLike() {
     this._likeSelector.classList.add(this._buttonLikeActive);
-    console.log("лайкнут addLike");
-    console.log('лайки этой карточки: ', this.likes);
-    
-//     this._likes.push({
-//       cohort: "cohort-62",
-//       name: this._name,
-//       _id: this._userId,
-// });
+    console.log("сработал card.addLike");
   }
-
+    
   _removeLike() {
     this._likeSelector.classList.remove(this._buttonLikeActive);
     console.log("лайк удален removeLike");
-    
-  //   this._likes.forEach((like) => {
-  //     like = {
-  //     cohort: "cohort-62",
-  //     name: this._name,
-  //     _id: this._userId,
-  //   }.remove();
-  // })
   } 
 
   generateCard(item) {
@@ -106,11 +86,7 @@ export default class Card {
     this._element.id = `${this._id}`;
     !this.сheckUserLike() ? this._removeLike() : this._addLike();
     this.likesCounter(item); //отобразить лайки
-    // debugger
-    // this.сheckUserLike();//поменять стиль отмеченных фото
     console.log("лайкнута?", this.сheckUserLike());
-    //
-
     return this._element; //получаем готовый элемент для вставки в dom
   }
 
@@ -119,67 +95,32 @@ export default class Card {
     this._imageToOpen.addEventListener("click", () => this._handleCardClick());
     //для сохранения контекста он привязан в свойствах класса
     //удаление по иконке
-    this._iconDelete.addEventListener("click", this._handlerRemoveCard);
+    this._iconDelete.addEventListener("click", () => this._handlerRemoveCard(this._id, this._item));
     //лайки
     this._likeSelector.addEventListener("click", () => {
       this._checkLike(this._id);
     });
   }
 
+  //ф-я удаления карточки
+  removeItem() {
+    //сделаем метод внешним для использования в index
+    this._element.remove();
+    this._element = null;
+  }
+
   likesCounter({ likes }) {
-    // debugger
-    console.log({ likes });
     this._likeCounter.textContent = likes.length; //this._likes.length
-//     this._likes.push({
-//       about: "",
-//       avatar: "",
-//       cohort: "cohort-62",
-//       name: this._name,
-//       _id: this._userId,
-// });
     console.log("каунтер сработал", "переданные значения:", likes.length);
-    // this._like.classList.toggle(this._buttonLikeActive);
   }
 
   сheckUserLike() {
+    console.log('старые значения массива лайков: ', this._likes);
     //возвращает true усли карточка лайкнута польз
    return this._likes.some((user) => {
-      return (this._isLiked = (this._userId === user._id));
+      return this._isLiked = (this._userId === user._id);
     })
-    // if (this._isLiked) {
-    //   console.log("Название: ", this._name, ", проверка сheckUserLike = true "); //тут порядок
-    //   // this._addLike();
-    //   this._like.classList.add(this._buttonLikeActive);
-    //   return true;
-    // } else {
-    //   console.log("Название: ", this._name, ", проверка сheckUserLike = false ");
-    //   this._like.classList.remove(this._buttonLikeActive);
-    //   return false;
-    // }
   }
 }
 
 
-
-// addLike() {
-//   this._likeSelector.classList.add(this._buttonLikeActive);
-//   console.log("лайкнут addLike");
-//   console.log('лайки этой карточки: ', this.likes);
-//   this._likeCounter.textContent ++;
-//   // this.likes.push();
-//   // this._likes.push({
-//   //   cohort: "cohort-62",
-//   //   name: this._name,
-//   //   _id: this._userId,
-//   // });
-// }
-
-// removeLike() {
-//   this._likeSelector.classList.remove(this._buttonLikeActive);
-//   console.log("лайк удален removeLike");
-//   this._likeCounter.textContent --;
-//   // this.likes.length --;
-// }
-// //   this._likes.forEach((like) => {
-// //     if (like.some("_id" = `${this._userId}`)) {like.remove()};
-// // })
