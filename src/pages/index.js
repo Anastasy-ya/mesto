@@ -108,54 +108,46 @@ function applySubmitEditAvatar({ link }) {
     });
 }
 
-//найти как передать id, card
 const popupWithWarning = new PopupWithWarning(
   popupWarning, //
   tags,
   (id, callback, scope) => {//applySubmit из PopupWithWarning
     api.deleteCard(id)
       .then(() => {
-        // console.log(makeCard(item));
-
         callback.bind(scope)();
-        // item
-        // .removeItem();//userCards.addItems(makeCard(item))
         popupWithWarning.close();
         })
       .catch((err) => {
-        console.log(err, "ошибка при удалении карточки"); // выведем ошибку
+        console.log(err, "ошибка при удалении карточки");
       });
   } //applySubmit из PopupWithWarning
 );
 
-popupWithWarning.setEventListeners();//вынесен в глобальную область
+popupWithWarning.setEventListeners();
 
 //Получение данных при перезагрузке страницы: данные польз и карточки
 Promise.all([api.getUserData(), api.getInitialCards()]) //получим данные при перезагрузке страницы
   .then(([userData, initialCards]) => {
     userId = userData._id;
-    // console.log(initialCards[owner]);
     //подгрузить данные о пользоавтеле
     userInfo.setUserInfo(userData);
     //отрендерить карточки
     userCards.renderItems(initialCards);
-    // console.log(initialCards);
     //получить инф о карточках и вставить
   })
   .catch((err) => {
-    console.log(err, "ошибка при загрузке страницы"); // выведем ошибку в консоль
+    console.log(err, "ошибка при загрузке страницы");
   });
 
-//ф-я будет сохранять карточку
+//сохранение карточки
 function applySubmitAdd(data) {
-  //добавит новую карточку, вместо data name link передать
+  //добавит новую карточку
   popupWithFormAdd.preloader("Создание...");
   api
     .addCard(data)
     .then((res) => {
       userCards.addItems(res);
       popupWithFormAdd.close();
-      // userCards.clear();
     })
     .catch((err) => {
       console.log(err, "ошибка при добавлении новой карточки");
@@ -169,7 +161,6 @@ function applySubmitAdd(data) {
 //сохранение данных пользователя: имя и инф. Получает данные из PopupWitnForm и передает их в запрос на сервер,
 //после обновления данных на сервере страницаобновляется с новыми данными
 function applySubmitEdit(data) {
-  //{ name, about }
   popupWithFormEdit.preloader("Сохранение...");
   api
     .setUserData(data)
@@ -178,7 +169,7 @@ function applySubmitEdit(data) {
       popupWithFormEdit.close();
     })
     .catch((err) => {
-      console.log(err, "ошибка при редактировании имени и данных пользователя"); // выведем ошибку в консоль
+      console.log(err, "ошибка при редактировании имени и данных пользователя");
     })
     .finally(() => {
       popupWithFormEdit.preloader("Cохранить");
@@ -193,8 +184,6 @@ function makeCard(item) {
       popupWithImage.open(item);
     },
     function checkLike(id) {
-      // debugger
-      //checkLike,
       console.log("лайкнута?", card.сheckUserLike());
       if (!card.сheckUserLike()) {
         //если нет лайка польз
@@ -205,18 +194,14 @@ function makeCard(item) {
               'в каунтер попадает:', res,
               "успешно:добавление лайка в index вызывает каунтер и меняет оформление"
             );
-            card.setLike(res); //изменить оформление и обновить счетчик (до обновления страницы)
+            card.setLike(res);
             card.likesCounter(res);
-            // card.addLike();
           })
           .catch((err) =>
             console.log(
               err,
               "ошибка: добавление лайка в index вызывает каунтер и меняет оформление"
             ))
-          // .finallyy(() => {
-          //   // card.сheckUserLike();
-          // });
       } else {
         api
           .removeLike(id)
@@ -225,9 +210,8 @@ function makeCard(item) {
               'в каунтер попадает:', res,
               "успешно: удаление лайка в index вызывает каунтер и меняет оформление"
             );
-            card.setLike(res); ;//изменить оформление и обновить счетчик (до обновления страницы)
+            card.setLike(res);
             card.likesCounter(res);
-            // card.removeLike();
           })
           .catch((err) =>
             console.log(

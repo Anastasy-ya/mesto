@@ -37,7 +37,6 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
-    // this._form.removeEventListener("submit", this._addApplySubmitFunction);
   }
 
   //вставляет данные из userInfo(имя и профессия) в форму Edit при открытии
