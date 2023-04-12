@@ -112,12 +112,14 @@ function applySubmitEditAvatar({ link }) {
 const popupWithWarning = new PopupWithWarning(
   popupWarning, //
   tags,
-  (id, element, item) => {//applySubmit из PopupWithWarning
+  (id, callback, scope) => {//applySubmit из PopupWithWarning
     api.deleteCard(id)
       .then(() => {
         // console.log(makeCard(item));
-        makeCard(item)
-        .removeItem(element);//userCards.addItems(makeCard(item))
+
+        callback.bind(scope)();
+        // item
+        // .removeItem();//userCards.addItems(makeCard(item))
         popupWithWarning.close();
         })
       .catch((err) => {
@@ -259,4 +261,3 @@ const userCards = new Section(
 ); //containerSelector второй параметр экз класса section
 
 //( o˘◡˘o)
-
