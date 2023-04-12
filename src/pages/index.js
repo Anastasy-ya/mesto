@@ -112,11 +112,12 @@ function applySubmitEditAvatar({ link }) {
 const popupWithWarning = new PopupWithWarning(
   popupWarning, //
   tags,
-  (item, id) => {//applySubmit из PopupWithWarning  не факт что сюда надо передавать card
+  (element, id) => {//applySubmit из PopupWithWarning
     api.deleteCard(id)
       .then(() => {
-        console.log(userCards.addItems(makeCard(item)));
-        userCards.addItems(makeCard(item)).removeItem(id);//userCards.addItems(makeCard(item))
+        // console.log(makeCard(item));
+        element.remove();
+        // .removeItem();//userCards.addItems(makeCard(item))
         })
       .catch((err) => {
         console.log(err, "ошибка при удалении карточки"); // выведем ошибку

@@ -13,6 +13,10 @@ export default class PopupWithWarning extends Popup {
     this._id = id;
   }
 
+  // setNewHandler(action) {
+  //   this._applySubmit = action;
+  // }
+
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
