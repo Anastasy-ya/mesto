@@ -103,7 +103,7 @@ export default class Card {
   }
 
   //ф-я удаления карточки
-  removeItem() {
+  removeItem(id) {
     //сделаем метод внешним для использования в index
     this._element.remove();
     this._element = null;
