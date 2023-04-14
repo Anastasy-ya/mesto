@@ -230,15 +230,7 @@ function renderer(item) {
   ); //card
   const element = card.generateCard(item);
   return element;
-  // return card;
 };//makeCard
-
-
-// function renderer(item) {
-//   //ф-я renderer, первый параметр Section
-//   const element = makeCard(item).generateCard(item);
-//   return element;
-// }; //ф-я renderer;//createCard
 
 //экземпляр класса Section для рендеринга карточек
 const userCards = new Section(
