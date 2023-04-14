@@ -176,7 +176,7 @@ function applySubmitEdit(data) {
     });
 } //applySubmitEdit
 
-function makeCard(item) {
+function renderer(item) {
   const card =  new Card(
     item,
     () => {
@@ -222,25 +222,27 @@ function makeCard(item) {
     }, //checkLike
     tags.templateBox, //templateSelector
     tags,
-    function (id, element, item) {
+    function (id, elem, item) {
       //handlerRemoveCard
-      popupWithWarning.open(id, element, item);
+      popupWithWarning.open(id, elem, item);
     }, //handlerRemoveCard
     userId //конец параметров для card
   ); //card
-  return card;
+  const element = card.generateCard(item);
+  return element;
+  // return card;
 };//makeCard
 
 
-function renderer(item) {
-  //ф-я renderer, первый параметр Section
-  const element = makeCard(item).generateCard(item);
-  return element;
-}; //ф-я renderer;//createCard
+// function renderer(item) {
+//   //ф-я renderer, первый параметр Section
+//   const element = makeCard(item).generateCard(item);
+//   return element;
+// }; //ф-я renderer;//createCard
 
 //экземпляр класса Section для рендеринга карточек
 const userCards = new Section(
-  renderer,
+  (item) => renderer(item),
   tags.elementsBox
 ); //containerSelector второй параметр экз класса section
 
