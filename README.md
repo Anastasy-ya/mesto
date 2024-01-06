@@ -2,6 +2,8 @@
 
 **Vanilla JavaScript**
 
+[Ссылка на курс](https://practicum.yandex.ru/web/)
+
 Практическая работа для изучения JavaScript
 
 ## Технологии
@@ -24,10 +26,10 @@
 *  Сделана самописная валидация форм
 
 ## Макет
-https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?type=design&node-id=0-1&mode=design
-https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?type=design&node-id=0-1&mode=design
+[Здесь](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?type=design&node-id=0-1&mode=design)
+[И здесь](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?type=design&node-id=0-1&mode=design)
 
-## GitHub Pages:
+## GitHub Pages
 https://anastasy-ya.github.io/mesto/
 
 ## Запуск проекта
@@ -42,8 +44,7 @@ npm install
 ```
 3. Запустить проект в режиме разработки:
 ```
-npm run build
 npm run dev
 ```
-## Полные задания к проектным работам с 4 по 9:
-https://www.notion.so/b3c1c05c512a41e0b57e9b40388eb928
+[Полные задания к проектным работам с 4 по 9](https://www.notion.so/b3c1c05c512a41e0b57e9b40388eb928)
+
