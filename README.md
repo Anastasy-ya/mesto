@@ -4,6 +4,14 @@
 
 Практическая работа для изучения JavaScript
 
+## Технологии
+![HTML5](https://img.shields.io/badge/-HTML5-e34f26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/-CSS3-1572b6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/-JavaScript-f7df1e?logo=javaScript&logoColor=black)
+![Webpack](https://img.shields.io/badge/-Webpack-99d6f8?logo=webpack&logoColor=black)
+![API](https://img.shields.io/badge/-api-yellow)
+![BEM](https://img.shields.io/badge/-BEM-yellowgreen)
+
 *Функционал:*
 
 *  Адаптивная вёрстка с учётом возможного переполнения блоков
@@ -15,16 +23,9 @@
 *  Попапы открываются по клику по соответствующей кнопке и закрываются по клику на "крестик", оверлей, кнопке ESC, сабмиту формы
 *  Сделана самописная валидация форм
 
-## Технологии
-![HTML5](https://img.shields.io/badge/-HTML5-e34f26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/-CSS3-1572b6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/-JavaScript-f7df1e?logo=javaScript&logoColor=black)
-![Webpack](https://img.shields.io/badge/-Webpack-99d6f8?logo=webpack&logoColor=black)
-![API](https://img.shields.io/badge/-api-yellow)
-![BEM](https://img.shields.io/badge/-BEM-yellowgreen)
-
-## Задания к проектной работе с 4 по 9:
-https://www.notion.so/b3c1c05c512a41e0b57e9b40388eb928
+## Макет
+https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?type=design&node-id=0-1&mode=design
+https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?type=design&node-id=0-1&mode=design
 
 ## GitHub Pages:
 https://anastasy-ya.github.io/mesto/
@@ -44,4 +45,5 @@ npm install
 npm run build
 npm run dev
 ```
-
+## Полные задания к проектным работам с 4 по 9:
+https://www.notion.so/b3c1c05c512a41e0b57e9b40388eb928
