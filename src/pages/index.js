@@ -1,4 +1,4 @@
-import "./index.css"; //   ЭТА СТРОКА ОБЯЗАТЕЛЬНА (ಠ益ಠ)
+import "./index.css";
 import {
   consts,
   tags,
@@ -15,7 +15,7 @@ import {
   popupWarning,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js"; //переименовать
+import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -26,7 +26,7 @@ import PopupWithWarning from "../components/PopupWithWarning.js";
 let userId; //определим переменную чтобы записать в нее значение внутри ф-и
 
 //класс UserInfo
-const userInfo = new UserInfo({ profileName, profileJob, profileAvatar }); //, profileAvatar
+const userInfo = new UserInfo({ profileName, profileJob, profileAvatar });
 
 const popupWithFormEdit = new PopupWithForm(
   popupEdit,
@@ -184,16 +184,11 @@ function renderer(item) {
       popupWithImage.open(item);
     },
     function checkLike(id) {
-      console.log("лайкнута?", card.сheckUserLike());
       if (!card.сheckUserLike()) {
         //если нет лайка польз
         api
           .addLike(id) //сделать запрос к серверу на добавление
           .then((res) => {
-            console.log(
-              'в каунтер попадает:', res,
-              "успешно:добавление лайка в index вызывает каунтер и меняет оформление"
-            );
             card.setLike(res);
             card.likesCounter(res);
           })
@@ -206,10 +201,6 @@ function renderer(item) {
         api
           .removeLike(id)
           .then((res) => {
-            console.log(
-              'в каунтер попадает:', res,
-              "успешно: удаление лайка в index вызывает каунтер и меняет оформление"
-            );
             card.setLike(res);
             card.likesCounter(res);
           })

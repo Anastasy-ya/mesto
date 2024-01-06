@@ -26,7 +26,6 @@ export default class Card {
     this._ownerId = item.owner._id;
     this._userId = userId;
     this._checkLike = checkLike;
-    // console.log('лайки этой карточки: ', this.likes);
   }
 
   _getTemplate() {
@@ -41,7 +40,7 @@ export default class Card {
   }
 
   setLike({ likes }) {//вызвать в глобальной области
-    
+
     if (!this.сheckUserLike()) {
       this._addLike();
       this._likeCounter.textContent ++;
@@ -50,18 +49,15 @@ export default class Card {
       this._likeCounter.textContent --;
     };
     this._likes = likes;
-    console.log('новые значения массива лайков', likes);
   }
- 
+
   _addLike() {
     this._likeSelector.classList.add(this._buttonLikeActive);
-    console.log("сработал card.addLike");
   }
-    
+
   _removeLike() {
     this._likeSelector.classList.remove(this._buttonLikeActive);
-    console.log("лайк удален removeLike");
-  } 
+  }
 
   generateCard(item) {
     //затем копия темплейта изменяется пережд вставкой
@@ -85,7 +81,6 @@ export default class Card {
     this._element.id = `${this._id}`;
     !this.сheckUserLike() ? this._removeLike() : this._addLike();
     this.likesCounter(item); //отобразить лайки
-    console.log("лайкнута?", this.сheckUserLike());
     return this._element; //получаем готовый элемент для вставки в dom
   }
 
@@ -118,11 +113,9 @@ export default class Card {
 
   likesCounter({ likes }) {
     this._likeCounter.textContent = likes.length; //this._likes.length
-    console.log("каунтер сработал", "переданные значения:", likes.length);
   }
 
   сheckUserLike() {
-    console.log('старые значения массива лайков: ', this._likes);
     //возвращает true усли карточка лайкнута польз
    return this._likes.some((user) => {
       return this._isLiked = (this._userId === user._id);

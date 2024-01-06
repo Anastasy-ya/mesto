@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--<link rel="icon" href="#" type="image">-->
     <title lang="en">Mesto-Russia</title>
-    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   </head>
 
   <body class="root">
@@ -18,7 +16,7 @@
       <main class="content">
         <section class="profile">
           <div class="profile__person">
-            <button class="profile__overlay">  
+            <button class="profile__overlay">
               <img
                 class="profile__avatar"
                 alt="Аватар профиля"
@@ -44,7 +42,7 @@
 
           </ul>
         </section>
-        <!--темплейт-->
+        <!--template-->
         <template id="template">
           <li class="elements__item">
             <img
@@ -82,7 +80,7 @@
               aria-label="Close"
             ></button>
             <h2 class="popup__heading">Редактировать профиль</h2>
-            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+            <form class="popup__form form" name="Form" novalidate>
               <label class="form__label">
                 <input
                   type="text"
@@ -93,7 +91,7 @@
                   minlength="2"
                   maxlength="40"
                   id="form__name-input"
-                /><!--popup__input-error - основное оформление текста-->
+                />
                 <span class="form__input-error form__name-input-error"></span>
               </label>
               <label class="form__label">
@@ -126,7 +124,7 @@
               aria-label="Close"
             ></button>
             <h2 class="popup__heading">Новое место</h2>
-            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+            <form class="popup__form form" name="Form" novalidate>
               <label class="form__label">
                 <input
                   type="text"
@@ -178,7 +176,6 @@
           </div>
         </figure>
 
-        <!--popup delete--><!--разобраться с размером отступов-->
         <div class="popup popup_type_delete">
           <!--popup_opened-->
           <div class="popup__container">
@@ -188,7 +185,7 @@
               aria-label="Close"
             ></button>
             <h2 class="popup__heading">Вы уверены?</h2>
-            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+            <form class="popup__form form" name="Form" novalidate>
               <button class="popup__button" type="submit" aria-label="Save"><!--popup__button_inactive-->
                 Да
               </button>
@@ -196,7 +193,6 @@
           </div>
         </div>
 
-        <!--popup reload avatar--><!--отступ под вилдом-->
         <div class="popup popup_type_reload-avatar">
           <!--popup_opened-->
           <div class="popup__container">
@@ -206,7 +202,7 @@
               aria-label="Close"
             ></button>
             <h2 class="popup__heading">Обновить аватар</h2>
-            <form class="popup__form form" name="Form" novalidate><!-- novalidate-->
+            <form class="popup__form form" name="Form" novalidate>
               <label class="form__label">
                 <input
                   type="url"
@@ -230,6 +226,5 @@
         <p class="footer__text">© 2023 Mesto Russia</p>
       </footer>
     </div>
-    <!-- <script type="module" src="./pages/index.js"></script> -->
   </body>
 </html>
