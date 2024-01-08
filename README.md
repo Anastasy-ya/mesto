@@ -1,10 +1,8 @@
 # Учебный проект MESTO
 
-**Vanilla JavaScript**
+**Практическая работа для изучения JavaScript**
 
 [Ссылка на курс](https://practicum.yandex.ru/web/)
-
-Практическая работа для изучения JavaScript
 
 ## Технологии
 ![HTML5](https://img.shields.io/badge/-HTML5-e34f26?logo=html5&logoColor=white)
