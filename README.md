@@ -36,11 +36,15 @@ https://anastasy-ya.github.io/mesto/
 ```
 git clone git@github.com:Anastasy-ya/mesto.git
 ```
-2. Установить зависимости:
+2. Перейти в папку проекта
+```
+cd .\mesto-main\
+```
+3. Установить зависимости:
 ```
 npm install
 ```
-3. Запустить проект в режиме разработки:
+4. Запустить проект в режиме разработки:
 ```
 npm run dev
 ```
