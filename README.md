@@ -2,8 +2,6 @@
 
 **Практическая работа для изучения JavaScript**
 
-[Ссылка на курс](https://practicum.yandex.ru/web/)
-
 ## Технологии
 ![HTML5](https://img.shields.io/badge/-HTML5-e34f26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/-CSS3-1572b6?logo=css3&logoColor=white)
@@ -21,7 +19,7 @@
 *  Плавное открытие и закрытие попапов
 *  При открытии попапа редактирования имени и информации о пользователе поля заполнены теми значениями, которые отображаются на странице.
 *  Попапы открываются по клику по соответствующей кнопке и закрываются по клику на "крестик", оверлей, кнопке ESC, сабмиту формы
-*  Сделана самописная валидация форм
+*  Самописная валидация форм
 
 ## Макет
 [Здесь](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?type=design&node-id=0-1&mode=design)
